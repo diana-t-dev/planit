@@ -6,6 +6,9 @@ module.exports = function(sequelize, DataTypes) {
     friends: DataTypes.TEXT,
     groups: DataTypes.TEXT,
     notifications: DataTypes.TEXT
+  },
+  {
+    timestamps: false
   });
 
 // user.associate = function(models) {

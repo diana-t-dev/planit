@@ -1,10 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+// var logger = require("morgan");
 var axios = require("axios");
-var cheerio = require("cheerio");
-var fs = require('fs');
 var path = require("path");
 var PORT = process.env.PORT || 3001;
 
@@ -32,19 +29,19 @@ server = db.sequelize.sync({
   });
 });
 
-var socket = require('socket.io');
- io = socket(server);
+// var socket = require('socket.io');
+//  io = socket(server);
 
-io.on('connection', (socket) => {
-    console.log(socket.id, "SOCKET CONNECTED!!");
+// io.on('connection', (socket) => {
+//     console.log(socket.id, "SOCKET CONNECTED!!");
 
-     socket.on('SEND_MESSAGE', function(data){
+//      socket.on('SEND_MESSAGE', function(data){
 
-        io.emit('RECEIVE_MESSAGE', data);
+//         io.emit('RECEIVE_MESSAGE', data);
 
-      });
+//       });
 
-});
+// });
 
 
 

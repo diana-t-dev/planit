@@ -4,6 +4,9 @@ module.exports = function(sequelize, DataTypes) {
     event: DataTypes.TEXT,
     user: DataTypes.TEXT
     
+  },
+  {
+    timestamps: false
   });
 
 // group.associate = function(models) {
