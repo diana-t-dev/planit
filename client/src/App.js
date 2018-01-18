@@ -94,11 +94,11 @@ componentDidMount(){
 
 // });
 
- cookies.set('name', 'Ben');
+ // cookies.set('name', 'Ben');
 
     this.setState({
 
-      user: cookies.get('name')
+      user: cookies.get('name');
     })
 
 }
