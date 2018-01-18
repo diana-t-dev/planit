@@ -10,7 +10,7 @@ import Groups from "./components/groups.js";
 import Notifications from "./components/notifications.js";
 import Nav from "./components/nav.js";
 import axios from 'axios';
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
@@ -44,7 +44,7 @@ state = {
     loggedin: false
   };
 
-    socket = io("/");
+    // socket = io("/");
 
      inputChange = event => {
     const name = event.target.name;
@@ -124,7 +124,7 @@ componentDidMount(){
         <Route exact path="/" component={Home} />
         <Route exact path="/friends" component={Friends} />
         <Route exact path="/groups" component={Groups} />
-        <Route exact path="/notifications" component={Notifications} />
+        <Route path="/notifications" component={Notifications} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route component={NoMatch} />

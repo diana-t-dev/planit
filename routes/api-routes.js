@@ -63,4 +63,15 @@ module.exports = function(app) {
     })
   });
 
+  app.get("/notifications/:user", function (req ,res) {
+    console.log(req.params.user);
+    db.user.findAll({
+      where: {
+        username: req.params.user
+      }
+    }).then(function (results) {
+      res.json(results);
+    })
+  })
+
 }

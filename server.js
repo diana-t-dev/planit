@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 var db = require("./models");
 
-app.use(logger("dev"));
+// app.use(logger("dev"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
