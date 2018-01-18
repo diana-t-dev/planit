@@ -42,7 +42,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/login", function(req, res) {
+  app.get("/users", function(req, res) {
 
     db.user.findAll({}).then(function(results) {
 
@@ -102,7 +102,7 @@ module.exports = function(app) {
             }
             // console.log(data);
 
-            res.render("userSearch", {
+            res.json({
               data
             })
 
@@ -142,7 +142,7 @@ module.exports = function(app) {
 
           }
 
-          res.render("userSearch", {
+          res.json({
             data
           })
         })
