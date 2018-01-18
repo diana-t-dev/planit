@@ -18,6 +18,10 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'react-notifications/lib/notifications.css';
 import $ from "jquery";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 
 const colors = {
   backgroundColor: "dodgerblue"
@@ -36,7 +40,7 @@ class App extends Component {
 
 state = {
  
-    user: "Ben",
+    user: "",
     loggedin: false
   };
 
@@ -63,11 +67,11 @@ this.setState({
       correct: "Submitted! Play Again!"
     });
 
-        this.socket.emit('SEND_MESSAGE', {
+    //     this.socket.emit('SEND_MESSAGE', {
 
-        user: this.state.topUser,
-        score: this.state.TopScore
-    });  
+    //     user: this.state.topUser,
+    //     score: this.state.TopScore
+    // });  
   }
 
   else {
@@ -83,17 +87,33 @@ this.setState({
 
 componentDidMount(){
 
-	 this.socket.on('RECEIVE_MESSAGE', (data) =>{
+// 	 this.socket.on('RECEIVE_MESSAGE', (data) =>{
 
-    addMessage(data);
+//     addMessage(data);
 
 
-});
+// });
+
+ cookies.set('name', 'Ben');
+
+    this.setState({
+
+      user: cookies.get('name')
+    })
 
 }
 
   render() {
     return (
+      <div>
+
+            {this.state.user === "" ? (
+      
+      <Login />
+)
+:
+(
+
            <Router>
       <div>
 <Nav />
@@ -112,7 +132,11 @@ componentDidMount(){
 <Footer />
   </div>
   </Router>
+      )}
+</div>
     )
   }
 }
+
+
 export default App;
