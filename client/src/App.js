@@ -11,12 +11,18 @@ import Notifications from "./components/notifications.js";
 import Nav from "./components/nav.js";
 import axios from 'axios';
 import io from "socket.io-client";
-// import 'materialize-css';
-// import 'materialize-css/dist/css/materialize.min.css';
-// import 'materialize-css/dist/js/materialize.min.js';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'react-notifications/lib/notifications.css';
+import $ from "jquery";
+
+const colors = {
+  backgroundColor: "dodgerblue"
+};
+
 
   const addMessage = data => {
     console.log(data);
@@ -91,6 +97,9 @@ componentDidMount(){
            <Router>
       <div>
 <Nav />
+		
+  <NotificationContainer/>
+  
         <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/friends" component={Friends} />
