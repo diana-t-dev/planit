@@ -55,6 +55,17 @@ body{
 
 }
 
+.nomatchText {
+  font-family: 'Press Start 2P', cursive;
+  color: darkgreen;
+
+}
+
+.logoutText {
+  font-family: 'Nosifer', cursive;
+  color: lightblue;
+}
+
 .namey {
 
   padding-right: 15%;
