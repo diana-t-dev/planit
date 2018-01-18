@@ -1,6 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-// var logger = require("morgan");
 var axios = require("axios");
 var path = require("path");
 var PORT = process.env.PORT || 3001;
@@ -11,8 +10,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var db = require("./models");
-
-// app.use(logger("dev"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 

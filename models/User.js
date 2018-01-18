@@ -11,12 +11,14 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
-// user.associate = function(models) {
+user.associate = function(models) {
     
-//     user.belongsToMany(models.group, {
-//       through: "group2user"
-//     });
-//   };
+    user.belongsToMany(models.group, {
+      through: "group2user",
+      as: 'groupy',
+      foreignKey: 'userId'
+    });
+  };
   
   return user;
 };
