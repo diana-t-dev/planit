@@ -4,11 +4,50 @@ import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import $ from "jquery";
+import axios from "axios";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class Friends extends Component {
 
 
+  state = {
+
+    users: ['Diana', 'Jesus', "Luis", "Ben"],
+    friends: ['Clark', "Elton", 'Paige']
+  }
+
+  getUsers = () => {
+
+
+axios.get('/users').then(user =>{
+
+  console.log(user);
+
+})
+
+
+  };
+
+
+  getFriends = () => {
+
+let namey = cookies.get('name');
+
+    axios.get('/friends/'+namey).then(friend =>{
+
+      console.log(friend);
+    })
+
+  };
+
+
   componentDidMount(){
+
+    this.getUsers();
+
+    this.getFriends();
 
      $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -43,11 +82,16 @@ class Friends extends Component {
 
     <ul id='dropdown1' class='dropdown-content'>
 
-      <li><a type="button" className="addFriend" data-id="username">name</a></li>
-      <li><a type="button" className="addFriend" data-id="username2">name2</a></li>
-  
+{
+
+  this.state.users.map(i => {
+  return <li><a type="button" className="addFriend" data-id="username">{i}</a></li>
+
+        })
+}
+
     </ul>
-    <table className="table table-responsive">
+    <table className="table highlight">
       <thead>
         <tr>
           <th>Name</th>
@@ -56,14 +100,22 @@ class Friends extends Component {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          
-            <td className="namey">name</td>
-            <td><a href="/friends">name's Groups</a></td>
-            <td>*</td>
-            <td><a className="waves-effect waves-light btn delfriend">Remove Friend</a></td>
-       
-         </tr>
+        
+  
+  {
+
+  this.state.friends.map(i => {
+    return  <tr>
+     <td className="namey">{i}</td>
+             <td><a href="/friends">{i}'s Groups</a></td>
+             <td>*</td>
+             <td><a className="waves-effect waves-light btn delfriend">Remove Friend</a></td>
+        
+</tr>
+         })
+
+}     
+         
       </tbody>
     </table>
     </div>

@@ -1,6 +1,19 @@
 var db = require("../models");
 
 module.exports = function(app) {
+
+  app.get("/users", function(req, res) {
+
+    db.user.findAll({}).then(function(results) {
+
+      // console.log("found user data");
+      // console.log(results);
+
+      res.json(results);
+    });
+
+  });
+
   app.get("/friends/:user", function(req, res) {
     db.user.findAll({
       where: {
@@ -15,7 +28,9 @@ module.exports = function(app) {
             var data = {
               names: res2
             }
-            res.render("userSearch", {
+
+            res.json({
+
               data
             })
           });
@@ -40,7 +55,8 @@ module.exports = function(app) {
             daty: friends,
             names: res2
           }
-          res.render("userSearch", {
+
+          res.json({
             data
           })
         })
