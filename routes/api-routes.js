@@ -6,6 +6,7 @@ aws.config.update({
   secretAccessKey: process.env.S3_SECRET_KEY || require("../key.js").secretAccessKey,
   accessKeyId: process.env.S3_ACCESS_KEY || require("../key.js").accessKeyId,
   region: 'us-west-1'
+ 
 });
 
 var s3 = new aws.S3();
@@ -568,4 +569,4 @@ module.exports = function(app) {
 
   });
 
-};
+}

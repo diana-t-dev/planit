@@ -21,22 +21,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static("client/build"));
 
-mongoose.Promise = Promise;
+require("./routes/api-routes.js")(app);
 
-if (process.env.MONGODB_URI){
+require("./routes/html-routes.js")(app);
 
-mongoose.connect(process.env.MONGODB_URI);
-
-} else{
-
-mongoose.connect("mongodb://localhost/clickgamedb", {
-
-});
-
-}
-
-server = app.listen(PORT, function() {
-  console.log("App running on port " + PORT + "!");
+server = db.sequelize.sync({
+}).then(function() {
+  app.listen(PORT, function() {
+    console.log("Party App listening on PORT " + PORT);
+  });
 });
 
 var socket = require('socket.io');
@@ -53,49 +46,6 @@ io.on('connection', (socket) => {
 
 });
 
-app.get("/users", function(req, res) {
 
-  console.log("test");
-
-db.User
-    .find({})
-    .then(function(user) {
-      
-      console.log(user);
-      console.log("got all users");
-
-      res.json({user});
-    })
-});
-
-app.post('/user', function(req, res){
-
-console.log("test");
-console.log(req.body);
-
- db.User.create({ 
-
-  user: req.body.user,
-  score: req.body.score
-
- })
-    .then(function(user) {
-        console.log(user);
-        console.log("updated");
-        // console.log(dbNote);
-      // If we were able to successfully update an Article, send it back to the client
-      res.json(user);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
-});
-
-
-app.get("/", function(req, res){
-
-  res.render("index.html");
-})
 
 

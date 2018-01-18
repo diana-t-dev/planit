@@ -7,10 +7,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
 group.associate = function(models) {
-    group.belongsTo(models.user, {
-      foreignKey: {
-        allowNull: false
-      }
+    group.belongsToMany(models.user, {
+      through: "group2user"
     });
 
 }
