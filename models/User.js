@@ -8,12 +8,12 @@ module.exports = function(sequelize, DataTypes) {
     notifications: DataTypes.TEXT
   });
 
-user.associate = function(models) {
+// user.associate = function(models) {
     
-    user.belongsToMany(models.group, {
-      through: "group2user"
-    });
-  };
+//     user.belongsToMany(models.group, {
+//       through: "group2user"
+//     });
+//   };
   
   return user;
 };

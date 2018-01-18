@@ -1,26 +1,26 @@
-var aws = require('aws-sdk'),
-  multer = require('multer'),
-  multerS3 = require('multer-s3');
+// var aws = require('aws-sdk'),
+//   multer = require('multer'),
+//   multerS3 = require('multer-s3');
 
-aws.config.update({
-  secretAccessKey: process.env.S3_SECRET_KEY || require("../key.js").secretAccessKey,
-  accessKeyId: process.env.S3_ACCESS_KEY || require("../key.js").accessKeyId,
-  region: 'us-west-1'
+// aws.config.update({
+//   secretAccessKey: process.env.S3_SECRET_KEY || require("../key.js").secretAccessKey,
+//   accessKeyId: process.env.S3_ACCESS_KEY || require("../key.js").accessKeyId,
+//   region: 'us-west-1'
  
-});
+// });
 
-var s3 = new aws.S3();
+// var s3 = new aws.S3();
 
-var upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'travelbookpictures',
-    key: function(req, file, cb) {
-      // console.log(file.originalname);
-      cb(null, file.originalname); //use Date.now() for unique file keys
-    }
-  })
-});
+// var upload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: 'travelbookpictures',
+//     key: function(req, file, cb) {
+//       // console.log(file.originalname);
+//       cb(null, file.originalname); //use Date.now() for unique file keys
+//     }
+//   })
+// });
 
 var db = require("../models");
 
