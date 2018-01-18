@@ -9,12 +9,15 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
-// group.associate = function(models) {
-//     group.belongsToMany(models.user, {
-//       through: "group2user"
-//     });
 
-// }
+  group.associate = function(models) {
+    
+    group.belongsToMany(models.user, {
+      through: "group2user",
+      as: 'usery',
+      foreignKey: 'groupId'
+    });
+  };
 
   return group;
 };
