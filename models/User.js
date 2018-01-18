@@ -1,20 +1,19 @@
-var mongoose = require("mongoose");
+module.exports = function(sequelize, DataTypes) {
+  var user = sequelize.define("user", {
+    
+    username: {type:DataTypes.STRING, allowNull:false},
+    password: {type:DataTypes.STRING, allowNull:false},
+    friends: DataTypes.TEXT,
+    groups: DataTypes.TEXT,
+    notifications: DataTypes.Text
+  });
 
-
-var Schema = mongoose.Schema;
-
-var UserSchema = new Schema({
-
-  user: {
-    type: String
-
-  },
-    score: {
-    type: Number
-  }
-
-});
-
-var User = mongoose.model("User", UserSchema);
-
-module.exports = User;
+user.associate = function(models) {
+    
+    user.hasMany(models.post, {
+      onDelete: "cascade"
+    });
+  };
+  
+  return user;
+};

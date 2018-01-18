@@ -1,4 +1,10 @@
-app.get("/", function(req, res){
+var path = require("path");
 
-  res.render("index.html");
-})
+
+module.exports = function(app) {
+
+	app.get("/", function(req, res) {
+		res.render('index.html');
+	});
+
+};
