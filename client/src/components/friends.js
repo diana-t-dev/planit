@@ -7,6 +7,7 @@ import $ from "jquery";
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import Login from './login.js';
+import Nav from './nav.js'
 
 const cookies = new Cookies();
 
@@ -51,10 +52,10 @@ let namey = cookies.get('name');
 
   console.log(user);
 
-this.setState({
+// this.setState({
 
-  id: user.data[0].id
-})
+//   id: user.data[0].id
+// })
 
 })
   };
@@ -129,6 +130,7 @@ let data = {
 
 
 <div>
+  <Nav/>
    <div className="row">
 <div className="col s12 top z-depth-2">
 <h1 className="center">My Friends</h1>

@@ -3,7 +3,11 @@ import '../App.css';
 import FacebookLogin from 'react-facebook-login';
 import Cookies from 'universal-cookie';
 import Home from "./home.js";
+import Nav from "./nav.js";
+import Footer from "./footer.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 const cookies = new Cookies();
 
   class Login extends React.Component {
@@ -46,16 +50,6 @@ const cookies = new Cookies();
 
     })
     
-
-    
-   //  console.log(response);
-
- 		// var test = cookies.get('name');
-
- 		// console.log('User is', test)
-
-   //    this.setState({loggedin:true})
-   //    console.log(this.state.loggedin)
     }
 
     componentDidMount(){
@@ -68,13 +62,13 @@ const cookies = new Cookies();
       return (this.state.loggedin ===true ? (<Home/>): 
 
       	(<div className='container'>
-
          <FacebookLogin
           appId="397807444004424"
-          autoLoad={true}
+          autoLoad={false}
           fields="name,email,picture"
           scope="public_profile,user_friends,user_actions.books"
-          callback={this.responseFacebook} />     	
+          callback={this.responseFacebook} />     
+	
 
       	</div>)  )
 
