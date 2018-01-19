@@ -6,6 +6,7 @@ import 'materialize-css/dist/js/materialize.min.js';
 import $ from "jquery";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import Login from './login.js';
 
 const cookies = new Cookies();
 
@@ -50,10 +51,15 @@ let namey = cookies.get('name');
 
   console.log(user);
 
+  user.data ? (
+
 this.setState({
 
   id: user.data[0].id
-})
+})):
+(
+""
+  )
 
 })
   };
@@ -101,7 +107,7 @@ let data = {
 
   componentDidMount(){
 
-  	cookies.set('name', 'Ben');
+  	// cookies.set('name', 'Ben');
 
      this.getUser();
 
@@ -123,6 +129,8 @@ let data = {
 
  render() {
     return (
+
+ cookies.get('name') === undefined ? (<Login />):(
 
 
 <div>
@@ -162,8 +170,10 @@ let data = {
   
   {
 
+    this.state.friends !== undefined ? (
+
   this.state.friends.map(i => {
-    return  <tr>
+      <tr>
      <td className="namey">{i.name}</td>
              <td><a href="/friends">{i.name}'s Groups</a></td>
              <td>*</td>
@@ -171,6 +181,17 @@ let data = {
         
 </tr>
          })
+
+  ):
+
+    (
+
+       <tr>
+     <td className="namey">You Have No Friends!</td>
+     </tr>
+
+
+      )
 
 }     
          
@@ -181,6 +202,7 @@ let data = {
     </div>
 </div>
 
+)
 );
 
 };
