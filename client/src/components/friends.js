@@ -15,28 +15,12 @@ class Friends extends Component {
   state = {
 
     users: [],
-    friends: []
+    friends: [],
+    id: ""
   };
 
    // users: ['Diana', 'Jesus', "Luis", "Ben"],
    //  friends: ['Clark', "Elton", 'Paige']
-
-//   getUsers = () => {
-
-
-// axios.get('/users').then(user =>{
-
-//   console.log(user.data);
-
-//   this.setState({
-
-//     users: user.data
-//   })
-
-// })
-
-
-//   };
 
 
   getFriends = () => {
@@ -58,6 +42,22 @@ let namey = cookies.get('name');
 
   };
 
+  getUser = () => {
+
+let namey = cookies.get('name');
+
+ axios.get('/users/'+namey).then(user =>{
+
+  console.log(user);
+
+this.setState({
+
+  id: user.data[0].id
+})
+
+})
+  };
+
     addFriend = (i) => {
 
 let namey = cookies.get('name');
@@ -67,7 +67,8 @@ let friend = i;
 let data = {
 
 	user: namey,
-	to: friend.i,
+  ids: this.state.id,
+	to: friend,
 	type: "friend request"
 }
 
@@ -102,7 +103,7 @@ let data = {
 
   	cookies.set('name', 'Ben');
 
-    // this.getUsers();
+     this.getUser();
 
     this.getFriends();
 

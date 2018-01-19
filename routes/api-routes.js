@@ -2,9 +2,18 @@ var db = require("../models");
 
 module.exports = function(app) {
 
-  app.get("/users", function(req, res) {
+  app.get("/users/:user", function(req, res) {
 
-    db.user.findAll({}).then(function(results) {
+    console.log(req.params.user);
+
+    db.user.findAll({
+      where:{
+        username: req.params.user
+      }
+
+    }).then(function(results) {
+
+console.log(results)
 
       // console.log("found user data");
       // console.log(results);
