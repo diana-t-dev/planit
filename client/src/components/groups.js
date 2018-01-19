@@ -1,8 +1,13 @@
 import React from "react";
 import '../App.css';
+import Login from './login.js';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const Groups = props => (
 
+cookies.get('name') === undefined ? (<Login />):(
   
 <div className ="wrapper">
   <div className="row z-depth-2">
@@ -89,6 +94,7 @@ const Groups = props => (
 
 	</div>
 </div>	
+)
 );
 
 export default Groups;

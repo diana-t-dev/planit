@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import Login from './login.js';
+
+
+const cookies = new Cookies();
 
 
 
@@ -21,7 +25,7 @@ class Notifications extends Component {
 
         // set new cookie
         const cookies = new Cookies();
-        cookies.set('name', 'Jesus');
+        // cookies.set('name', 'Jesus');
 
         // get request for user notifications
         axios.get(`/notifications/${cookies.get('name')}`)
@@ -60,6 +64,8 @@ class Notifications extends Component {
     render() {
 
         return (
+
+ cookies.get('name') === undefined ? (<Login />):(
 
         	<div>
         <div className="row">
@@ -104,6 +110,7 @@ class Notifications extends Component {
         </div>
         </div>
         </div>
+    )
         );
     }
 } 

@@ -6,6 +6,7 @@ import 'materialize-css/dist/js/materialize.min.js';
 import $ from "jquery";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import Login from './login.js';
 
 const cookies = new Cookies();
 
@@ -101,7 +102,7 @@ let data = {
 
   componentDidMount(){
 
-  	cookies.set('name', 'Ben');
+  	// cookies.set('name', 'Ben');
 
      this.getUser();
 
@@ -123,6 +124,8 @@ let data = {
 
  render() {
     return (
+
+ cookies.get('name') === undefined ? (<Login />):(
 
 
 <div>
@@ -181,6 +184,7 @@ let data = {
     </div>
 </div>
 
+)
 );
 
 };
