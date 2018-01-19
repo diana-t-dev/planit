@@ -1,20 +1,64 @@
-import React from "react";
+import React, { Component } from "react";
 import '../App.css';
+import Form from "./form.js";
 import Login from './login.js';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const Groups = props => (
+class Groups extends Component {
+  state = {
+    form: false
+  }
+
+  toggleForm = () => {
+
+    this.state.form ?(
+
+      this.setState({form:false})
+
+      ):
+    (
+
+    this.setState({form:true})
+)
+  }
+
+  componentDidMount () {
+
+  }
+
+render() { 
+
+  return ( 
 
 cookies.get('name') === undefined ? (<Login />):(
   
+
 <div className ="wrapper">
   <div className="row z-depth-2">
-  <div className="col s12">
-	<h1 className ="center">Group</h1>	
+  <div className="groupTextPanel col s12">
+	<h1 className ="groupText center">Group Hub</h1>	
 	</div>
  </div>
+
+  <div className="row">
+    <div className="col s2 offset-s5">
+      <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
+    </div>
+
+  </div>
+
+  { this.state.form ? (
+
+<Form 
+  click={this.toggleForm}/>
+
+    )
+:(
+  "")
+}    
+
 
 	<div className="row">
 		<div className="col s3 m3 l3">
@@ -27,7 +71,7 @@ cookies.get('name') === undefined ? (<Login />):(
 
    			 <div className="card-content">
 
-     		 <span className="card-title activator grey-text text-darken-4">Friends<i class="material-icons right">Expand</i></span>
+     		 <span className="card-title activator grey-text text-darken-4">Friends<i class="material-icons right"></i></span>
       		<p><a href="#">Leaving this link here just in case we need it</a></p>
 
    			 </div>
@@ -53,7 +97,7 @@ cookies.get('name') === undefined ? (<Login />):(
 
    			 <div className="card-content">
 
-     		 <span className="card-title activator grey-text text-darken-4">Groups<i class="material-icons right">Expand</i></span>
+     		 <span className="card-title activator grey-text text-darken-4">Groups<i class="material-icons right"></i></span>
       		<p><a href="#">link placeholder</a></p>
 
    			 </div>
@@ -77,7 +121,7 @@ cookies.get('name') === undefined ? (<Login />):(
 
    			 <div className="card-content">
 
-     		 <span className="card-title activator grey-text text-darken-4">Chat<i class="material-icons right">Expand</i></span>
+     		 <span className="card-title activator grey-text text-darken-4">Chat<i class="material-icons right"></i></span>
       		<p><a href="#">link placeholder</a></p>
 
    			 </div>
@@ -93,8 +137,10 @@ cookies.get('name') === undefined ? (<Login />):(
 		</div>			
 
 	</div>
-</div>	
-)
-);
+</div>
+      )
+    }
+
+};
 
 export default Groups;
