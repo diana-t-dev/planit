@@ -105,32 +105,37 @@ console.log(results)
   })
 
   app.post('/friends/update/:userId', function (req, res) {
-    console.log("======= " + req.params.userId);
     db.user.findAll({
       where: {
         id: req.params.userId
       }
     }).then((results) => {
       // transform string to array
-      console.log(results);
-      console.log(results[0]);
       let friends = results[0].dataValues.friends.split(', ');
+      console.log(typeof friends[0]);
       // add new friend to array
-      let newFriend = req.body.friendId;
-      friends.push(newFriend);
-      // send data back to db as string
-      friends = friends.join(', ');
+      let newFriend = req.body.friendId.toString();
+      console.log(typeof newFriend);
+      if (friends.includes(newFriend)) {
+        res.end();
+      }
+      else {
+        friends.push(newFriend);
+        // send data back to db as string
+        friends = friends.join(', ');
 
-      db.user.update({
-        friends: friends
-        },
-        {
-          where: {
-            id: req.params.userId
-          }
-        }).then((data) => {
-          res.send('friends updated');
-        })
+        db.user.update({
+          friends: friends
+          },
+          {
+            where: {
+              id: req.params.userId
+            }
+          }).then((data) => {
+            res.send('friends updated');
+          })
+      }
+      
     })
   })
 
