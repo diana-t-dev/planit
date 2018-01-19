@@ -8,7 +8,8 @@ import Cookies from 'universal-cookie';
 class Notifications extends Component {
     state = {
         notifications: [],
-        deletion: false
+        deletion: false,
+        user: ""
     }
 
     componentDidMount () {
@@ -21,6 +22,8 @@ class Notifications extends Component {
         // set new cookie
         const cookies = new Cookies();
         cookies.set('name', 'Ben');
+
+        this.setState({user: cookies.get('name')});
 
         // get request for user notifications
         axios.get(`/notifications/${cookies.get('name')}`)
@@ -103,7 +106,7 @@ class Notifications extends Component {
                 		return <tr>
                         <td>{el.from}</td>
                         <td>{el.type}</td>
-                        <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
+                        <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                         </tr>
                   }
                 })}

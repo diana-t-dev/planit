@@ -110,9 +110,25 @@ console.log(results)
         id: req.params.userId
       }
     }).then((results) => {
+      // transform string to array
       let friends = results[0].dataValues.friends.split(', ');
-      console.log(friends);
-      res.send(results);
+      // add new friend to array
+      let newFriend = req.body.friendId;
+      friends.push(newFriend);
+      // send data back to db as string
+      friends = friends.join(', ');
+
+      db.user.update({
+        friends: friends
+        },
+        {
+          where: {
+            id: req.params.userId
+          }
+        }).then((data) => {
+          res.send('friends updated');
+        })
+
     })
   })
 
