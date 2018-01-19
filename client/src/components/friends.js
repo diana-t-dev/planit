@@ -52,7 +52,7 @@ let data = {
 
 	user: namey,
 	to: friend.i,
-	type: "friend req"
+	type: "friend request"
 }
 
     axios.post('/notification', {data}).then(friend =>{
