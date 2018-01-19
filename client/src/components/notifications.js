@@ -70,7 +70,7 @@ class Notifications extends Component {
             <div className="container">
             <div className="row">
             <div className="col s12">
-            <table>
+            <table className="table highlight">
                 <thead>
                 <tr>
                     <th>From</th>

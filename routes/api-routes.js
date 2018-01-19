@@ -15,12 +15,17 @@ module.exports = function(app) {
   });
 
   app.get("/friends/:user", function(req, res) {
+
+    console.log(req.params.user);
+
     db.user.findAll({
       where: {
         username: req.params.user
-      },
-      include: [db.post]
+      }
     }).then(function(results) {
+
+      console.log(results[0])
+      
       var friends = results[0].friends;
       if (friends === null) {
         db.user.findAll({})
@@ -88,6 +93,7 @@ module.exports = function(app) {
     })
   })
 
+
   app.delete('/notifications/delete/:id', function (req, res) {
     db.notification.destroy({
       where: {
@@ -97,5 +103,65 @@ module.exports = function(app) {
       res.send('deleted notification');
     })
   })
+
+   app.put("/delfriend", function(req, res) {
+
+
+    // console.log(req.body);
+
+
+    db.user.findAll({
+
+      where: {
+
+        username: req.body.data.user
+      }
+
+    }).then(function(results) {
+
+      var friends = results[0].friends;
+
+      // console.log(friends);
+
+      var friendsList = friends.split(",");
+
+      // console.log(friendsList);
+
+      // for (var i = 0; i < friendsList.length; i++) {
+
+      // console.log(friendsList[i]);
+      // console.log(req.body.friend);
+
+      // if (friendsList[i] === req.body.friend) {
+
+
+      var number = friendsList.indexOf(req.body.data.friend);
+      console.log(number);
+
+      friendsList.splice(number, 1);
+      // }
+
+      // }
+
+      var newList = friendsList.toString();
+
+      console.log(newList);
+
+      db.user.update({
+
+        friends: newList
+
+      }, {
+        where: {
+
+          username: req.body.data.user
+
+        }
+      })
+
+    });
+
+    res.end();
+  });
 
 }
