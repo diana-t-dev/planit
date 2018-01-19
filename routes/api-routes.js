@@ -15,12 +15,17 @@ module.exports = function(app) {
   });
 
   app.get("/friends/:user", function(req, res) {
+
+    console.log(req.params.user);
+
     db.user.findAll({
       where: {
         username: req.params.user
-      },
-      include: [db.post]
+      }
     }).then(function(results) {
+
+      console.log(results[0])
+      
       var friends = results[0].friends;
       if (friends === null) {
         db.user.findAll({})
