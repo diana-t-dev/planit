@@ -60,15 +60,16 @@ var datas = [];
 			<div className ="row">
 				<div className="col s12 top z-depth-2">
 				<h2 className="nomatchText center">Well this is awkward... Innit?</h2>
+				</div>
+				</div>
+				<div className ="row">
+				<div className="col s12">
 				<div className="panel-list center-align">
 					<img src ={this.state.pick}/>
-					
-					
-					
-
+				</div>
+				</div>
+				
 			</div>	
-			</div>
-			</div>
 			</div>
 		);	
 	};
