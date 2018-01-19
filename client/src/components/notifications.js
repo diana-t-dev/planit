@@ -53,6 +53,10 @@ class Notifications extends Component {
              })
     }
 
+    // acceptFriendRequest = () => {
+    //     axios.update(`/friends/`)
+    // }
+
     render() {
 
         return (
