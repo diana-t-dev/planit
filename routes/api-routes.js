@@ -93,6 +93,17 @@ module.exports = function(app) {
     })
   })
 
+
+  app.delete('/notifications/delete/:id', function (req, res) {
+    db.notification.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then((results) => {
+      res.send('deleted notification');
+    })
+  })
+
    app.put("/delfriend", function(req, res) {
 
 

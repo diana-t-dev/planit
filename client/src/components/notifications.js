@@ -7,24 +7,25 @@ import Cookies from 'universal-cookie';
 
 class Notifications extends Component {
     state = {
-        notifications: []
-     
+        notifications: [],
+        deletion: false
     }
 
     componentDidMount () {
+        this.renderNotifications();
+    }
 
-    	 this.setState({notifications: []})
+    renderNotifications = () => {
+        this.setState({notifications: []})
+        console.log(`before: ${this.state.deletion}`);
+
         // set new cookie
         const cookies = new Cookies();
         cookies.set('name', 'Jesus');
-        
+
         // get request for user notifications
         axios.get(`/notifications/${cookies.get('name')}`)
-        .then((results) => {
-
-        	console.log(results)
-            // set state equal to notifications
-           
+        .then((results) => {           
             // if user has none, display a message
             if (results.data[0] === undefined) {
             	
@@ -32,25 +33,29 @@ class Notifications extends Component {
             }
             // else, set the state to their notifications as a list
             else {
-                // notifications = notifications.split(",");
-                
-
-                results.data.forEach(i =>{
-
-                	   this.setState({
-
-                    notifications: [...this.state.notifications, i.user, i.type]
+                let notifications = results.data.map((notification) => {
+                    return {id: notification.id, from: notification.user, type: notification.type}
                 })
-                })
-
-             
-                console.log(this.state.notifications);
-
-
+                this.setState({notifications: notifications});
               	
             }
         })
     }
+
+    deleteNotification = (notificationId) => {
+        this.setState({deletion: !this.state.deletion});
+        this.renderNotifications();
+
+        console.log(notificationId);
+        axios.delete(`/notifications/delete/${notificationId}`)
+             .then((results) => {
+                 console.log(results);
+             })
+    }
+
+    // acceptFriendRequest = () => {
+    //     axios.update(`/friends/`)
+    // }
 
     render() {
 
@@ -74,7 +79,7 @@ class Notifications extends Component {
                 </thead>
                 <tbody>
 
-                {this.state.notifications.map( (el, i) => {
+                {this.state.notifications.map( (el) => {
 
                 	if (el === 'none') {
 
@@ -82,13 +87,14 @@ class Notifications extends Component {
                         <td>No Notifications</td>
                         </tr>
                 		
-                	}else
+                    }
+                    else
                 	{
 
                 		return <tr>
-                        <td>{el}</td>
-                        <td>{el}</td>
-                        <td><a className="btn">Accept</a><a className="btn">Decline</a></td>
+                        <td>{el.from}</td>
+                        <td>{el.type}</td>
+                        <td><a className="btn" data-id={el.id}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                         </tr>
                   }
                 })}
