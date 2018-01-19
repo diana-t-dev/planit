@@ -3,7 +3,6 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
-var noteys = [];
 
 
 class Notifications extends Component {
@@ -14,7 +13,7 @@ class Notifications extends Component {
 
     componentDidMount () {
 
-    	 noteys = [];
+    	 this.setState({notifications: []})
         // set new cookie
         const cookies = new Cookies();
         cookies.set('name', 'Jesus');
@@ -28,8 +27,8 @@ class Notifications extends Component {
            
             // if user has none, display a message
             if (results.data[0] === undefined) {
-            	noteys.push('none');
-                this.setState({notifications: noteys});
+            	
+                this.setState({notifications: ['none']});
             }
             // else, set the state to their notifications as a list
             else {
@@ -38,15 +37,13 @@ class Notifications extends Component {
 
                 results.data.forEach(i =>{
 
-                	noteys.push(i.user);
-                	noteys.push(i.type);
+                	   this.setState({
+
+                    notifications: [...this.state.notifications, i.user, i.type]
+                })
                 })
 
-                this.setState({
-
-                	notifications: noteys
-                })
-
+             
                 console.log(this.state.notifications);
 
 
