@@ -7,23 +7,25 @@ import Cookies from 'universal-cookie';
 
 class Notifications extends Component {
     state = {
-        notifications: []
-     
+        notifications: [],
+        deletion: false
     }
 
     componentDidMount () {
+        this.renderNotifications();
+    }
 
-    	 this.setState({notifications: []})
+    renderNotifications = () => {
+        this.setState({notifications: []})
+        console.log(`before: ${this.state.deletion}`);
+
         // set new cookie
         const cookies = new Cookies();
         cookies.set('name', 'Jesus');
-        
+
         // get request for user notifications
         axios.get(`/notifications/${cookies.get('name')}`)
-        .then((results) => {
-
-            // set state equal to notifications
-           
+        .then((results) => {           
             // if user has none, display a message
             if (results.data[0] === undefined) {
             	
@@ -41,6 +43,9 @@ class Notifications extends Component {
     }
 
     deleteNotification = (notificationId) => {
+        this.setState({deletion: !this.state.deletion});
+        this.renderNotifications();
+
         console.log(notificationId);
         axios.delete(`/notifications/delete/${notificationId}`)
              .then((results) => {
