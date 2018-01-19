@@ -73,4 +73,19 @@ module.exports = function(app) {
     })
   })
 
+   app.post("/notification", function (req ,res) {
+
+    console.log(req.body.data)
+
+    db.notification.create({
+      
+      user: req.body.data.user,
+      to: req.body.data.to,
+      type: req.body.data.type
+
+      }).then(function (results) {
+      res.json(results);
+    })
+  })
+
 }
