@@ -6,6 +6,7 @@ import 'materialize-css/dist/js/materialize.min.js';
 import $ from "jquery";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import Login from './login.js';
 
 const cookies = new Cookies();
 
@@ -14,21 +15,13 @@ class Friends extends Component {
 
   state = {
 
-    users: ['Diana', 'Jesus', "Luis", "Ben"],
-    friends: ['Clark', "Elton", 'Paige']
-  }
-
-  getUsers = () => {
-
-
-axios.get('/users').then(user =>{
-
-  console.log(user);
-
-})
-
-
+    users: [],
+    friends: [],
+    id: ""
   };
+
+   // users: ['Diana', 'Jesus', "Luis", "Ben"],
+   //  friends: ['Clark', "Elton", 'Paige']
 
 
   getFriends = () => {
@@ -38,8 +31,39 @@ let namey = cookies.get('name');
     axios.get('/friends/'+namey).then(friend =>{
 
       console.log(friend);
+
+
+      this.setState({
+
+        users: friend.data.data.names,
+        friends: friend.data.data.daty
+
+      })
     })
 
+  };
+
+  getUser = () => {
+
+let namey = cookies.get('name');
+
+ axios.get('/users/'+namey).then(user =>{
+
+  console.log(user);
+
+  user.data && user.data[0] ? (
+
+
+this.setState({
+
+  id: user.data[0].id
+})
+):
+(
+""
+  )
+
+})
   };
 
     addFriend = (i) => {
@@ -51,8 +75,9 @@ let friend = i;
 let data = {
 
 	user: namey,
-	to: friend.i,
-	type: "friend req"
+  ids: this.state.id,
+	to: friend,
+	type: "friend request"
 }
 
     axios.post('/notification', {data}).then(friend =>{
@@ -62,12 +87,31 @@ let data = {
 
   };
 
+      delFriend = (i) => {
+
+let namey = cookies.get('name');
+
+let friend = i;
+
+let data = {
+
+  user: namey,
+  friend: friend.i
+}
+
+    axios.put('/delfriend', {data}).then(friend =>{
+
+      console.log(friend);
+    })
+
+  };
+
 
   componentDidMount(){
 
-  	cookies.set('name', 'Ben');
+  	// cookies.set('name', 'Ben');
 
-    this.getUsers();
+     this.getUser();
 
     this.getFriends();
 
@@ -88,6 +132,8 @@ let data = {
  render() {
     return (
 
+ cookies.get('name') === undefined ? (<Login />):(
+
 
 <div>
    <div className="row">
@@ -107,7 +153,7 @@ let data = {
 {
 
   this.state.users.map(i => {
-  return <li><a type="button" className="addFriend" data-id="username" onClick={() => this.addFriend({i})}>{i}</a></li>
+  return <li><a type="button" className="addFriend" data-id="username" onClick={() => this.addFriend(i.username)}>{i.username}</a></li>
 
         })
 }
@@ -126,15 +172,28 @@ let data = {
   
   {
 
+    this.state.friends !== undefined ? (
+
   this.state.friends.map(i => {
-    return  <tr>
-     <td className="namey">{i}</td>
-             <td><a href="/friends">{i}'s Groups</a></td>
+      <tr>
+     <td className="namey">{i.name}</td>
+             <td><a href="/friends">{i.name}'s Groups</a></td>
              <td>*</td>
-             <td><a className="waves-effect waves-light btn delfriend">Remove Friend</a></td>
+             <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i.name)}>Remove Friend</a></td>
         
 </tr>
          })
+
+  ):
+
+    (
+
+       <tr>
+     <td className="namey">You Have No Friends!</td>
+     </tr>
+
+
+      )
 
 }     
          
@@ -145,6 +204,7 @@ let data = {
     </div>
 </div>
 
+)
 );
 
 };

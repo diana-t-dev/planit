@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import '../App.css';
 import Form from "./form.js";
+import Login from './login.js';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class Groups extends Component {
   state = {
@@ -27,6 +31,10 @@ class Groups extends Component {
 render() { 
 
   return ( 
+
+cookies.get('name') === undefined ? (<Login />):(
+  
+
 <div className ="wrapper">
   <div className="row z-depth-2">
   <div className="groupTextPanel col s12">
