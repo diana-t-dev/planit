@@ -89,9 +89,13 @@ module.exports = function(app) {
   })
 
   app.delete('/notifications/delete/:id', function (req, res) {
-    console.log(req.params.id);
-    console.log('hello');
-    res.send(req.params.id);
+    db.notification.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then((results) => {
+      res.send('deleted notification');
+    })
   })
 
 }

@@ -22,7 +22,6 @@ class Notifications extends Component {
         axios.get(`/notifications/${cookies.get('name')}`)
         .then((results) => {
 
-        	console.log(results)
             // set state equal to notifications
            
             // if user has none, display a message
