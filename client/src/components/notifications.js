@@ -23,7 +23,9 @@ class Notifications extends Component {
         const cookies = new Cookies();
         cookies.set('name', 'Ben');
 
-        this.setState({user: cookies.get('name')});
+        axios.get(`/users/${cookies.get('name')}`).then(user =>{       
+            this.setState({user: user.data[0].id})
+        })
 
         // get request for user notifications
         axios.get(`/notifications/${cookies.get('name')}`)
@@ -61,7 +63,12 @@ class Notifications extends Component {
         axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
              .then((results) => {
                  console.log(results);
-             })
+                 axios.post(`/friends/update/${userId}`, {friendId: userRequestId})
+                      .then((results) => {
+                        console.log(results);
+                      });
+             });
+        
 
         // if it's a group request, update group members
         // then delete notifications

@@ -105,12 +105,15 @@ console.log(results)
   })
 
   app.post('/friends/update/:userId', function (req, res) {
+    console.log("======= " + req.params.userId);
     db.user.findAll({
       where: {
         id: req.params.userId
       }
     }).then((results) => {
       // transform string to array
+      console.log(results);
+      console.log(results[0]);
       let friends = results[0].dataValues.friends.split(', ');
       // add new friend to array
       let newFriend = req.body.friendId;
@@ -128,7 +131,6 @@ console.log(results)
         }).then((data) => {
           res.send('friends updated');
         })
-
     })
   })
 
