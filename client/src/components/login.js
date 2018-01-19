@@ -3,6 +3,7 @@ import '../App.css';
 import FacebookLogin from 'react-facebook-login';
 import Cookies from 'universal-cookie';
 import Home from "./home.js";
+import axios from "axios";
 const cookies = new Cookies();
 
   class Login extends React.Component {
@@ -11,27 +12,50 @@ const cookies = new Cookies();
   		loggedin: false
   	}
 
-  	remove = () =>{
-  		cookies.remove('name');
-  		console.log('User is', cookies.get('name'))
-  		this.setState({loggedin:false})
-  		console.log(this.state.loggedin)
-  	}
-
-
     responseFacebook =(response) => {
 
-      console.log(response);
+    var id = response.id
+    console.log(response.id);
+    console.log(response.name);
+    console.log(response.picture.data.url);
 
-      cookies.set('name',response.name);
+    axios.get('/user/'+id)
+    .then( user => {
+
+      if (user.data === null) {
+
+        var newUser = {
+          usernameId: response.id,
+          username: response.name,
+          image: response.picture.data.url
+        }
+
+        axios.post('/newUser', {newUser})
+        .then( user => {
+          cookies.set('name',user.data.username);
+          this.setState({loggedin:true})
+          console.log("new user was created", user)
+        })
+      }
+      else{
+          cookies.set('name',response.name);
+          this.setState({loggedin:true});
+      }
+      
 
 
- 		var test = cookies.get('name');
+    })
+    
 
- 		console.log('User is', test)
+    
+   //  console.log(response);
 
-      this.setState({loggedin:true})
-      console.log(this.state.loggedin)
+ 		// var test = cookies.get('name');
+
+ 		// console.log('User is', test)
+
+   //    this.setState({loggedin:true})
+   //    console.log(this.state.loggedin)
     }
 
     componentDidMount(){
@@ -44,8 +68,6 @@ const cookies = new Cookies();
       return (this.state.loggedin ===true ? (<Home/>): 
 
       	(<div className='container'>
-
-      		<button onClick={this.remove}>adfadfa</button>
 
          <FacebookLogin
           appId="397807444004424"

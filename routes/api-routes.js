@@ -173,4 +173,39 @@ console.log(results)
     res.end();
   });
 
+  app.get("/user/:id", function(req, res) {
+
+    console.log(req.params.id);
+
+    db.user.findOne({
+      where:{
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+
+      res.json(results);
+    });
+
+  });
+
+  app.post("/newUser", function(req, res) {
+
+    console.log(req.body.newUser);
+
+    db.user.create({
+      username: req.body.newUser.username,
+      usernameId: req.body.newUser.usernameId,
+      image: req.body.newUser.image
+
+    }).then(function(results) {
+
+      console.log('created new user', results)
+
+      res.json(results);
+    });
+
+  });
+
+
 }
