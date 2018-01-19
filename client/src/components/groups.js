@@ -139,7 +139,8 @@ cookies.get('name') === undefined ? (<Login />):(
 	</div>
 </div>
       )
-    }
+);
+    };
 
 };
 
