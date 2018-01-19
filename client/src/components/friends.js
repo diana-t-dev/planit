@@ -51,12 +51,14 @@ let namey = cookies.get('name');
 
   console.log(user);
 
-  user.data ? (
+  user.data && user.data[0] ? (
+
 
 this.setState({
 
   id: user.data[0].id
-})):
+})
+):
 (
 ""
   )

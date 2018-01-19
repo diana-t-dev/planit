@@ -28,8 +28,14 @@ class Notifications extends Component {
 
         cookies.set('name', 'Ben');
 
-        axios.get(`/users/${cookies.get('name')}`).then(user =>{       
+        axios.get(`/users/${cookies.get('name')}`).then(user =>{  
+
+            user.data && user.data[0] ? (
+
             this.setState({user: user.data[0].id})
+
+            ):
+            ("")
         })
 
         // get request for user notifications
