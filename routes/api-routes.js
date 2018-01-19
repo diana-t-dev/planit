@@ -13,7 +13,6 @@ module.exports = function(app) {
 
     }).then(function(results) {
 
-console.log(results)
 
       // console.log("found user data");
       // console.log(results);
@@ -25,15 +24,13 @@ console.log(results)
 
   app.get("/friends/:user", function(req, res) {
 
-    console.log(req.params.user);
 
     db.user.findAll({
       where: {
-        username: req.params.user
+        usernameId: req.params.user
       }
     }).then(function(results) {
 
-      console.log(results[0])
       
       var friends = results[0].friends;
       if (friends === null) {
@@ -78,7 +75,6 @@ console.log(results)
   });
 
   app.get("/notifications/:user", function (req ,res) {
-    console.log("***** " + req.params.user);
     db.notification.findAll({
       where: {
         to: req.params.user
@@ -89,8 +85,6 @@ console.log(results)
   })
 
    app.post("/notification", function (req ,res) {
-
-    console.log(req.body.data)
 
     db.notification.create({
       
@@ -111,21 +105,38 @@ console.log(results)
       }
     }).then((results) => {
       // transform string to array
-      let friends = results[0].dataValues.friends.split(', ');
-      console.log(typeof friends[0]);
-      // add new friend to array
-      let newFriend = req.body.friendId.toString();
-      console.log(typeof newFriend);
-      if (friends.includes(newFriend)) {
-        res.end();
+      let data = results[0].dataValues.friends;
+      console.log("friends column***** " + data);
+      
+      if (data && data !== null) {
+        let friends = results[0].dataValues.friends.split(', ');
+        // add new friend to array
+        let newFriend = req.body.friendId.toString();
+        if (friends.includes(newFriend)) {
+          res.end();
+        }
+        else {
+          friends.push(newFriend);
+          // send data back to db as string
+          friends = friends.join(', ');
+
+          db.user.update({
+            friends: friends
+            },
+            {
+              where: {
+                id: req.params.userId
+              }
+            }).then((data) => {
+              res.send('friends updated');
+            })
+        }
       }
       else {
-        friends.push(newFriend);
-        // send data back to db as string
-        friends = friends.join(', ');
-
+        let newFriend = req.body.friendId.toString();
+        console.log("new friend: " + newFriend);
         db.user.update({
-          friends: friends
+          friends: newFriend
           },
           {
             where: {
@@ -135,6 +146,8 @@ console.log(results)
             res.send('friends updated');
           })
       }
+      
+      
       
     })
   })
@@ -182,7 +195,6 @@ console.log(results)
 
 
       var number = friendsList.indexOf(req.body.data.friend);
-      console.log(number);
 
       friendsList.splice(number, 1);
       // }
@@ -191,7 +203,6 @@ console.log(results)
 
       var newList = friendsList.toString();
 
-      console.log(newList);
 
       db.user.update({
 
@@ -212,7 +223,6 @@ console.log(results)
 
   app.get("/user/:id", function(req, res) {
 
-    console.log(req.params.id);
 
     db.user.findOne({
       where:{
@@ -228,7 +238,6 @@ console.log(results)
 
   app.post("/newUser", function(req, res) {
 
-    console.log(req.body.newUser);
 
     db.user.create({
       username: req.body.newUser.username,
@@ -237,7 +246,6 @@ console.log(results)
 
     }).then(function(results) {
 
-      console.log('created new user', results)
 
       res.json(results);
     });

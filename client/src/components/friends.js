@@ -23,7 +23,7 @@ class Friends extends Component {
 
   getFriends = () => {
 
-let namey = cookies.get('name');
+let namey = cookies.get('id');
 
     axios.get('/friends/'+namey).then(friend =>{
 
