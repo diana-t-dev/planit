@@ -10,7 +10,7 @@ const cookies = new Cookies();
 
   	state={
   		loggedin: false
-  	}
+  	};
 
     responseFacebook =(response) => {
 
@@ -35,45 +35,38 @@ const cookies = new Cookies();
           cookies.set('name',user.data.username);
           cookies.set('id', user.data.usernameId);
           this.setState({loggedin:true})
-          console.log("new user was created", user)
+          console.log("new user was created", user);
+          this.props.history.push('/');
         })
       }
       else{
           cookies.set('name',response.name);
           cookies.set('id', response.id);
+          
           this.setState({loggedin:true});
+          this.props.history.push('/');
       }
       
-
-
-    })
+     })
     
-
-    
-   //  console.log(response);
-
- 		// var test = cookies.get('name');
-
- 		// console.log('User is', test)
-
-   //    this.setState({loggedin:true})
-   //    console.log(this.state.loggedin)
     }
 
     componentDidMount(){
-    	
+    	console.log("******",this.props)
     }
 
 
     render() {
 
-      return (this.state.loggedin ===true ? (<Home/>): 
+      
+
+      return (this.state.loggedin === true ? (<Home/>): 
 
       	(<div className='container'>
 
          <FacebookLogin
           appId="397807444004424"
-          autoLoad={true}
+          autoLoad={false}
           fields="name,email,picture"
           scope="public_profile,user_friends,user_actions.books"
           callback={this.responseFacebook} />     	

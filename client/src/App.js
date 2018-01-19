@@ -108,28 +108,23 @@ componentDidMount(){
 
     return (
       <div>
-
-            {cookies.get('name') === undefined ? (<Login />):(
-             <Router> 
-             <div>
-                <Nav />
-                <NotificationContainer/>
-
-                <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/friends" component={Friends} />
-                <Route exact path="/groups" component={Groups} />
-                <Route exact path="/notifications" component={Notifications} />
-                <Route exact path="/login" render={(props) => ( <Login user={this.state.user}/> )}/>
-                <Route exact path="/logout" component={Logout} />
-                <Route component={NoMatch} />
-              </Switch>
-            <Footer />
-            </div>
-            </Router>)}
-</div>
-    )
-  }
+        <Router>
+        <div>
+          <NotificationContainer/>
+          <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/friends" component={Friends} />
+          <Route exact path="/groups" component={Groups} />
+          <Route exact path="/notifications" component={Notifications} />
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/logout" component={Logout} />
+          <Route component={NoMatch} />
+          </Switch>
+          <Footer />
+          </div>
+          </Router>
+        </div>
+    )}
 }
 
 

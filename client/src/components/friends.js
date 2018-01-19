@@ -7,6 +7,7 @@ import $ from "jquery";
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import Login from './login.js';
+import Nav from './nav.js'
 
 const cookies = new Cookies();
 
@@ -126,10 +127,11 @@ let data = {
  render() {
     return (
 
- cookies.get('name') === undefined ? (<Login />):(
+ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
 
 
 <div>
+  <Nav/>
    <div className="row">
 <div className="col s12 top z-depth-2">
 <h1 className="center">My Friends</h1>
