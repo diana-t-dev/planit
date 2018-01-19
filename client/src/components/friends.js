@@ -16,7 +16,7 @@ class Friends extends Component {
 
     users: ['Diana', 'Jesus', "Luis", "Ben"],
     friends: ['Clark', "Elton", 'Paige']
-  }
+  };
 
   getUsers = () => {
 
@@ -56,6 +56,25 @@ let data = {
 }
 
     axios.post('/notification', {data}).then(friend =>{
+
+      console.log(friend);
+    })
+
+  };
+
+      delFriend = (i) => {
+
+let namey = cookies.get('name');
+
+let friend = i;
+
+let data = {
+
+  user: namey,
+  friend: friend.i
+}
+
+    axios.put('/delfriend', {data}).then(friend =>{
 
       console.log(friend);
     })
@@ -131,7 +150,7 @@ let data = {
      <td className="namey">{i}</td>
              <td><a href="/friends">{i}'s Groups</a></td>
              <td>*</td>
-             <td><a className="waves-effect waves-light btn delfriend">Remove Friend</a></td>
+             <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend({i})}>Remove Friend</a></td>
         
 </tr>
          })
