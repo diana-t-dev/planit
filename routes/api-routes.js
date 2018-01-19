@@ -78,6 +78,7 @@ console.log(results)
   });
 
   app.get("/notifications/:user", function (req ,res) {
+    console.log("***** " + req.params.user);
     db.notification.findAll({
       where: {
         to: req.params.user
@@ -94,11 +95,22 @@ console.log(results)
     db.notification.create({
       
       user: req.body.data.user,
+      userId: req.body.data.ids,
       to: req.body.data.to,
       type: req.body.data.type
 
       }).then(function (results) {
       res.json(results);
+    })
+  })
+
+  app.post('/friends/update/:userId', function (req, res) {
+    db.user.findAll({
+      where: {
+        id: req.params.userId
+      }
+    }).then((results) => {
+      res.send(results);
     })
   })
 
