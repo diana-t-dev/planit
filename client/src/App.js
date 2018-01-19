@@ -106,7 +106,6 @@ componentDidMount(){
 
   render() {
 
-    console.log(this.state.user)
     return (
       <div>
 

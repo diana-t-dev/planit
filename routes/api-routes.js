@@ -78,6 +78,7 @@ console.log(results)
   });
 
   app.get("/notifications/:user", function (req ,res) {
+    console.log("***** " + req.params.user);
     db.notification.findAll({
       where: {
         to: req.params.user
@@ -94,11 +95,47 @@ console.log(results)
     db.notification.create({
       
       user: req.body.data.user,
+      userId: req.body.data.ids,
       to: req.body.data.to,
       type: req.body.data.type
 
       }).then(function (results) {
       res.json(results);
+    })
+  })
+
+  app.post('/friends/update/:userId', function (req, res) {
+    db.user.findAll({
+      where: {
+        id: req.params.userId
+      }
+    }).then((results) => {
+      // transform string to array
+      let friends = results[0].dataValues.friends.split(', ');
+      console.log(typeof friends[0]);
+      // add new friend to array
+      let newFriend = req.body.friendId.toString();
+      console.log(typeof newFriend);
+      if (friends.includes(newFriend)) {
+        res.end();
+      }
+      else {
+        friends.push(newFriend);
+        // send data back to db as string
+        friends = friends.join(', ');
+
+        db.user.update({
+          friends: friends
+          },
+          {
+            where: {
+              id: req.params.userId
+            }
+          }).then((data) => {
+            res.send('friends updated');
+          })
+      }
+      
     })
   })
 
