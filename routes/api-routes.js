@@ -88,4 +88,64 @@ module.exports = function(app) {
     })
   })
 
+   app.put("/delfriend", function(req, res) {
+
+
+    // console.log(req.body);
+
+
+    db.user.findAll({
+
+      where: {
+
+        username: req.body.data.user
+      }
+
+    }).then(function(results) {
+
+      var friends = results[0].friends;
+
+      // console.log(friends);
+
+      var friendsList = friends.split(",");
+
+      // console.log(friendsList);
+
+      // for (var i = 0; i < friendsList.length; i++) {
+
+      // console.log(friendsList[i]);
+      // console.log(req.body.friend);
+
+      // if (friendsList[i] === req.body.friend) {
+
+
+      var number = friendsList.indexOf(req.body.data.friend);
+      console.log(number);
+
+      friendsList.splice(number, 1);
+      // }
+
+      // }
+
+      var newList = friendsList.toString();
+
+      console.log(newList);
+
+      db.user.update({
+
+        friends: newList
+
+      }, {
+        where: {
+
+          username: req.body.data.user
+
+        }
+      })
+
+    });
+
+    res.end();
+  });
+
 }
