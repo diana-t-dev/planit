@@ -29,7 +29,7 @@ console.log(results)
 
     db.user.findAll({
       where: {
-        username: req.params.user
+        usernameId: req.params.user
       }
     }).then(function(results) {
 
