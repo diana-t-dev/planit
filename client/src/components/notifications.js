@@ -35,16 +35,22 @@ class Notifications extends Component {
                 // notifications = notifications.split(",");
                 
 
-                results.data.forEach(i =>{
+                // results.data.forEach(i =>{
 
-                	   this.setState({
+                // 	   this.setState({
 
-                    notifications: [...this.state.notifications, i.user, i.type]
+                //     notifications: [...this.state.notifications, i.user, i.type]
+                // })
+                // })
+
+                let notifications = results.data.map((notification) => {
+                    return {from: notification.user, type: notification.type}
                 })
-                })
+
+                this.setState({notifications: notifications});
 
              
-                console.log(this.state.notifications);
+                console.log(notifications);
 
 
               	
@@ -74,7 +80,7 @@ class Notifications extends Component {
                 </thead>
                 <tbody>
 
-                {this.state.notifications.map( (el, i) => {
+                {this.state.notifications.map( (el) => {
 
                 	if (el === 'none') {
 
@@ -82,12 +88,13 @@ class Notifications extends Component {
                         <td>No Notifications</td>
                         </tr>
                 		
-                	}else
+                    }
+                    else
                 	{
 
                 		return <tr>
-                        <td>{el}</td>
-                        <td>{el}</td>
+                        <td>{el.from}</td>
+                        <td>{el.type}</td>
                         <td><a className="btn">Accept</a><a className="btn">Decline</a></td>
                         </tr>
                   }
