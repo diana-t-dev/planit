@@ -33,12 +33,14 @@ const cookies = new Cookies();
         axios.post('/newUser', {newUser})
         .then( user => {
           cookies.set('name',user.data.username);
+          cookies.set('id', user.data.usernameId);
           this.setState({loggedin:true})
           console.log("new user was created", user)
         })
       }
       else{
           cookies.set('name',response.name);
+          cookies.set('id', response.id);
           this.setState({loggedin:true});
       }
       

@@ -26,8 +26,6 @@ class Notifications extends Component {
         // set new cookie
         const cookies = new Cookies();
 
-        cookies.set('name', 'Ben');
-
         axios.get(`/users/${cookies.get('name')}`).then(user =>{  
 
             user.data && user.data[0] ? (

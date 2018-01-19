@@ -20,10 +20,6 @@ class Friends extends Component {
     id: ""
   };
 
-   // users: ['Diana', 'Jesus', "Luis", "Ben"],
-   //  friends: ['Clark', "Elton", 'Paige']
-
-
   getFriends = () => {
 
 let namey = cookies.get('name');
@@ -108,8 +104,6 @@ let data = {
 
 
   componentDidMount(){
-
-  	// cookies.set('name', 'Ben');
 
      this.getUser();
 
