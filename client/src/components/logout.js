@@ -56,12 +56,17 @@ class Logout extends Component {
 			<div className = "row">
 				<div className = "col s12 top z-depth-2">
 				<h1 className = "logoutText center">Why do you have to leave? Everyone always leaves.</h1>
+				</div>
+				</div>
+				<div className ="row">
+				<div className="col s12">
 				<div className = "panel-list center-align">
 					<img src ={this.state.pick}/>
 
 				</div>
 				</div>
 				</div>
+				
 				</div>
 			);
 	};
