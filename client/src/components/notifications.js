@@ -3,6 +3,7 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import Login from './login.js';
+import Nav from './nav.js'
 
 
 const cookies = new Cookies();
@@ -86,54 +87,49 @@ class Notifications extends Component {
 
         return (
 
- cookies.get('name') === undefined ? (<Login />):(
+ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
 
-        	<div>
+<div>
+    <Nav/>
         <div className="row">
             <div className="col s12 top z-depth-2">
                 <h1 className="center">My Notifications</h1>
             </div>
-            </div>
-            <div className="container">
+        </div>
+        <div className="container">
             <div className="row">
-            <div className="col s12">
-            <table className="table highlight">
-                <thead>
-                <tr>
-                    <th>From</th>
-                    <th>Type</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                {this.state.notifications.map( (el) => {
-
-                    console.log(el);
-
-                	if (el === 'none') {
-
-                		return <tr>
-                        <td>No Notifications</td>
-                        </tr>
-                		
-                    }
-                    else
-                	{
-
-                		return <tr>
-                        <td>{el.from}</td>
-                        <td>{el.type}</td>
-                        <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
-                        </tr>
-                  }
-                })}
-                </tbody>
-            </table>
+                <div className="col s12">
+                    <table className="table highlight">
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.notifications.map( (el) => {
+                            console.log(el);
+                            if (el === 'none') {
+                            return <tr>
+                                <td>No Notifications</td>
+                            </tr>
+                            
+                            }
+                            else
+                            {
+                            return <tr>
+                                <td>{el.from}</td>
+                                <td>{el.type}</td>
+                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
+                            </tr>
+                            }
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        </div>
-        </div>
-        </div>
-    )
+    </div> )
         );
     }
 } 
