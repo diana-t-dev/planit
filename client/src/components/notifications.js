@@ -32,30 +32,21 @@ class Notifications extends Component {
             }
             // else, set the state to their notifications as a list
             else {
-                // notifications = notifications.split(",");
-                
-
-                // results.data.forEach(i =>{
-
-                // 	   this.setState({
-
-                //     notifications: [...this.state.notifications, i.user, i.type]
-                // })
-                // })
-
                 let notifications = results.data.map((notification) => {
-                    return {from: notification.user, type: notification.type}
+                    return {id: notification.id, from: notification.user, type: notification.type}
                 })
-
                 this.setState({notifications: notifications});
-
-             
-                console.log(notifications);
-
-
               	
             }
         })
+    }
+
+    deleteNotification = (notificationId) => {
+        console.log(notificationId);
+        axios.delete(`/notifications/delete/${notificationId}`)
+             .then((results) => {
+                 console.log(results);
+             })
     }
 
     render() {
@@ -95,7 +86,7 @@ class Notifications extends Component {
                 		return <tr>
                         <td>{el.from}</td>
                         <td>{el.type}</td>
-                        <td><a className="btn">Accept</a><a className="btn">Decline</a></td>
+                        <td><a className="btn" data-id={el.id}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                         </tr>
                   }
                 })}

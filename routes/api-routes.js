@@ -88,4 +88,10 @@ module.exports = function(app) {
     })
   })
 
+  app.delete('/notifications/delete/:id', function (req, res) {
+    console.log(req.params.id);
+    console.log('hello');
+    res.send(req.params.id);
+  })
+
 }
