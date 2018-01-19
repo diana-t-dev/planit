@@ -31,7 +31,7 @@ const colors = {
   const addMessage = data => {
     console.log(data);
  
- 	NotificationManager.success("User: " + data.user + " Score: " + data.score, 'NEW TOP SCORE!');
+  NotificationManager.success("User: " + data.user + " Score: " + data.score, 'NEW TOP SCORE!');
 
 };
 
@@ -87,7 +87,7 @@ this.setState({
 
 componentDidMount(){
 
-// 	 this.socket.on('RECEIVE_MESSAGE', (data) =>{
+//   this.socket.on('RECEIVE_MESSAGE', (data) =>{
 
 //     addMessage(data);
 
@@ -98,41 +98,36 @@ componentDidMount(){
 
     this.setState({
 
-      user: cookies.get('name');
+      user: cookies.get('name')
     })
+
 
 }
 
   render() {
+
+    console.log(this.state.user)
     return (
       <div>
 
-            {this.state.user === "" ? (
-      
-      <Login />
-)
-:
-(
+            {cookies.get('name') === undefined ? (<Login />):(
+             <Router> 
+             <div>
+                <Nav />
+                <NotificationContainer/>
 
-           <Router>
-      <div>
-<Nav />
-		
-  <NotificationContainer/>
-  
-        <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/friends" component={Friends} />
-        <Route exact path="/groups" component={Groups} />
-        <Route path="/notifications" component={Notifications} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
-        <Route component={NoMatch} />
-      </Switch>
-<Footer />
-  </div>
-  </Router>
-      )}
+                <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/friends" component={Friends} />
+                <Route exact path="/groups" component={Groups} />
+                <Route exact path="/notifications" component={Notifications} />
+                <Route exact path="/login" render={(props) => ( <Login user={this.state.user}/> )}/>
+                <Route exact path="/logout" component={Logout} />
+                <Route component={NoMatch} />
+              </Switch>
+            <Footer />
+            </div>
+            </Router>)}
 </div>
     )
   }
