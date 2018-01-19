@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import $ from "jquery";
 import Axios from "axios";
 import '../App.css';
+import Login from './login.js';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 
 
@@ -56,6 +60,9 @@ var datas = [];
 			console.log(this.state.gifs)
 		
 		return (
+
+			 cookies.get('name') === undefined ? (<Login />):(
+
 			<div className = "wrapper">
 			<div className ="row">
 				<div className="col s12 top z-depth-2">
@@ -71,6 +78,7 @@ var datas = [];
 				
 			</div>	
 			</div>
+			)
 		);	
 	};
 
