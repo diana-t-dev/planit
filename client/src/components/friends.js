@@ -42,8 +42,30 @@ let namey = cookies.get('name');
 
   };
 
+    addFriend = (i) => {
+
+let namey = cookies.get('name');
+
+let friend = i;
+
+let data = {
+
+	user: namey,
+	to: friend.i,
+	type: "friend req"
+}
+
+    axios.post('/notification', {data}).then(friend =>{
+
+      console.log(friend);
+    })
+
+  };
+
 
   componentDidMount(){
+
+  	cookies.set('name', 'Ben');
 
     this.getUsers();
 
@@ -85,7 +107,7 @@ let namey = cookies.get('name');
 {
 
   this.state.users.map(i => {
-  return <li><a type="button" className="addFriend" data-id="username">{i}</a></li>
+  return <li><a type="button" className="addFriend" data-id="username" onClick={() => this.addFriend({i})}>{i}</a></li>
 
         })
 }
