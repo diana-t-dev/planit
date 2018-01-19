@@ -1,9 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import '../App.css';
 
-const Groups = props => (
+class Groups extends Component {
+  state = {
+    form: false
+  }
 
-  
+  toggleForm () {
+
+    this.setState({form:true})
+
+  }
+
+  componentDidMount () {
+
+  }
+
+render() { 
+
+  return ( 
 <div className ="wrapper">
   <div className="row z-depth-2">
   <div className="col s12">
@@ -88,7 +103,10 @@ const Groups = props => (
 		</div>			
 
 	</div>
-</div>	
-);
+</div>
+      )
+    }
+
+};
 
 export default Groups;
