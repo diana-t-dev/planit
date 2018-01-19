@@ -21,6 +21,8 @@ const cookies = new Cookies();
 
     responseFacebook =(response) => {
 
+      console.log(response);
+
       cookies.set('name',response.name);
 
 
