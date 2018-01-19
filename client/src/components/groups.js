@@ -5,8 +5,10 @@ const Groups = props => (
 
   
 <div className ="wrapper">
-  <div className="row">
+  <div className="row z-depth-2">
+  <div className="col s12">
 	<h1 className ="center">Group</h1>	
+	</div>
  </div>
 
 	<div className="row">
