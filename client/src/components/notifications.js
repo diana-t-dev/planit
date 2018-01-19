@@ -62,10 +62,9 @@ class Notifications extends Component {
         // if it's a friend request, update both users' friends list
         axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
              .then((results) => {
-                 console.log(results);
                  axios.post(`/friends/update/${userId}`, {friendId: userRequestId})
                       .then((results) => {
-                        console.log(results);
+                          this.deleteNotification(notificationId);
                       });
              });
         
