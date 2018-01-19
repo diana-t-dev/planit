@@ -110,6 +110,8 @@ console.log(results)
         id: req.params.userId
       }
     }).then((results) => {
+      let friends = results[0].dataValues.friends.split(', ');
+      console.log(friends);
       res.send(results);
     })
   })
