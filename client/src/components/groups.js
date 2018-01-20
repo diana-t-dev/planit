@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import '../App.css';
-import Form from "./form.js";
 import Login from './login.js';
 import Cookies from 'universal-cookie';
 import Nav from './nav.js';
@@ -9,22 +8,6 @@ import Footer from './footer.js';
 const cookies = new Cookies();
 
 class Groups extends Component {
-  state = {
-    form: false
-  }
-
-  toggleForm = () => {
-
-    this.state.form ?(
-
-      this.setState({form:false})
-
-      ):
-    (
-
-    this.setState({form:true})
-)
-  }
 
   componentDidMount () {
 
@@ -44,13 +27,8 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
         <h1 className ="groupText center">Group Hub</h1>
       </div>
     </div>
-    <div className="row toprow">
-      <div className="col s2 offset-s5">
-        <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
-      </div>
-    </div>
-    { this.state.form ? (<Form  click={this.toggleForm}/> ):("") }
-      <div className="row">
+   
+      <div className="row toprow">
         <div className="col s3 m3 l3">
           <div className="col s12 top z-depth-2">
             <div className="card">
