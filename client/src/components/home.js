@@ -47,6 +47,38 @@ class Home extends React.Component {
       </div>
     </div>		
 				{ this.state.form ? (<Form  click={this.toggleForm}/> ):("") }
+
+	<div  className="container">
+	<div  className="row">
+		<div className="col s12 top z-depth-2 bordy4 hoverable">
+		<ul>
+		<li> Name - Text</li>
+		<li> Name - Text</li>
+		<li> Name - Text</li>
+		<li> Name - Text</li>
+		<li> Name - Text</li>
+		</ul>
+		</div>
+
+		<div className="col s12 top z-depth-2 bordy3 hoverable">
+		  <h4>Chat</h4>
+            <hr/>
+           <form className="col s12">
+                <div className="input-field col s9 ">
+                 <i className="material-icons icon-blue prefix">message</i>
+                 <input id="icon_name" type="text" className="validate" />
+               <label for="icon_name">What's on your mind'?</label>
+                </div>
+                <div className="col s3">
+                <a className="btn center">Enter</a>
+                </div>
+               </form>
+
+
+		</div>
+
+		</div>
+		</div>
 			
 			<Footer/>
 		</div>

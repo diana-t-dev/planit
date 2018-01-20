@@ -141,6 +141,13 @@ i.icon-blue {
   overflow: auto;
 }
 
+.bordy4 {
+
+  border: 2px solid black;
+  height: 525px;
+  overflow: auto;
+}
+
 .coms {
 height: 90px;
   overflow: auto;
