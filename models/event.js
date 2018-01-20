@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
+     event.hasMany(models.comment, {
+      onDelete: "cascade"
+    });
+
+
 }
   return event;
 };
