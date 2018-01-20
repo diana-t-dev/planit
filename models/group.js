@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
       as: 'usery',
       foreignKey: 'groupId'
     });
+
+    group.hasMany(models.event, {
+      onDelete: "cascade"
+    });
   };
 
   return group;
