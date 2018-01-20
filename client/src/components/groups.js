@@ -3,7 +3,8 @@ import '../App.css';
 import Form from "./form.js";
 import Login from './login.js';
 import Cookies from 'universal-cookie';
-import Nav from './nav.js'
+import Nav from './nav.js';
+import Footer from './footer.js';
 
 const cookies = new Cookies();
 
@@ -103,6 +104,7 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
         </div>
       </div>
     </div>
+    <Footer/>
   </div>
 
      )

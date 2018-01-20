@@ -2,7 +2,8 @@ import React from "react";
 import '../App.css';
 import Login from './login.js';
 import Cookies from 'universal-cookie';
-import Nav from './nav.js'
+import Nav from './nav.js';
+import Footer from './footer.js';
 
 const cookies = new Cookies();
 
@@ -22,6 +23,7 @@ class Home extends React.Component {
 					<h1 className="center">My Dashboard</h1>
 				</div>
 			</div>
+			<Footer/>
 		</div>
 		)
 	 );

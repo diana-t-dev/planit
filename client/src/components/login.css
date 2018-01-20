@@ -1,0 +1,28 @@
+
+
+.signHeader{
+	height: 70px;
+	background: black;
+	margin-top: 0px;
+	color: white;
+	/*font-size: 24px;*/
+}
+
+.container{
+	margin-bottom: -20px !important;
+	margin-top: -21px !important;
+}
+
+
+
+.design{
+	background: darkred;
+	height: 500px;
+	margin-bottom: 0px;
+}
+
+
+.login{
+	background: lightblue;
+	height: 500px;
+}

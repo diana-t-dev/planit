@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import $ from "jquery";
 import Axios from "axios";
 import '../App.css';
 import Cookies from 'universal-cookie';
-import Login from './login.js';
 import Nav from './nav.js'
 
 
@@ -18,34 +16,25 @@ class Logout extends Component {
 	};
 
 	componentDidMount() {
-		Axios.get("https://api.giphy.com/v1/gifs/search?q=crying&limit=20&offset=0&rating=G&lang=en&api_key=IelN2EsP53lCGIzF6kjIakIkgXbSa3bL").then
-			((data) => {
-				console.log(data);
+		var key = "api_key=IelN2EsP53lCGIzF6kjIakIkgXbSa3bL"
+		Axios.get("https://api.giphy.com/v1/gifs/search?q=crying&limit=20&offset=0&rating=G&lang=en&"+key)
+			.then((data) => {
 
-		cookies.remove('name');
-		cookies.remove('id');
+				cookies.remove('name');
+				cookies.remove('id');
 
-		var datas = [];	
-			
-			data.data.data.forEach(i =>{
+				var datas = [];
 
-				datas.push( i.images.downsized_large.url)
-			})
-
-			this.setState( {gifs: datas});
-			this.pickGif()
-			console.log(this.state.pick);	
-				
+				data.data.data.forEach(i => { datas.push(i.images.downsized_large.url)})
+				this.setState({ gifs: datas });
+				this.pickGif()
 			});
 	}
 
 	pickGif = () => {
 		if (this.state.gifs !== []){
-
 			let num = Math.floor(Math.random()*(this.state.gifs).length);
-				this.setState({
-					pick: this.state.gifs[num]
-				})
+			this.setState({ pick: this.state.gifs[num]})
 		}
 	}
 
@@ -62,7 +51,7 @@ class Logout extends Component {
 				<div className ="row">
 					<div className="col s12">
 						<div className = " panel-list center-align">
-							<img src ={this.state.pick}/>
+							<img alt='img' src ={this.state.pick}/>
 						</div>
 					</div>
 				</div>
