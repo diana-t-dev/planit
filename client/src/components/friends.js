@@ -7,7 +7,8 @@ import $ from "jquery";
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import Login from './login.js';
-import Nav from './nav.js'
+import Nav from './nav.js';
+import Footer from './footer.js';
 
 const cookies = new Cookies();
 
@@ -144,7 +145,7 @@ let data = {
 
 <a className='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'>Add Friend</a>
 
-    <ul id='dropdown1' class='dropdown-content'>
+    <ul id='dropdown1' className='dropdown-content'>
 
 {
 
@@ -198,6 +199,7 @@ let data = {
     </div>
     </div>
     </div>
+    <Footer/>
 </div>
 
 )

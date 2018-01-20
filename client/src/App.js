@@ -3,12 +3,10 @@ import './App.css';
 import Login from "./components/login.js";
 import Logout from "./components/logout.js";
 import Home from "./components/home.js";
-import Footer from "./components/footer.js";
 import NoMatch from "./components/nomatch.js";
 import Friends from "./components/friends.js";
 import Groups from "./components/groups.js";
 import Notifications from "./components/notifications.js";
-import Nav from "./components/nav.js";
 import axios from 'axios';
 // import io from "socket.io-client";
 import 'materialize-css';
@@ -107,23 +105,20 @@ componentDidMount(){
   render() {
 
     return (
-      <div>
-        <Router>
-        <div>
-          <NotificationContainer/>
-          <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/friends" component={Friends} />
-          <Route exact path="/groups" component={Groups} />
-          <Route exact path="/notifications" component={Notifications} />
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/logout" component={Logout} />
-          <Route component={NoMatch} />
-          </Switch>
-          <Footer />
-          </div>
+          <Router>
+            <div>
+              <NotificationContainer/>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/friends" component={Friends} />
+                <Route exact path="/groups" component={Groups} />
+                <Route exact path="/notifications" component={Notifications} />
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/logout" component={Logout} />
+                <Route component={NoMatch} />
+              </Switch>
+            </div>
           </Router>
-        </div>
     )}
 }
 

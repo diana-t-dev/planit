@@ -3,7 +3,8 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import Login from './login.js';
-import Nav from './nav.js'
+import Nav from './nav.js';
+import Footer from './footer.js';
 
 
 const cookies = new Cookies();
@@ -129,6 +130,7 @@ class Notifications extends Component {
                 </div>
             </div>
         </div>
+        <Footer/>
     </div> )
         );
     }
