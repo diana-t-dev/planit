@@ -140,7 +140,7 @@ let data = {
 </div>
 <div className="container">
 
-<div className="row">
+<div className="row toprow">
 <div className="col s12">
 
 <a className='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'>Add Friend</a>

@@ -44,7 +44,7 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
         <h1 className ="groupText center">Group Hub</h1>
       </div>
     </div>
-    <div className="row">
+    <div className="row toprow">
       <div className="col s2 offset-s5">
         <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
       </div>
