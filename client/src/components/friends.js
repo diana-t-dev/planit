@@ -19,17 +19,17 @@ class Friends extends Component {
 
     users: [],
     friends: [],
+    test: [],
     id: ""
   };
 
   getFriends = () => {
 
-let namey = cookies.get('id');
+    let userid = cookies.get('id');
 
-    axios.get('/friends/'+namey).then(friend =>{
-
-      console.log(friend);
-
+    axios.get('/friends/' + userid).then(friend => {
+      console.log(friend.data.data.names)
+      console.log(friend.data.data.daty)
 
       this.setState({
 
@@ -37,79 +37,86 @@ let namey = cookies.get('id');
         friends: friend.data.data.daty
 
       })
+
     })
 
   };
+
 
   getUser = () => {
 
-let namey = cookies.get('name');
+    let namey = cookies.get('name');
 
- axios.get('/users/'+namey).then(user =>{
+    axios.get('/users/' + namey).then(user => {
 
-  console.log(user);
+      console.log(user);
 
-  user.data && user.data[0] ? (
+      user.data && user.data[0] ? (  this.setState({ id: user.data[0].id })) :("")
 
-
-this.setState({
-
-  id: user.data[0].id
-})
-):
-(
-""
-  )
-
-})
+    })
   };
 
-    addFriend = (i) => {
+  addFriend = (i) => {
 
-let namey = cookies.get('name');
+    let namey = cookies.get('name');
+    let friend = i;
 
-let friend = i;
+    let data = {
+      user: namey,
+      ids: this.state.id,
+      to: friend,
+      type: "friend request"
+    }
 
-let data = {
-
-	user: namey,
-  ids: this.state.id,
-	to: friend,
-	type: "friend request"
-}
-
-    axios.post('/notification', {data}).then(friend =>{
-
+    axios.post('/notification', {data})
+    .then(friend => {
       console.log(friend);
     })
 
   };
 
-      delFriend = (i) => {
+  delFriend = (i) => {
 
-let namey = cookies.get('name');
+    let namey = cookies.get('name');
+    let friend = i;
+    let data = {
+      user: namey,
+      friend: friend.i
+    }
 
-let friend = i;
-
-let data = {
-
-  user: namey,
-  friend: friend.i
-}
-
-    axios.put('/delfriend', {data}).then(friend =>{
-
-      console.log(friend);
+    axios.put('/delfriend', {data})
+    .then(friend => {
+      console.log("!!!!!!!!!!!",friend);
     })
 
   };
+
+  // test = () => {
+  
+
+  // this.state.friends.map(i => {
+
+
+  // return  (<tr>
+  //   <td className="namey">{i}</td>
+  //   <td><a href="/friends">{i}'s Groups</a></td>
+  //   <td>*</td>
+  //   <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i)}>Remove Friend</a></td>
+  //   </tr>)
+
+  //   })
+
+
+  // };
 
 
   componentDidMount(){
-
-     this.getUser();
-
     this.getFriends();
+    this.getUser();
+
+    console.log(this.state.friends)
+
+
 
      $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -126,87 +133,68 @@ let data = {
 }
 
  render() {
+
+    console.log(this.state.friends[0])
+
     return (
 
- cookies.get('name') === undefined ? (<Login {...this.props}/>):(
+      cookies.get('name') === undefined ? (<Login {...this.props}/>):
+
+      (<div>
+          <Nav/>
+            <div className="row">
+              <div className="col s12 top z-depth-2">
+                <h1 className="center">My Friends</h1>
+              </div>
+            </div>
+            <div className="container">
+              <div className="row toprow">
+                <div className="col s12">
+                  <a className='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'>Add Friend</a>
+                  <ul id='dropdown1' className='dropdown-content'>
+                    {
+                    this.state.users.map(i => {
+                    return <li><a type="button" className="addFriend" data-id="username" onClick={() => { this.addFriend(i) }
 
 
-<div>
-  <Nav/>
-   <div className="row">
-<div className="col s12 top z-depth-2">
-<h1 className="center">My Friends</h1>
-</div>
-</div>
-<div className="container">
 
-<div className="row toprow">
-<div className="col s12">
-
-<a className='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'>Add Friend</a>
-
-    <ul id='dropdown1' className='dropdown-content'>
-
-{
-
-  this.state.users.map(i => {
-  return <li><a type="button" className="addFriend" data-id="username" onClick={() => this.addFriend(i.username)}>{i.username}</a></li>
-
-        })
-}
-
-    </ul>
-    <table className="table highlight">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>See Friend's Groups</th>
-          <th>Friend Online</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-  
-  {
-
-    this.state.friends !== undefined ? (
-
-  this.state.friends.map(i => {
-      <tr>
-     <td className="namey">{i.name}</td>
-             <td><a href="/friends">{i.name}'s Groups</a></td>
-             <td>*</td>
-             <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i.name)}>Remove Friend</a></td>
-        
-</tr>
-         })
-
-  ):
-
-    (
-
-       <tr>
-     <td className="namey">You Have No Friends!</td>
-     </tr>
+                    }>{i}</a></li>
+                    })
+                    }
+                  </ul>
+                  <table className="table highlight">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>See Friend's Groups</th>
+                        <th>Friend Online</th>
+                        <th>Friend Online</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {  this.state.friends.map(i => {
 
 
-      )
+  return  (<tr>
+    <td className="namey">{i}</td>
+    <td><a href="/friends">{i}'s Groups</a></td>
+    <td>*</td>
+    <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i)}>Remove Friend</a></td>
+    </tr>)
 
-}     
-         
-      </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    <Footer/>
-</div>
+    })}
 
-)
-);
 
-};
-
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <Footer/>
+          </div>)
+        );
+      };
 };
 
 export default Friends;

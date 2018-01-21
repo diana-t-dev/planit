@@ -22,57 +22,112 @@ module.exports = function(app) {
 
   });
 
-  app.get("/friends/:user", function(req, res) {
+  app.get("/friends/:userid", function(req, res) {
 
 
     db.user.findAll({
       where: {
-        usernameId: req.params.user
+        usernameId: {
+          $ne: req.params.userid
+        }
       }
     }).then(function(results) {
 
+      var userList = results.map( users => users.username );
+      // console.log(friendstest)   
       
-      var friends = results[0].friends;
-      if (friends === null) {
-        db.user.findAll({})
-          .then(function(res2) {
-            var data = {
-              names: res2
-            }
 
-            res.json({
+      
+      //work on this 
+      // var friends = results[0].friends;
+      // console.log('friends', friends)
+      // if (friends === null) {
+      //   db.user.findAll({})
+      //     .then(function(res2) {
+      //       var data = {
+      //         names: res2
+      //       }
 
-              data
-            })
-          });
-      }
-      var friendsList = friends.split(",");
-      var availableFriends = friends.split(",");
-      availableFriends.push(results[0].username);
-      var friends = friendsList.map(function(names) {
-        var rObj = {};
-        rObj.name = names;
-        return rObj;
-      });
+      //       res.json({
+
+      //         data
+      //       })
+      //     });
+      // }
+
       db.user.findAll({
           where: {
-            username: {
-              $notIn: availableFriends
-            }
+            usernameId: req.params.userid
           }
         })
-        .then(function(res2) {
-          var data = {
-            daty: friends,
-            names: res2
-          }
+        .then(function(data) {
 
-          res.json({
-            data
+          
+          var friendsList = data[0].friends.split(",");
+          var idList = friendsList.map( id => parseInt(id) );
+
+
+          db.user.findAll({
+            where: {
+              id: {
+                $in: idList
+              }
+            }
+          }).then( function(list){
+            var friends = list.map( users => users.username );
+
+            var data = {
+              daty: friends,
+              names: userList
+            }
+              res.json({data})            
+
           })
+
         })
+
     })
   });
+
+  app.get("/friendslist/:userid", function(req, res) {
+
+      db.user.findAll({
+          where: {
+            usernameId: req.params.userid
+          }
+        })
+        .then(function(data) {
+
+          
+          var friendsList = data[0].friends.split(",");
+          var idList = friendsList.map( id => parseInt(id) );
+
+
+          db.user.findAll({
+            where: {
+              id: {
+                $in: idList
+              }
+            }
+          }).then( function(list){
+            var friends = list.map( users => users.username );
+
+            var data = {
+              friendslist: friends,
+            }
+
+            console.log("@@@@@@@@@@@@@@@@",data)
+              res.json({data})            
+
+          })
+
+        })
+
+
+  });
+
+
+
 
   app.get("/notifications/:user", function (req ,res) {
     db.notification.findAll({
