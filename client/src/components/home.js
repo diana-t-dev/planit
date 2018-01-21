@@ -45,7 +45,7 @@ class Home extends React.Component {
 
   chats = () => {
 
-  if (this.state.chat != ""){
+  if (this.state.chat !== ""){
 
   	  this.socket.emit('SEND_MESSAGE', {
 
@@ -59,6 +59,8 @@ class Home extends React.Component {
 
 run = () => {
 
+  if (this.state.chat !== ""){
+
       const data = {
 
   name: cookies.get('name'),
@@ -71,6 +73,7 @@ console.log('chat posted');
  this.getChat();
 
 })
+}
 };
 
 getChat = () =>{
