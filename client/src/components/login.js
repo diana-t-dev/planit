@@ -55,29 +55,37 @@ const cookies = new Cookies();
       return (this.state.loggedin === true ? (<Home/>): 
 
       	(<div>
-            <div className="header center">
+            <div className="header">
                 <div className='sign'>
-                  <h2 className='signHeader'>Sign Up</h2>
+                  <h3 className='signHeader'>Fun with Friends</h3>
                 </div>
                 
             </div>
             <div className='container'>
+
               <div className="row">
-                <div className="col m6 design">
-                  Left design
-                </div>
-                <div className="col m6 login center">
-                  <FacebookLogin
-                  appId="397807444004424"
-                  autoLoad={false}
-                  size="small"
-                  fields="name,email,picture"
-                  scope="public_profile,user_friends,user_actions.books"
-                  icon="fa-facebook-square fa-fw"
-                  textButton="Connect with Facebook"
-                  callback={this.responseFacebook} />
+                <div className="col s12 main center test">
+                  <div className='login blue lighten-3'>
+
+
+                    <div className='button'>
+                        <FacebookLogin
+                        appId="397807444004424"
+                        autoLoad={false}
+                        size="small"
+                        fields="name,email,picture"
+                        scope="public_profile,user_friends,user_actions.books"
+                        icon="fa-facebook-square fa-fw"
+                        textButton="Login with Facebook"
+                        callback={this.responseFacebook} />
+                    </div>
+                  </div>
+                  <div className='content'>
+                      <p>Images will go here</p>
+                  </div>
                 </div>
               </div>
+           
             </div>
             <Footer/>
           </div>) )
