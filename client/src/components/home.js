@@ -70,7 +70,7 @@ run = () => {
 axios.post("/chat", data).then( data => {
 
 console.log('chat posted');
- this.getChat();
+ 
 
 })
 }
@@ -99,6 +99,7 @@ componentDidMount(){
 	 this.socket.on('RECEIVE_MESSAGE', (data) =>{
 
     this.run();
+   this.getChat();
 
 });
 
