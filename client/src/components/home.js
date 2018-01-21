@@ -57,25 +57,6 @@ class Home extends React.Component {
 	
 };
 
-run = () => {
-
-  if (this.state.chat !== ""){
-
-      const data = {
-
-  name: cookies.get('name'),
-  chat: this.state.chat
-}
-
-axios.post("/chat", data).then( data => {
-
-console.log('chat posted');
- 
-
-})
-}
-};
-
 getChat = () =>{
 
 	axios.get("/chats").then(data => {
@@ -92,6 +73,26 @@ console.log(this.state.all)
 })
 };
 
+run = () => {
+
+  if (this.state.chat !== ""){
+
+      const data = {
+
+  name: cookies.get('name'),
+  chat: this.state.chat
+}
+
+axios.post("/chat", data).then( data => {
+
+console.log('chat posted');
+
+
+})
+}
+};
+
+
 componentDidMount(){
 
 	this.getChat();
@@ -99,8 +100,9 @@ componentDidMount(){
 	 this.socket.on('RECEIVE_MESSAGE', (data) =>{
 
     this.run();
-   this.getChat();
 
+    setTimeout(() => { this.getChat(); }, 200);
+     
 });
 
 }
