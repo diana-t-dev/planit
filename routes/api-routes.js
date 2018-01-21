@@ -39,9 +39,12 @@ module.exports = function(app) {
 
       
       //work on this 
-      // var friends = results[0].friends;
-      // console.log('friends', friends)
+      var friends = results[0].friends;
+      console.log('friends', friends)
       // if (friends === null) {
+
+      //   console.log('no friends');
+
       //   db.user.findAll({})
       //     .then(function(res2) {
       //       var data = {
