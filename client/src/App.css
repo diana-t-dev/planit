@@ -10,7 +10,7 @@
 }
 
 .right{
-
+  
   margin-right: 2%;
 }
 
@@ -98,4 +98,70 @@ i.icon-blue {
 .groupTextPanel {
   background-color: dodgerblue;
 
+}
+
+.navText {
+  color: dodgerblue;
+  
+}
+.navTab {
+  background-color: dodgerblue;
+}
+
+.navbar-fixed {
+  position: absolute;z-index:999999999;
+}
+
+.video-container {
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 25% !important;
+  @media(min-width: 600px) {
+    height: 100vh;
+  }
+}
+
+/*.video-container: {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(black, .2);
+  z-index: 1;
+}*/
+
+video {
+  object-fit: cover; // Set the magic
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.callout {
+  position: relative;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.navbarTitle{
+  padding-top: 55px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navDescription {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
 }
