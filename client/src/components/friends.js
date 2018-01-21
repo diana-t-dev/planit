@@ -156,8 +156,6 @@ class Friends extends Component {
                     this.state.users.map(i => {
                     return <li><a type="button" className="addFriend" data-id="username" onClick={() => { this.addFriend(i) }
 
-
-
                     }>{i}</a></li>
                     })
                     }
@@ -172,20 +170,25 @@ class Friends extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                    {  this.state.friends.map(i => {
 
+                  {  this.state.friends[0] !== undefined ?
+                    (
+                      this.state.friends.map(i => {
 
-  return  (<tr>
+    <tr>
     <td className="namey">{i}</td>
     <td><a href="/friends">{i}'s Groups</a></td>
     <td>*</td>
     <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i)}>Remove Friend</a></td>
-    </tr>)
+    </tr>
+    })):
+      (
+        <tr>
+        <td className="namey">You Have No Friends!</td>
+    </tr>
 
-    })}
-
-
-                      
+        ) }
+ 
                     </tbody>
                   </table>
                 </div>
