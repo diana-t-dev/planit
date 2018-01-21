@@ -12,21 +12,47 @@ render() {
   return ( 
 
   
-        <div className="col s7 m7 l7">
-        <div className="col s12 top z-depth-2">
-            <div className="card">
-              <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src="https://media.giphy.com/media/3o6gbchrcNIt4Ma8Tu/giphy.gif"/>
-              </div>
-              <div className="card-content">
-                <span className="card-title activator grey-text text-darken-4">Group Events<i class="material-icons right"></i></span>
-                <p><a href="#">link placeholder</a></p>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Group Events<i class="material-icons right">close</i></span>
-                <p>This is where we'll populate our group events</p>
-              </div>
-            </div>
+        <div className="col s8 m7 l7">
+        <div className="col s12 top z-depth-2 bordy2 hoverable">
+           <h4>Selected Group Name, Members</h4>
+           <hr/>
+           <div className="col s10 offset-s1">
+           <div className="eventy">
+           <p>Event 1 Here - Posted By Here</p>
+              <div className="coms">
+           <p> Comment 1...</p>
+           <p> Comment 2...</p>
+           <p> Comment 3...</p>
+           </div>
+           <p>Vote up/down button here - add comment button here</p>
+           </div>
+           <div className="eventy">   
+           <p>Event 2 Here - Posted By Here</p>
+           <div className="coms">
+           <p> Comment 1...</p>
+           <p> Comment 2...</p>
+           <p> Comment 3...</p>
+           </div>
+           <p>Vote up/down button here - add comment button here</p></div>
+           <div className="eventy">
+              <p>Event 3 Here - Posted By Here</p>
+              <div className="coms">
+           <p> Comment 1...</p>
+           <p> Comment 2...</p>
+           <p> Comment 3...</p>
+           </div>
+           <p>Vote up/down button here - add comment button here</p></div>
+
+           <div className="eventy">
+              <p>Event 4 Here - Posted By Here</p>
+              <div className="coms">
+           <p> Comment 1...</p>
+           <p> Comment 2...</p>
+           <p> Comment 3...</p>
+           </div>
+           <p>Vote up/down button here - add comment button here</p></div>
+
+           </div>
           </div>
           </div>
 

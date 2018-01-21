@@ -106,3 +106,49 @@ i.icon-blue {
   padding-top: 25px;
   padding-bottom: 25px;
 }
+
+.bordy {
+
+  border: 2px solid black;
+  height: 800px;
+  overflow: auto;
+}
+
+
+.hovy:hover{
+
+  cursor: pointer;
+}
+
+.eventy {
+
+  border: 2px solid darkgray;
+  height: 200px;
+  overflow: auto;
+}
+
+.bordy2 {
+
+  border: 2px solid black;
+
+}
+
+.bordy3 {
+
+  border: 2px solid black;
+  height: 175px;
+  overflow: auto;
+}
+
+.bordy4 {
+
+  border: 2px solid black;
+  height: 525px;
+  overflow: auto;
+}
+
+.coms {
+height: 90px;
+  overflow: auto;
+
+}
