@@ -310,5 +310,33 @@ module.exports = function(app) {
 
   });
 
+   app.post("/chat", function(req, res) {
+
+    console.log("***", req.body.name, req.body.chat, "***")
+
+    db.chat.create({
+      name: req.body.name,
+      text: req.body.chat
+
+    }).then(function(results) {
+
+
+      res.json(results);
+    });
+
+  });
+
+
+      app.get("/chats", function(req, res) {
+
+    db.chat.findAll({
+    }).then(function(results) {
+
+      res.json(results);
+    });
+
+  });
+
+
 
 }

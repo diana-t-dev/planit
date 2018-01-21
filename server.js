@@ -19,26 +19,26 @@ require("./routes/api-routes.js")(app);
 
 require("./routes/html-routes.js")(app);
 
-server = db.sequelize.sync({
-}).then(function() {
-  app.listen(PORT, function() {
+var socket = require('socket.io');
+
+ db.sequelize.sync({})
+
+ server = app.listen(PORT, function() {
     console.log("Party App listening on PORT " + PORT);
-  });
 });
 
-// var socket = require('socket.io');
-//  io = socket(server);
+io = socket(server);
 
-// io.on('connection', (socket) => {
-//     console.log(socket.id, "SOCKET CONNECTED!!");
+io.on('connection', (socket) => {
+    console.log(socket.id, "SOCKET CONNECTED!!");
 
-//      socket.on('SEND_MESSAGE', function(data){
+     socket.on('SEND_MESSAGE', function(data){
 
-//         io.emit('RECEIVE_MESSAGE', data);
+        io.emit('RECEIVE_MESSAGE', data);
 
-//       });
+      });
 
-// });
+});
 
 
 
