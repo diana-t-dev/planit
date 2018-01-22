@@ -66,9 +66,7 @@ const cookies = new Cookies();
               <div className="row">
                 <div className="col s12 main center test">
                   <div className='login blue lighten-3'>
-
-
-                    <div className='button'>
+                    <div className='button col m12 s12'>
                         <FacebookLogin
                         appId="397807444004424"
                         autoLoad={false}
@@ -78,7 +76,7 @@ const cookies = new Cookies();
                         icon="fa-facebook-square fa-fw"
                         textButton="Login with Facebook"
                         callback={this.responseFacebook} />
-                    </div>
+                    </div>                   
                   </div>
                   <div className='content'>
                       <p>Images will go here</p>
