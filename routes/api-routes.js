@@ -70,8 +70,6 @@ module.exports = function(app) {
             names: nonFriends,
             friendIds: list.map(users => users.id)
           }
-
-          console.log(data);
             res.json({data})            
 
         })
@@ -159,6 +157,11 @@ module.exports = function(app) {
       
       
     })
+  })
+
+  app.post('/groups/new', function (req, res) {
+    console.log(req.body);
+    res.end();
   })
 
 

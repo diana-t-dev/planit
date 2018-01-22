@@ -32,11 +32,14 @@ class Form extends Component {
 
 	// adds friend to group and updates state of group
 	addToGroup = (friendName) => {
+		// match friend name to friend id
 		let friendId = this.state.friendIds[this.state.friends.indexOf(friendName)];
-		console.log(friendId);
-		let newGroup = this.state.groupMembers.push(friendId);
-		this.setState({groupMembers: newGroup});
+		console.log(`friendId: ${friendId}`);
+		// add friend to group
+		this.state.groupMembers.push(friendId);
 		console.log(this.state.groupMembers);
+		// update group members state
+		this.setState({groupMembers: this.state.groupMembers});
 	}
 
 	handleGroupName = (event) => {
@@ -66,8 +69,16 @@ class Form extends Component {
 	};
 	
 	// creates group in db
-	createGroup = () => {
-
+	createGroup = (event) => {
+		event.preventDefault();
+		let groupInfo = {
+			groupName: this.state.groupName,
+			groupMembers: this.state.groupMembers
+		}
+		console.log(`groupinfo: ${groupInfo}`)
+		axios.post('/groups/new', groupInfo).then(results => {
+			console.log(results);
+		})
 	}
  
  render() {
@@ -99,7 +110,7 @@ class Form extends Component {
 										 </ul>
 									 </div>
 									 <div className="center">
-										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.props.click()}>Submit</a>
+										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={(event) => this.createGroup(event)}>Submit</a>
 									 </div>
 								 </form>
 							 </div>
