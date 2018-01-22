@@ -114,11 +114,9 @@ componentDidMount(){
 
 		<div>
 			<Nav/>
-			<div  className="row">
-				<div className="col s12 top z-depth-2">
-					<h1 className="center">My Dashboard</h1>
-				</div>
-				</div>
+		
+					<h1 className="center titles groupText">My Dashboard</h1>
+			
    <div className="row toprow">
       <div className="col s2 offset-s5">
         <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>

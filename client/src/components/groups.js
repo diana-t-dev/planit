@@ -26,11 +26,9 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
 <div>
   <Nav/>
   <div className ="wrapper">
-    <div className="row z-depth-2">
-      <div className="groupTextPanel col s12">
-        <h1 className ="groupText center">Group Hub</h1>
-      </div>
-    </div>
+    
+        <h1 className ="groupText center titles">Group Hub</h1>
+   
    
         <div className="row toprow">
           <div className="col s12 top borders">
