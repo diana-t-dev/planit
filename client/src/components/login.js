@@ -54,39 +54,59 @@ const cookies = new Cookies();
 
       return (this.state.loggedin === true ? (<Home/>): 
 
-      	(<div>
-            <div className="header">
-                <div className='sign'>
-                  <h3 className='signHeader'>Fun with Friends</h3>
-                </div>
-                
-            </div>
-            <div className='container'>
+      	(
+              
 
-              <div className="row">
-                <div className="col s12 main center test">
-                  <div className='login blue lighten-3'>
-                    <div className='button col m12 s12'>
-                        <FacebookLogin
-                        appId="397807444004424"
-                        autoLoad={false}
-                        size="small"
-                        fields="name,email,picture"
-                        scope="public_profile,user_friends,user_actions.books"
-                        icon="fa-facebook-square fa-fw"
-                        textButton="Login with Facebook"
-                        callback={this.responseFacebook} />
-                    </div>                   
-                  </div>
-                  <div className='content'>
-                      <p>Images will go here</p>
-                  </div>
-                </div>
-              </div>
-           
-            </div>
-            <Footer/>
-          </div>) )
+                  <div className="container">
+                    <div className="row loginRow">
+                        <div className="col s12 m8 l8">
+                          <div className="loginCard card blue-grey darken-1">
+                            <div className="loginContent card-content white-text">
+                             
+       
+                               <div className="center loginButton">
+                                  <FacebookLogin
+                                  appId="397807444004424"
+                                  autoLoad={false}
+                                  size="small"
+                                  fields="name,email,picture"
+                                  scope="public_profile,user_friends,user_actions.books"
+                                  icon="fa-facebook-square fa-fw"
+                                  textButton="Login with Facebook"
+                                  callback={this.responseFacebook} />
+                                </div>  
+                           
+                            </div>
+                            
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="descriptionRow center row">
+                        <div className=" col s4 m4 l4">
+                          <div className="descriptionBorder">
+                          <img className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                          <p className="descriptText"> description placeholder</p>
+                          </div>
+                        </div>
+                        <div className=" col s4 m4 l4">
+                          <div className="descriptionBorder">
+                          <img className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                          <p className="descriptText"> description placeholder</p>
+                          </div>
+                        </div>
+                        <div className=" col s4 m4 l4">
+                          <div className="descriptionBorder">
+                          <img className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                          <p className="descriptText"> description placeholder </p>
+                          </div>
+                        </div>
+                       </div> 
+                              
+                     </div> 
+
+         ) )
+
     }
   }
 
