@@ -246,9 +246,10 @@ video {
 .head {
 
   font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin-left: 33%;
   position:relative;
   top: 80px;
-  left: 620px;
   font-size: 50px;
 
 }
