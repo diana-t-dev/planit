@@ -268,5 +268,22 @@ module.exports = function(app) {
   });
 
 
+        app.post("/addevent", function(req, res) {
+
+          console.log(req.body);
+
+    db.event.create({
+
+      name: req.body.data.name,
+      person: req.body.data.person
+
+    }).then(function(results) {
+
+      res.json(results);
+    });
+
+  });
+
+
 
 }
