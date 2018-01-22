@@ -4,18 +4,12 @@ module.exports = function(app) {
 
   app.get("/users/:user", function(req, res) {
 
-    console.log(req.params.user);
-
     db.user.findAll({
       where:{
         username: req.params.user
       }
 
     }).then(function(results) {
-
-
-      // console.log("found user data");
-      // console.log(results);
 
       res.json(results);
     });
@@ -24,7 +18,7 @@ module.exports = function(app) {
 
   app.get("/friends/:userid", function(req, res) {
 
-
+    // find all users that aren't the current user and the current user's friends
     db.user.findAll({
       where: {
         usernameId: {
@@ -34,16 +28,9 @@ module.exports = function(app) {
     }).then(function(results) {
 
       var userList = results.map( users => users.username );
-      // console.log(friendstest)   
-      
+      console.log(`userlist: ${userList}`);
 
-      
-      //work on this 
-      var friends = results[0].friends;
-      console.log('friends111111111111', friends)
-
-
-
+      // find all friends to render in table
       db.user.findAll({
           where: {
             usernameId: req.params.userid
@@ -51,11 +38,8 @@ module.exports = function(app) {
         })
         .then(function(data) {
 
-          
-          var friendsList = data[0].friends.split(",");
-          var idList = friendsList.map( id => parseInt(id) );
-
-      if (friendsList === null) {
+      // if user doesn't have any friends, send all user data back
+      if (data[0].friends === null) {
 
         var data = {
           names: userList
@@ -64,26 +48,35 @@ module.exports = function(app) {
             res.json({data})
           
       }
+      // else, render user's friends
+      else {
+        var friendsList = data[0].friends.split(", ");
+        var idList = friendsList.map( id => parseInt(id) );
 
-
-
-
-          db.user.findAll({
-            where: {
-              id: {
-                $in: idList
-              }
+        db.user.findAll({
+          where: {
+            id: {
+              $in: idList
             }
-          }).then( function(list){
-            var friends = list.map( users => users.username );
+          }
+        }).then( function(list){
+          var friends = list.map( users => users.username );
 
-            var data = {
-              daty: friends,
-              names: userList
-            }
-              res.json({data})            
+          var nonFriends = userList.filter(function (user) {
+            return this.indexOf(user) < 0
+          }, friends);
 
-          })
+          console.log(`nonfriends::::: ${nonFriends}`);
+
+          var data = {
+            daty: friends,
+            names: nonFriends
+          }
+            res.json({data})            
+
+        })
+      }
+
 
         })
 
