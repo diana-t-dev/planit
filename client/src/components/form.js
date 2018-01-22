@@ -10,7 +10,10 @@ class Form extends Component {
 
 	state = {
 		users: [],
-		friends: []
+		friends: [],
+		groupName: "",
+		groupMembers: [],
+		friendIds: []
 	}
 
 	componentDidMount () {
@@ -26,7 +29,22 @@ class Form extends Component {
       stopPropagation: false // Stops event propagation
     })
 	}
+
+	// adds friend to group and updates state of group
+	addToGroup = (friendName) => {
+		let friendId = this.state.friendIds[this.state.friends.indexOf(friendName)];
+		console.log(friendId);
+		let newGroup = this.state.groupMembers.push(friendId);
+		this.setState({groupMembers: newGroup});
+		console.log(this.state.groupMembers);
+	}
+
+	handleGroupName = (event) => {
+		this.setState({groupName: event.target.value});
+	}
+
 	
+	// renders friends in dropdown
 	getFriends = () => {
     let userid = cookies.get('id');
     axios.get('/friends/' + userid).then(friend => {
@@ -36,86 +54,65 @@ class Form extends Component {
         })
       }
       else{
+				
         this.setState({
           users: friend.data.data.names,
-          friends: friend.data.data.daty
+					friends: friend.data.data.daty,
+					friendIds: friend.data.data.friendIds
         })        
       }
     })
 
-  };
+	};
+	
+	// creates group in db
+	createGroup = () => {
+
+	}
  
  render() {
  return (
- 	<div className="wrapper">
-
- 	 <div className="row">
-
-        <div className="col s6 offset-s3 ">
-
-          <div className="card">
-
-            <div className="card-image">
-
-              <img src="https://68.media.tumblr.com/607d816927c95f49d278f04a96c5d421/tumblr_o4utp2WbL81tforevo1_1280.gif"/>
-
-
-            </div>
-
-            <div className="card-content">
-
-              <div className="row">
-
-   						<form className="col s6 offset-s3">
-
-      
-
-        				<div className="input-field col s12">
-
-         				 <i className="material-icons icon-blue prefix">create</i>
-
-         				 <input id="icon_name" type="text" className="validate" />
-
-         				 <label for="icon_name">What would you like to name your group?</label>
-
-        				</div>
-    					 </form>
-   						 </div>    
-     
-   			 <div className="row">
-
-   						<form className="col s6 offset-s3">
-
-       					<div className="input-field col s12">
-
-       					<i className="material-icons icon-blue prefix">face</i>
-
-								 <a className='dropdown-button btn material-icons left add-to-group' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
-								 <ul id='friend-dropdown' className='dropdown-content'>
-								 {this.state.friends.map(friend => <li key={friend}><a type="button" className="addFriend" data-id="username">{friend}</a></li>)}
-								 </ul>
-
-       					</div>
-       					<div className="center">
-       					 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.props.click()}>Submit</a>
-       					</div> 
-     					</form>  
-      		</div>
-  
-  			</div>
- 
+		 <div className="wrapper">
+			 <div className="row">
+				 <div className="col s6 offset-s3 ">
+					 <div className="card">
+						 <div className="card-image">
+							 <img src="https://68.media.tumblr.com/607d816927c95f49d278f04a96c5d421/tumblr_o4utp2WbL81tforevo1_1280.gif" />
+						 </div>
+						 <div className="card-content">
+							 <div className="row">
+								 <form className="col s6 offset-s3">
+									 <div className="input-field col s12">
+										 <i className="material-icons icon-blue prefix">create</i>
+										 <input id="icon_name" type="text" className="validate" onChange={(event) => this.handleGroupName(event)} />
+										 <label for="icon_name">What would you like to name your group?</label>
+									 </div>
+								 </form>
+							 </div>
+							 <div className="row">
+								 <form className="col s6 offset-s3">
+									 <div className="input-field col s12">
+										 <i className="material-icons icon-blue prefix">face</i>
+										 <a className='dropdown-button btn material-icons left add-to-group' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
+										 <ul id='friend-dropdown' className='dropdown-content'>
+											 {this.state.friends.map(friend => <li key={friend}><a type="button" className="addFriend" data-id="username" onClick={() => this.addToGroup(friend)}>{friend}</a></li>)}
+										 </ul>
+									 </div>
+									 <div className="center">
+										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.props.click()}>Submit</a>
+									 </div>
+								 </form>
+							 </div>
+						 </div>
+					 </div>
 
 
+				 </div>
+			 </div>
+		 </div>
 
-            </div>
 
-           
-          </div>
-        </div>
-      </div>
-
-	
-)
+	 )
  }
 };
 

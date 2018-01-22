@@ -67,8 +67,11 @@ module.exports = function(app) {
 
           var data = {
             daty: friends,
-            names: nonFriends
+            names: nonFriends,
+            friendIds: list.map(users => users.id)
           }
+
+          console.log(data);
             res.json({data})            
 
         })
