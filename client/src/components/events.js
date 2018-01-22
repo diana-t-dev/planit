@@ -24,7 +24,8 @@ render() {
            <p> Comment 2...</p>
            <p> Comment 3...</p>
            </div>
-           <p>Vote up/down button here - add comment button here</p>
+           <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
+           Vote<i class="large material-icons">arrow_downward</i></a><a className="btn"><i class="large material-icons">add</i> comment</a>
            </div>
            <div className="eventy">   
            <p>Event 2 Here - Posted By Here</p>
@@ -33,7 +34,9 @@ render() {
            <p> Comment 2...</p>
            <p> Comment 3...</p>
            </div>
-           <p>Vote up/down button here - add comment button here</p></div>
+           <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
+           Vote<i class="large material-icons">arrow_downward</i></a><a className="btn"><i class="large material-icons">add</i> comment</a>
+           </div>
            <div className="eventy">
               <p>Event 3 Here - Posted By Here</p>
               <div className="coms">
@@ -41,7 +44,9 @@ render() {
            <p> Comment 2...</p>
            <p> Comment 3...</p>
            </div>
-           <p>Vote up/down button here - add comment button here</p></div>
+           <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
+           Vote<i class="large material-icons">arrow_downward</i></a><a className="btn"><i class="large material-icons">add</i> comment</a>
+           </div>
 
            <div className="eventy">
               <p>Event 4 Here - Posted By Here</p>
@@ -50,7 +55,9 @@ render() {
            <p> Comment 2...</p>
            <p> Comment 3...</p>
            </div>
-           <p>Vote up/down button here - add comment button here</p></div>
+           <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
+           Vote<i class="large material-icons">arrow_downward</i></a><a className="btn"><i class="large material-icons">add</i> comment</a>
+           </div>
 
            </div>
           </div>

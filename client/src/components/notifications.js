@@ -92,11 +92,9 @@ class Notifications extends Component {
 
 <div>
     <Nav/>
-        <div className="row">
-            <div className="col s12 top z-depth-2">
-                <h1 className="center">My Notifications</h1>
-            </div>
-        </div>
+        
+                <h1 className="center titles groupText">My Notifications</h1>
+       
         <div className="container">
             <div className="row toprow">
                 <div className="col s12">
