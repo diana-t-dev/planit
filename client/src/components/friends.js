@@ -156,11 +156,9 @@ class Friends extends Component {
 
       (<div>
           <Nav/>
-            <div className="row">
-              <div className="col s12 top z-depth-2">
-                <h1 className="center">My Friends</h1>
-              </div>
-            </div>
+          
+                <h1 className="center titles groupText">My Friends</h1>
+      
             <div className="container">
               <div className="row toprow">
                 <div className="col s12">
