@@ -28,7 +28,6 @@ module.exports = function(app) {
     }).then(function(results) {
 
       var userList = results.map( users => users.username );
-      console.log(`userlist: ${userList}`);
 
       // find all friends to render in table
       db.user.findAll({
@@ -65,8 +64,6 @@ module.exports = function(app) {
           var nonFriends = userList.filter(function (user) {
             return this.indexOf(user) < 0
           }, friends);
-
-          console.log(`nonfriends::::: ${nonFriends}`);
 
           var data = {
             daty: friends,
@@ -117,7 +114,6 @@ module.exports = function(app) {
     }).then((results) => {
       // transform string to array
       let data = results[0].dataValues.friends;
-      console.log("friends column***** " + data);
       
       if (data && data !== null) {
         let friends = results[0].dataValues.friends.split(', ');
@@ -145,7 +141,6 @@ module.exports = function(app) {
       }
       else {
         let newFriend = req.body.friendId.toString();
-        console.log("new friend: " + newFriend);
         db.user.update({
           friends: newFriend
           },
@@ -176,10 +171,6 @@ module.exports = function(app) {
 
    app.put("/delfriend", function(req, res) {
 
-
-    // console.log(req.body);
-
-
     db.user.findAll({
 
       where: {
@@ -191,26 +182,13 @@ module.exports = function(app) {
 
       var friends = results[0].friends;
 
-      // console.log(friends);
 
       var friendsList = friends.split(",");
-
-      // console.log(friendsList);
-
-      // for (var i = 0; i < friendsList.length; i++) {
-
-      // console.log(friendsList[i]);
-      // console.log(req.body.friend);
-
-      // if (friendsList[i] === req.body.friend) {
 
 
       var number = friendsList.indexOf(req.body.data.friend);
 
       friendsList.splice(number, 1);
-      // }
-
-      // }
 
       var newList = friendsList.toString();
 
@@ -265,7 +243,6 @@ module.exports = function(app) {
 
    app.post("/chat", function(req, res) {
 
-    console.log("***", req.body.name, req.body.chat, "***")
 
     db.chat.create({
       name: req.body.name,
