@@ -55,7 +55,7 @@ const cookies = new Cookies();
       return (this.state.loggedin === true ? (<Home/>): 
 
       	(
-              
+              <div className="backgroundy">
 
                   <div className="container">
                     <div className="row loginRow">
@@ -104,6 +104,7 @@ const cookies = new Cookies();
                        </div> 
                               
                      </div> 
+                   </div>  
 
          ) )
 

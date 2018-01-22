@@ -21,10 +21,7 @@ li{
 
 body{
 
-	background-image: url("https://www.imgbase.info/images/safe-wallpapers/photography/cityscape/49915_cityscape_city_life.jpg");
-	background-repeat: no-repeat;
-  background-size: cover;
-  filter: grayscale(100%);
+	
   
 
 }
@@ -258,14 +255,8 @@ video {
 
 }
 
-.background {
-  background-image: url("https://www.imgbase.info/images/safe-wallpapers/photography/cityscape/49915_cityscape_city_life.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: grayscale(100%);
-  margin-left: -10px;
 
-}
+
 
 .loginButton {
   z-index:1;
@@ -316,5 +307,12 @@ video {
 .votey{
 
   margin-bottom: 0;
+}
+
+.backgroundy {
+  background-image: url("https://www.imgbase.info/images/safe-wallpapers/photography/cityscape/49915_cityscape_city_life.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1080px;
 }
 
