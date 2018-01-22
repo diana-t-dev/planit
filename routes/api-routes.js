@@ -32,6 +32,7 @@ module.exports = function(app) {
         }
       }
     }).then(function(results) {
+      console.log("RESULTS::::::::" + results);
 
       var userList = results.map( users => users.username );
       // console.log(friendstest)   
@@ -39,8 +40,8 @@ module.exports = function(app) {
 
       
       //work on this 
-      var friends = results[0].friends;
-      console.log('friends111111111111', friends)
+      // var friends = results[0].friends;
+      // console.log('friends111111111111', friends)
 
 
 
@@ -52,10 +53,8 @@ module.exports = function(app) {
         .then(function(data) {
 
           
-          var friendsList = data[0].friends.split(",");
-          var idList = friendsList.map( id => parseInt(id) );
 
-      if (friendsList === null) {
+      if (data[0].friends === null) {
 
         var data = {
           names: userList
@@ -64,26 +63,28 @@ module.exports = function(app) {
             res.json({data})
           
       }
+      else {
+        var friendsList = data[0].friends.split(", ");
+        var idList = friendsList.map( id => parseInt(id) );
 
-
-
-
-          db.user.findAll({
-            where: {
-              id: {
-                $in: idList
-              }
+        db.user.findAll({
+          where: {
+            id: {
+              $in: idList
             }
-          }).then( function(list){
-            var friends = list.map( users => users.username );
+          }
+        }).then( function(list){
+          var friends = list.map( users => users.username );
 
-            var data = {
-              daty: friends,
-              names: userList
-            }
-              res.json({data})            
+          var data = {
+            daty: friends,
+            names: userList
+          }
+            res.json({data})            
 
-          })
+        })
+      }
+
 
         })
 
