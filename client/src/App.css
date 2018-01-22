@@ -103,7 +103,7 @@ i.icon-blue {
 
 .toprow{
 
-  padding-top: 35px;
+
   padding-bottom: 25px;
 }
 
@@ -214,9 +214,9 @@ video {
 }
 
 .navDescription {
-  position:absolute;
-  top: 140px;
-  left: 760px;
+  position:relative;
+  top: 170px;
+  left: 10px;
   font-family: 'Montserrat', sans-serif;
   color: white;
 
@@ -234,8 +234,8 @@ video {
 
 .titles {
  
-  position:absolute;
-  top: 330px;
+  position:relative;
+  top: -130px;
   width:100%;
   z-index:1;
   background-color: none;
@@ -246,9 +246,9 @@ video {
 .head {
 
   font-family: 'Montserrat', sans-serif;
-  position:absolute;
-  top: 90px;
-  left: 630px;
+  position:relative;
+  top: 80px;
+  left: 620px;
   font-size: 50px;
 
 }
