@@ -8,7 +8,7 @@ import Friends from "./components/friends.js";
 import Groups from "./components/groups.js";
 import Notifications from "./components/notifications.js";
 import axios from 'axios';
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
