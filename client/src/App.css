@@ -123,7 +123,7 @@ i.icon-blue {
 .eventy {
 
   border: 2px solid darkgray;
-  height: 200px;
+  height: 220px;
   overflow: auto;
 }
 
@@ -252,4 +252,9 @@ video {
   top: 80px;
   font-size: 50px;
 
+}
+
+.votey{
+
+  margin-bottom: 0;
 }
