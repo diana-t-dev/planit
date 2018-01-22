@@ -1,10 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
 import '../App.css';
+import $ from "jquery";
+import Cookies from 'universal-cookie';
+import axios from "axios";
 
+const cookies = new Cookies();
 
-const Form = props => 
- (
- 	<div clasName="wrapper">
+class Form extends Component {
+
+	state = {
+		users: [],
+		friends: []
+	}
+
+	componentDidMount () {
+		this.getFriends();
+    $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: true, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    })
+	}
+	
+	getFriends = () => {
+    let userid = cookies.get('id');
+    axios.get('/friends/' + userid).then(friend => {
+      if (friend.data.data.daty===undefined) {
+        this.setState({
+          users: friend.data.data.names
+        })
+      }
+      else{
+        this.setState({
+          users: friend.data.data.names,
+          friends: friend.data.data.daty
+        })        
+      }
+    })
+
+  };
+ 
+ render() {
+ return (
+ 	<div className="wrapper">
 
  	 <div className="row">
 
@@ -47,13 +90,14 @@ const Form = props =>
 
        					<i className="material-icons icon-blue prefix">face</i>
 
-          				<input id="icon_friend" type="text" className="validate" />
-
-         				 <label for="icon_friend">Add a friend to your group!</label>
+								 <a className='dropdown-button btn material-icons left add-to-group' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
+								 <ul id='friend-dropdown' className='dropdown-content'>
+								 {this.state.friends.map(friend => <li key={friend}><a type="button" className="addFriend" data-id="username">{friend}</a></li>)}
+								 </ul>
 
        					</div>
        					<div className="center">
-       					 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => props.click()}>Submit</a>
+       					 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.props.click()}>Submit</a>
        					</div> 
      					</form>  
       		</div>
@@ -71,7 +115,9 @@ const Form = props =>
       </div>
 
 	
-);
+)
+ }
+};
 
 export default Form;
 
