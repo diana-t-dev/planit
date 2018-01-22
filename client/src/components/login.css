@@ -25,7 +25,7 @@
 
 .main{
 	background: gray;
-	height: 525px;
+	height: 550px;
 	margin-bottom: 0px;	
 }
 
@@ -43,9 +43,9 @@
 }
 
 .content{
-	height: 400px;
+	height: 420px;
 	background: lightgray;
 /*	border: 1px solid black;*/
-    border-radius: 25px;
+    border-radius: 20px;
 
 }

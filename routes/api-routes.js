@@ -40,23 +40,9 @@ module.exports = function(app) {
       
       //work on this 
       var friends = results[0].friends;
-      console.log('friends', friends)
-      // if (friends === null) {
+      console.log('friends111111111111', friends)
 
-      //   console.log('no friends');
 
-      //   db.user.findAll({})
-      //     .then(function(res2) {
-      //       var data = {
-      //         names: res2
-      //       }
-
-      //       res.json({
-
-      //         data
-      //       })
-      //     });
-      // }
 
       db.user.findAll({
           where: {
@@ -68,6 +54,18 @@ module.exports = function(app) {
           
           var friendsList = data[0].friends.split(",");
           var idList = friendsList.map( id => parseInt(id) );
+
+      if (friendsList === null) {
+
+        var data = {
+          names: userList
+        }
+
+            res.json({data})
+          
+      }
+
+
 
 
           db.user.findAll({
@@ -91,44 +89,6 @@ module.exports = function(app) {
 
     })
   });
-
-  app.get("/friendslist/:userid", function(req, res) {
-
-      db.user.findAll({
-          where: {
-            usernameId: req.params.userid
-          }
-        })
-        .then(function(data) {
-
-          
-          var friendsList = data[0].friends.split(",");
-          var idList = friendsList.map( id => parseInt(id) );
-
-
-          db.user.findAll({
-            where: {
-              id: {
-                $in: idList
-              }
-            }
-          }).then( function(list){
-            var friends = list.map( users => users.username );
-
-            var data = {
-              friendslist: friends,
-            }
-
-            console.log("@@@@@@@@@@@@@@@@",data)
-              res.json({data})            
-
-          })
-
-        })
-
-
-  });
-
 
 
 

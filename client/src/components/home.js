@@ -87,6 +87,10 @@ axios.post("/chat", data).then( data => {
 
 console.log('chat posted');
 
+this.setState({
+  chat: ""
+})
+
 
 })
 }
