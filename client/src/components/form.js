@@ -71,12 +71,13 @@ class Form extends Component {
 	// creates group in db
 	createGroup = (event) => {
 		event.preventDefault();
+		let userid = cookies.get('id');
 		let groupInfo = {
 			groupName: this.state.groupName,
 			groupMembers: this.state.groupMembers
 		}
 		console.log(`groupinfo: ${groupInfo}`)
-		axios.post('/groups/new', groupInfo).then(results => {
+		axios.post('/groups/new/' + userid, groupInfo).then(results => {
 			console.log(results);
 		})
 	}

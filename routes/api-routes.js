@@ -159,8 +159,15 @@ module.exports = function(app) {
     })
   })
 
-  app.post('/groups/new', function (req, res) {
-    console.log(req.body);
+  app.post('/groups/new/:userid', function (req, res) {
+    // console.log(req.body);
+    // console.log(req.params.userid);
+    let members = req.body.groupMembers.join(", ");
+    db.group.create({
+      user: req.params.userid,
+      name: req.body.groupName,
+      members: members
+    });
     res.end();
   })
 
