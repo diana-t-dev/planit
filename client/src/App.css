@@ -284,7 +284,7 @@ video {
 }
 .descriptionRow {
   position: absolute;
-  top: 75%;
+  top: 55%;
   left: 35%;
   background-color: transparent;
 }
@@ -299,10 +299,13 @@ video {
   margin-left: -90px;
   padding: 40px;
 
+
 }
 
 .descriptText {
   margin-left: -90px;
+  margin-bottom: 100px;
+
 }
 .votey{
 
@@ -313,6 +316,7 @@ video {
   background-image: url("https://www.imgbase.info/images/safe-wallpapers/photography/cityscape/49915_cityscape_city_life.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 1080px;
+  height: 1005px;
+  width: 1920px;
 }
 
