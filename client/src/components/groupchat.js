@@ -12,7 +12,8 @@ class Chat extends Component {
     thing: "",
     location: "",
     results: [],
-    results2: []
+    results2: [],
+    results3: []
 
   };
 
@@ -67,6 +68,29 @@ searchevent = () => {
     })
   };
 
+  searchmovie = () => {
+
+ let BASEURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=c0f1c321f80530f1c8b9eeee2923c0f5&page=1";
+
+  axios.get(BASEURL).then(data =>{
+
+    console.log(data.data.results);
+
+
+  for (var i = 0; i < 10; i++) {
+
+      this.setState({
+
+      results3: [...this.state.results3, data.data.results[i]]
+    })
+     
+    }
+
+    console.log(this.state.results3);
+
+
+    })
+  };
 
 
   add = (name) => {
@@ -117,6 +141,7 @@ render() {
 
                <a className="btn" onClick={this.search}>Places</a>
                <a className="btn" onClick={this.searchevent}>Events</a>
+               <a className="btn" onClick={this.searchmovie}>Movies</a>
           <h4>Results</h4>
           <hr/>
             <ul>
@@ -153,6 +178,24 @@ render() {
            ) ):("")
 
               }
+
+         {
+              this.state.results3 !== undefined ?(
+
+
+              this.state.results3.map(i => 
+
+                <div>
+             <li className="hovy">{i.original_title}</li>
+              <li className="hovy">Rating: {i.vote_average}</li>
+            <li className="hovy">Plot: {i.overview}</li>
+              <a className="btn" onClick={() =>this.add(i.original_title)}>Add to Group</a>
+               </div>
+
+           ) ):("")
+
+              }
+            
             
 
             </ul>
