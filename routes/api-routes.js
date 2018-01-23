@@ -421,7 +421,7 @@ module.exports = function(app) {
                   console.log(allGroups);
                   res.send(allGroups)
                 }
-                res.end();
+                res.send(userGroups);
               })
 
             })
