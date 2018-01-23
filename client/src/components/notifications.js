@@ -68,17 +68,21 @@ class Notifications extends Component {
 
     acceptRequest = (notificationId, userRequestId, notificationType, userId) => {
         // if it's a friend request, update both users' friends list
-        axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
+        if (notificationType === 'friend request') {
+            axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
              .then((results) => {
                  axios.post(`/friends/update/${userId}`, {friendId: userRequestId})
                       .then((results) => {
                           this.deleteNotification(notificationId);
                       });
              });
-        
-
+        }
         // if it's a group request, update group members
         // then delete notifications
+        else if (notificationType === 'Group Invite') {
+            
+        }
+        
     }
 
     render() {

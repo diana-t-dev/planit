@@ -101,7 +101,8 @@ module.exports = function(app) {
       user: req.body.user,
       userId: req.body.ids,
       to: req.body.to,
-      type: req.body.type
+      type: req.body.type,
+      groupId: req.body.groupId
 
       }).then(function (results) {
       res.json(results);
@@ -170,11 +171,11 @@ module.exports = function(app) {
       user: req.params.userid,
       name: req.body.groupName,
       // members: members
+    }).then(results => {
+      res.send(results);
     });
 
-    // send group notifications to each group member
 
-    res.end();
   })
 
 
