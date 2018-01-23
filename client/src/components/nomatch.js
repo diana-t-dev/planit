@@ -44,21 +44,22 @@ class NoMatch extends Component {
 
 			 cookies.get('name') === undefined ? (<Login {...this.props}/>):(
 
-			<div className = "wrapper">
-				<div className ="row">
-					<div className="col s12 top z-depth-2">
-						<h2 className="nomatchText center">Well this is awkward... Innit?</h2>
-					</div>
-				</div>
-				<div className ="row">
-					<div className="col s12">
-						<div className="panel-list center-align">
-							<img alt='img' src ={this.state.pick}/>
-						</div>
-					</div>
+			<div className = "background404">
+			
+
+					<div>
+						<p className="center-align text404">Well this is awkward isn't it</p>
+					</div>	
 					
+						<div className="panel-list center-align">
+							<img className="gif404" alt='img' src ={this.state.pick}/>
+						
 				</div>
+				
+					
 			</div>
+
+			
 			)
 		);	
 	}

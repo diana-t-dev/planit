@@ -7,6 +7,7 @@ import Footer from './footer.js';
 import List from './grouplist.js';
 import Chat from './groupchat.js';
 import Events from './events.js';
+import axios from 'axios';
 
 
 const cookies = new Cookies();
@@ -27,6 +28,7 @@ this.setState({
 })
 
 console.log(this.state.mygroup)
+
   };
 
   componentDidMount () {
@@ -51,7 +53,8 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
           <List />
           <Events 
           group={this.state.mygroup}/>
-          <Chat />
+          <Chat 
+          group={this.state.mygroup}/>
           </div>
         </div>
       </div>

@@ -6,7 +6,8 @@ class Events extends Component {
 
   state = {
 
-    group: ""
+    group: "",
+    events: []
   }
 
   getEvents = () =>{
@@ -21,10 +22,14 @@ class Events extends Component {
     axios.get("events/"+groupy).then(data =>{
 
 console.log(data);
+
+
     })
   }
 
   componentDidMount () {
+
+    this.getEvents();
 
   }
 

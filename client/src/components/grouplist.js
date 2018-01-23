@@ -26,7 +26,8 @@ class List extends Component {
 
   };
 
-  getGroups = () =>{
+  // getGroups = () =>{
+
 
     let userId = cookies.get('id');
 
@@ -48,9 +49,10 @@ class List extends Component {
     })
   }
 
+
   componentDidMount () {
 
-    this.getGroups();
+    // this.getGroups();
 
   };
   
