@@ -27,9 +27,17 @@ this.setState({
     mygroup: group
 })
 
+// this.sendgroup();
+
 console.log(this.state.mygroup)
 
   };
+
+//   sendgroup = () =>{
+
+// return this.state.mygroup
+
+//   }
 
   componentDidMount () {
 
@@ -50,7 +58,8 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
    
         <div className="row toprow">
           <div className="col s12 top borders">
-          <List />
+          <List 
+           group={this.setgroup}/>
           <Events 
           group={this.state.mygroup}/>
           <Chat 
