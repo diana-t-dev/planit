@@ -334,6 +334,7 @@ module.exports = function(app) {
     db.event.create({
 
       name: req.body.data.name,
+      type: req.body.data.type,
       person: req.body.data.person
 
     }).then(function(results) {
