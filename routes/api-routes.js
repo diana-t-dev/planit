@@ -192,7 +192,7 @@ module.exports = function(app) {
         if (!members.includes(newMember)) {
           members.push(newMember);
           members = members.join(', ');
-          db.group.update({
+          db.groupy.update({
             members: members
           }, {
             where: {
