@@ -13,10 +13,13 @@ class Form extends Component {
 		friends: [],
 		groupName: "",
 		groupMembers: [],
-		friendIds: []
+		friendIds: [],
+		id: "",
+		groupId: ""
 	}
 
 	componentDidMount () {
+		this.getUser();
 		this.getFriends();
     $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -29,6 +32,14 @@ class Form extends Component {
       stopPropagation: false // Stops event propagation
     })
 	}
+
+	getUser = () => {
+    let name = cookies.get('name');
+    axios.get('/users/' + name).then(user => {
+      console.log(user);
+      user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
+    })
+  };
 
 	// adds friend to group and updates state of group
 	addToGroup = (friendName) => {
@@ -68,18 +79,35 @@ class Form extends Component {
 
 	};
 	
-	// creates group in db
+	// creates group in db and sends notifications to added members
 	createGroup = (event) => {
 		event.preventDefault();
 		let userid = cookies.get('id');
 		let groupInfo = {
 			groupName: this.state.groupName,
-			groupMembers: this.state.groupMembers
+			// groupMembers: this.state.groupMembers
 		}
 		console.log(`groupinfo: ${groupInfo}`)
+
+		// create new group record
 		axios.post('/groups/new/' + userid, groupInfo).then(results => {
 			console.log(results);
-		})
+			this.setState({groupId: results.data.id});
+			// send notifications to all group members
+			for (let i=0; i < this.state.groupMembers.length; i++) {
+				let groupNotification = {
+					user: cookies.get('name'),
+					ids: this.state.id,
+					to: this.state.groupMembers[i],
+					type: 'Group Invite',
+					groupId: this.state.groupId
+				}
+				axios.post('/notification', groupNotification).then(results => {
+					console.log(results);
+				});
+			}		
+		});
+
 	}
  
  render() {

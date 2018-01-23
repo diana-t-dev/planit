@@ -83,10 +83,10 @@ module.exports = function(app) {
 
 
 
-  app.get("/notifications/:user", function (req ,res) {
+  app.get("/notifications/:userId", function (req ,res) {
     db.notification.findAll({
       where: {
-        to: req.params.user
+        to: req.params.userId
       }
     }).then(function (results) {
       res.json(results);
@@ -94,13 +94,15 @@ module.exports = function(app) {
   })
 
    app.post("/notification", function (req ,res) {
+     console.log(req.body);
 
     db.notification.create({
       
-      user: req.body.data.user,
-      userId: req.body.data.ids,
-      to: req.body.data.to,
-      type: req.body.data.type
+      user: req.body.user,
+      userId: req.body.ids,
+      to: req.body.to,
+      type: req.body.type,
+      groupId: req.body.groupId
 
       }).then(function (results) {
       res.json(results);
@@ -162,13 +164,57 @@ module.exports = function(app) {
   app.post('/groups/new/:userid', function (req, res) {
     // console.log(req.body);
     // console.log(req.params.userid);
-    let members = req.body.groupMembers.join(", ");
+    // let members = req.body.groupMembers.join(", ");
+    
+    // create new group with group name and owner
     db.group.create({
       user: req.params.userid,
       name: req.body.groupName,
-      members: members
+      // members: members
+    }).then(results => {
+      res.send(results);
     });
-    res.end();
+  });
+
+  app.post('/groups/members/:userId/:groupId', function (req, res) {
+    db.group.findAll({
+      where: {
+        id: req.params.groupId
+      }
+    }).then(results => {
+      let data = results[0].members;
+      console.log(results[0].members);
+      let newMember = req.params.userId.toString();
+
+      if (data && data !== null) {
+        let members = data.split(', ');
+      // if new member isn't already part of the group, add them
+        if (!members.includes(newMember)) {
+          members.push(newMember);
+          members = members.join(', ');
+          db.group.update({
+            members: members
+          }, {
+            where: {
+              id: req.params.groupId
+            }
+          }).then(results => {
+            res.send('updated members');
+          })
+        }
+      }
+      else {
+        db.group.update({
+          members: newMember
+        }, {
+          where: {
+            id: req.params.groupId
+          }
+        }).then(results => {
+          res.send('first member added');
+        })
+      }
+    })
   })
 
 

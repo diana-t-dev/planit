@@ -14,32 +14,29 @@ const cookies = new Cookies();
 class Notifications extends Component {
     state = {
         notifications: [],
-        deletion: false,
-        user: ""
+        user: "",
+        id: ""
     }
 
     componentDidMount () {
-        this.renderNotifications();
+        let namey = cookies.get('name');
+    
+        axios.get('/users/' + namey).then(user => {
+    
+          console.log(user);
+    
+          user.data && user.data[0] ? (  this.setState({ id: user.data[0].id })) :("")
+
+          console.log(this.state.id);
+    
+        }).then(results => {
+            this.renderNotifications();
+        })
     }
 
     renderNotifications = () => {
-        this.setState({notifications: []})
-
-        // set new cookie
-        const cookies = new Cookies();
-
-        axios.get(`/users/${cookies.get('name')}`).then(user =>{  
-
-            user.data && user.data[0] ? (
-
-            this.setState({user: user.data[0].id})
-
-            ):
-            ("")
-        })
-
         // get request for user notifications
-        axios.get(`/notifications/${cookies.get('name')}`)
+        axios.get(`/notifications/${this.state.id}`)
         .then((results) => {           
             // if user has none, display a message
             if (results.data[0] === undefined) {
@@ -49,7 +46,7 @@ class Notifications extends Component {
             // else, set the state to their notifications as a list
             else {
                 let notifications = results.data.map((notification) => {
-                    return {id: notification.id, userId: notification.userId, from: notification.user, type: notification.type}
+                    return {id: notification.id, userId: notification.userId, from: notification.user, type: notification.type, groupId: notification.groupId}
                 })
                 this.setState({notifications: notifications});
               	
@@ -58,7 +55,6 @@ class Notifications extends Component {
     }
 
     deleteNotification = (notificationId) => {
-        this.setState({deletion: !this.state.deletion});
 
         axios.delete(`/notifications/delete/${notificationId}`)
              .then((results) => {
@@ -66,19 +62,29 @@ class Notifications extends Component {
              })
     }
 
-    acceptRequest = (notificationId, userRequestId, notificationType, userId) => {
+    acceptRequest = (notificationId, userRequestId, notificationType, userId, groupId) => {
         // if it's a friend request, update both users' friends list
-        axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
+        if (notificationType === 'friend request') {
+            axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
              .then((results) => {
                  axios.post(`/friends/update/${userId}`, {friendId: userRequestId})
                       .then((results) => {
                           this.deleteNotification(notificationId);
                       });
              });
-        
-
+        }
         // if it's a group request, update group members
         // then delete notifications
+        else if (notificationType === 'Group Invite') {
+            console.log(`groupId ${groupId}`);
+            axios.post(`/groups/members/${userId}/${groupId}`)
+                 .then(results => {
+                     console.log(results);
+                     this.deleteNotification(notificationId);
+
+                 })
+        }
+        
     }
 
     render() {
@@ -113,10 +119,10 @@ class Notifications extends Component {
                             }
                             else
                             {
-                            return <tr>
+                            return <tr key={el.id}>
                                 <td>{el.from}</td>
                                 <td>{el.type}</td>
-                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
+                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.id, el.groupId)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                             </tr>
                             }
                             })}
