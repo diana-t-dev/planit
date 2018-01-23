@@ -20,19 +20,6 @@ class Home extends React.Component {
 
  socket = io("/");
 
-  toggleForm = () => {
-
-    this.state.form ?(
-
-      this.setState({form:false})
-
-      ):
-    (
-
-    this.setState({form:true})
-)
-  };
-
      inputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -120,13 +107,6 @@ componentDidMount(){
 			<Nav/>
 		
 					<h1 className="center titles groupText">My Dashboard</h1>
-			
-   <div className="row toprow">
-      <div className="col s2 offset-s5">
-        <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
-      </div>
-    </div>		
-				{ this.state.form ? (<Form  click={this.toggleForm}/> ):("") }
 
 	<div  className="container">
 	<div  className="row">
