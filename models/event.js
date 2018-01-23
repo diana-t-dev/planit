@@ -12,6 +12,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   event.associate = function(models) {
+    
     event.belongsTo(models.group, {
       foreignKey: {
         allowNull: true

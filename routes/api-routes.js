@@ -167,8 +167,8 @@ module.exports = function(app) {
     // let members = req.body.groupMembers.join(", ");
     
     // create new group with group name and owner
-    db.group.create({
-      user: req.params.userid,
+    db.groupy.create({
+      person: req.params.userid,
       name: req.body.groupName,
       // members: members
     }).then(results => {
@@ -177,7 +177,7 @@ module.exports = function(app) {
   });
 
   app.post('/groups/members/:userId/:groupId', function (req, res) {
-    db.group.findAll({
+    db.groupy.findAll({
       where: {
         id: req.params.groupId
       }
@@ -204,7 +204,7 @@ module.exports = function(app) {
         }
       }
       else {
-        db.group.update({
+        db.groupy.update({
           members: newMember
         }, {
           where: {
