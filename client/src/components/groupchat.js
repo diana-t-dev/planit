@@ -37,7 +37,9 @@ class Chat extends Component {
 
     this.setState({
 
-      results: data.data.response.venues
+      results: data.data.response.venues,
+      results2: [],
+      results3: []
     })
 
     console.log(this.state.results);
@@ -58,7 +60,9 @@ searchevent = () => {
 
       this.setState({
 
-      results2: [...this.state.results2, data.data.events[i]]
+      results2: [...this.state.results2, data.data.events[i]],
+      results: [],
+      results3: []
     })
      
     }
@@ -81,7 +85,9 @@ searchevent = () => {
 
       this.setState({
 
-      results3: [...this.state.results3, data.data.results[i]]
+      results3: [...this.state.results3, data.data.results[i]],
+      results: [],
+      results2: []
     })
      
     }
