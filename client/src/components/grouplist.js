@@ -30,7 +30,7 @@ class List extends Component {
 
     let namey = cookies.get('name');
 
-    axios.get(/mygroups/+namey).then(data => {
+    axios.get('/mygroups/'+namey).then(data => {
 
       console.log("got groups");
       console.log(data);
@@ -67,7 +67,7 @@ render() {
             <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>My Groups</a>
                   <ul id='dropdown1' className='dropdown-content'>
 
-            {this.state.groups !== null && this.state.groups !== undefined ?(
+            {this.state.groups !== null && this.state.groups ? (
 
               this.state.groups.map(i =>{
 
