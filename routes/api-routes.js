@@ -426,20 +426,18 @@ module.exports = function(app) {
             })
           })
 
-          // console.log(req.params.name)
-
-          // db.user.findAll({
-
-          //   where:{
-
-          //     username: req.params.name
-          //   }
-          // }).then(function(results){
-
-          //   res.json(results)
-          // })
-
         });
+
+        app.get('/groupnames/:groupId', function (req, res) {
+          db.group.findAll({
+            where: {
+              id: req.params.groupId
+            }
+          }).then(results => {
+           // console.log(results[0].dataValues);
+            res.send(results[0].dataValues)
+          })
+        })
 
 
 

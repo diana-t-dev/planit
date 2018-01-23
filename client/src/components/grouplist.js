@@ -30,16 +30,21 @@ class List extends Component {
 
     let userId = cookies.get('id');
 
-    axios.get('/mygroups/' + userId).then(data => {
+    axios.get('/mygroups/' + userId).then(result => {
 
       console.log("got groups");
-      console.log(data);
+      console.log(result.data);
 
-      // this.setState({
-
-      //   groups: data.data[0].groupy
-      // })
-
+      // this.setState({groups: result.data});
+      let groups = [];
+      for (let i=0; i < result.data.length; i++) {
+        axios.get('/groupnames/' + result.data[i]).then(result => {
+          console.log(result.data);
+          groups.push(result.data);
+          this.setState({groups: groups});
+          console.log(this.state.groups);    
+        })
+      }      
     })
   }
 
@@ -69,9 +74,9 @@ render() {
 
             {this.state.groups !== null && this.state.groups !== undefined ?(
 
-              this.state.groups.map(i =>{
+              this.state.groups.map(group =>{
 
-      return <li><a type="button" className="mygroups" data-id="username" onClick={() => { this.props.setgroup({i}) }}>{i}</a></li>
+      return <li><a type="button" className="mygroups" data-id="username" onClick={() => { this.props.setgroup(group.id) }}>{group.name}</a></li>
             
             })
               ):("")}
