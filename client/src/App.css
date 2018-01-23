@@ -19,11 +19,10 @@ li{
   font-size: 25px;
 }
 
-body{
+.small{
 
-	
-  
-
+  margin-left: -20px !important;
+  margin-right: 15px !important;
 }
 
 .row{
@@ -256,8 +255,6 @@ video {
 }
 
 
-
-
 .loginButton {
   z-index:1;
   width: 100%;
@@ -320,3 +317,139 @@ video {
   width: 1920px;
 }
 
+@media screen and (max-width: 1680px) { 
+
+.backgroundy {
+
+  width: 1680px;
+
+}
+
+.descriptionRow {
+  position: absolute;
+  top: 55%;
+  left: 33%;
+
+}
+
+.head{
+
+	margin-left: 29%;
+}
+
+.right {
+position: absolute;
+  top: 10%;
+  margin-left: 70%;
+
+}
+
+}
+
+@media screen and (max-width: 1440px) { 
+
+.backgroundy {
+
+  width: 1440px;
+
+}
+
+.descriptionRow {
+  position: absolute;
+  top: 55%;
+  left: 32%;
+
+}
+
+.head{
+
+	margin-left: 26%;
+}
+
+.right {
+position: absolute;
+  top: 10%;
+  margin-left: 70%;
+
+}
+
+}
+
+@media screen and (max-width: 1024px) { 
+
+.backgroundy {
+
+  width: 1024px;
+
+}
+
+.descriptionRow {
+  position: absolute;
+  top: 60%;
+  left: 26%;
+
+}
+
+.head{
+
+	margin-left: 20%;
+	position: absolute;
+  top: 100%;
+}
+
+.right {
+position: absolute;
+  top: 10%;
+  margin-left: 55%;
+
+}
+
+.titles {
+
+	font-size: 35px;
+	position: absolute;
+  top: 17%;
+}
+
+.navDescription {
+  position:relative;
+  top: 150px;
+  left: 10px;
+
+}
+
+}
+
+@media screen and (max-width: 768px) { 
+
+.backgroundy {
+
+  width: 768px;
+
+}
+
+.descriptionRow {
+  position: absolute;
+  top: 60%;
+  left: 17%;
+
+}
+
+}
+
+@media screen and (max-width: 640px) { 
+
+.backgroundy {
+
+  width: 640px;
+
+}
+
+.descriptionRow {
+  position: absolute;
+  top: 60%;
+  left: 10%;
+
+}
+
+}

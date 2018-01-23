@@ -13,6 +13,22 @@ const cookies = new Cookies();
 
 class Groups extends Component {
 
+  state ={
+
+    mygroup: ""
+  };
+
+
+  setgroup = (group) => {
+
+this.setState({
+
+    mygroup: group
+})
+
+console.log(this.state.mygroup)
+  };
+
   componentDidMount () {
 
   }
@@ -33,7 +49,8 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
         <div className="row toprow">
           <div className="col s12 top borders">
           <List />
-          <Events />
+          <Events 
+          group={this.state.mygroup}/>
           <Chat />
           </div>
         </div>

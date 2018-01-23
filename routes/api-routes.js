@@ -344,6 +344,24 @@ module.exports = function(app) {
 
   });
 
+        app.get("/mygroups/:name", function(req, res){
+
+
+          console.log(req.params.name)
+
+          db.user.findAll({
+
+            where:{
+
+              username: req.params.name
+            }
+          }).then(function(results){
+
+            res.json(results)
+          })
+
+        });
+
 
 
 }

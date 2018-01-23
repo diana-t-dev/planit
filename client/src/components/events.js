@@ -1,7 +1,28 @@
 import React, { Component } from "react";
 import '../App.css';
+import axios from 'axios';
 
 class Events extends Component {
+
+  state = {
+
+    group: ""
+  }
+
+  getEvents = () =>{
+
+    this.setState({
+
+      group: this.props.group
+    })
+
+    let groupy = this.state.group;
+
+    axios.get("events/"+groupy).then(data =>{
+
+console.log(data);
+    })
+  }
 
   componentDidMount () {
 

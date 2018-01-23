@@ -127,7 +127,7 @@ render() {
 
   return ( 
 
-        <div className="col s3 m3 l3">
+        <div className="col s6 m4 l4">
           <div className="col s12 top z-depth-2 bordy hoverable">
            <h4>Search</h4>
             <hr/>
