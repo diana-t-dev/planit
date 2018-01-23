@@ -86,7 +86,7 @@ class Friends extends Component {
       type: "friend request"
     }
 
-    axios.post('/notification', {data})
+    axios.post('/notification', data)
     .then(friend => {
       console.log(friend);
     })

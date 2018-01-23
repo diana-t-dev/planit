@@ -94,13 +94,14 @@ module.exports = function(app) {
   })
 
    app.post("/notification", function (req ,res) {
+     console.log(req.body);
 
     db.notification.create({
       
-      user: req.body.data.user,
-      userId: req.body.data.ids,
-      to: req.body.data.to,
-      type: req.body.data.type
+      user: req.body.user,
+      userId: req.body.ids,
+      to: req.body.to,
+      type: req.body.type
 
       }).then(function (results) {
       res.json(results);
@@ -162,12 +163,17 @@ module.exports = function(app) {
   app.post('/groups/new/:userid', function (req, res) {
     // console.log(req.body);
     // console.log(req.params.userid);
-    let members = req.body.groupMembers.join(", ");
+    // let members = req.body.groupMembers.join(", ");
+    
+    // create new group with group name and owner
     db.group.create({
       user: req.params.userid,
       name: req.body.groupName,
-      members: members
+      // members: members
     });
+
+    // send group notifications to each group member
+
     res.end();
   })
 
