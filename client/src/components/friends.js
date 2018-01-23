@@ -76,20 +76,30 @@ class Friends extends Component {
 
   addFriend = (i) => {
 
-    let namey = cookies.get('name');
-    let friend = i;
+    axios.get('/users/' + i).then(user => {
 
-    let data = {
-      user: namey,
-      ids: this.state.id,
-      to: friend,
-      type: "friend request"
-    }
+      console.log(user.data[0].id);
 
-    axios.post('/notification', data)
-    .then(friend => {
+      let namey = cookies.get('name');
+      let friend = i;
+
       console.log(friend);
+
+      let data = {
+        user: namey,
+        ids: this.state.id,
+        to: user.data[0].id,
+        type: "friend request"
+      }
+
+      axios.post('/notification', data)
+      .then(friend => {
+        console.log(friend);
+      })
+
     })
+
+    
 
   };
 

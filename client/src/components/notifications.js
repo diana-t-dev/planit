@@ -35,9 +35,11 @@ class Notifications extends Component {
     }
 
     renderNotifications = () => {
+        console.log('render');
         // get request for user notifications
         axios.get(`/notifications/${this.state.id}`)
-        .then((results) => {           
+        .then((results) => {
+            console.log(`render results ${results}`);           
             // if user has none, display a message
             if (results.data[0] === undefined) {
             	
@@ -46,6 +48,7 @@ class Notifications extends Component {
             // else, set the state to their notifications as a list
             else {
                 let notifications = results.data.map((notification) => {
+                    console.log(notification);
                     return {id: notification.id, userId: notification.userId, from: notification.user, type: notification.type, groupId: notification.groupId}
                 })
                 this.setState({notifications: notifications});

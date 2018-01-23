@@ -84,6 +84,7 @@ module.exports = function(app) {
 
 
   app.get("/notifications/:userId", function (req ,res) {
+    console.log(`params:::: ${req.params.userId}`);
     db.notification.findAll({
       where: {
         to: req.params.userId
