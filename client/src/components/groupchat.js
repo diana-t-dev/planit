@@ -11,7 +11,8 @@ class Chat extends Component {
 
     thing: "",
     location: "",
-    results: []
+    results: [],
+    results2: []
 
   };
 
@@ -42,7 +43,31 @@ class Chat extends Component {
 
 
     })
-  }
+  };
+
+searchevent = () => {
+
+    let url = "https://www.eventbriteapi.com/v3/events/search/?q="+this.state.thing+"&sort_by=best&location.address="+this.state.location+"&token=ZHYMXVXF44JLXPWWBSYQ";
+
+    axios.get(url).then(data => {
+
+    console.log(data.data.events);
+
+    for (var i = 0; i < 5; i++) {
+
+      this.setState({
+
+      results2: [...this.state.results2, data.data.events[i]]
+    })
+     
+    }
+
+    console.log(this.state.results2);
+
+    })
+  };
+
+
 
   add = (name) => {
 
@@ -90,7 +115,8 @@ render() {
                 </div>
                </form>
 
-               <a className="btn" onClick={this.search}>Search</a>
+               <a className="btn" onClick={this.search}>Places</a>
+               <a className="btn" onClick={this.searchevent}>Events</a>
           <h4>Results</h4>
           <hr/>
             <ul>
@@ -105,6 +131,23 @@ render() {
                <li className="hovy">{i.location.address}</li>
                <li className="hovy">{i.categories[0].name}</li>
               <a className="btn" onClick={() =>this.add(i.name)}>Add to Group</a>
+               </div>
+
+           ) ):("")
+
+              }
+
+              {
+              this.state.results2 !== undefined ?(
+
+
+              this.state.results2.map(i => 
+
+                <div>
+             <li className="hovy">{i.name.text}</li>
+              <li className="hovy">Date: {i.start.local}</li>
+              <li className="hovy"><a href={i.url} target="_blank">Link to Event</a></li>
+              <a className="btn" onClick={() =>this.add(i.name.text)}>Add to Group</a>
                </div>
 
            ) ):("")
