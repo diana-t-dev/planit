@@ -162,28 +162,23 @@ module.exports = function(app) {
   })
 
   app.post('/groups/new/:userid', function (req, res) {
-    // console.log(req.body);
-    // console.log(req.params.userid);
-    // let members = req.body.groupMembers.join(", ");
     
     // create new group with group name and owner
-    db.groupy.create({
+    db.group.create({
       person: req.params.userid,
       name: req.body.groupName,
-      // members: members
     }).then(results => {
       res.send(results);
     });
   });
 
   app.post('/groups/members/:userId/:groupId', function (req, res) {
-    db.groupy.findAll({
+    db.group.findAll({
       where: {
         id: req.params.groupId
       }
     }).then(results => {
       let data = results[0].members;
-      console.log(results[0].members);
       let newMember = req.params.userId.toString();
 
       if (data && data !== null) {
@@ -204,7 +199,7 @@ module.exports = function(app) {
         }
       }
       else {
-        db.groupy.update({
+        db.group.update({
           members: newMember
         }, {
           where: {

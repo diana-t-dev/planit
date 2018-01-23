@@ -37,7 +37,7 @@ class List extends Component {
 
       this.setState({
 
-        groups: data.data[0].groups
+        groups: data.data[0].groupy
       })
 
     })

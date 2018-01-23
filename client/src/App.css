@@ -158,11 +158,35 @@ height: 90px;
 }
 .navTab {
   background-color: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .transparent {
   position: absolute;z-index:999999999;
 }
+
+.groupHeader {
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+.searchText {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.resultsText {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.chatText{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.friendsText{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold !important; 
+}
+
 
 .video-container {
   height: 50vh;
@@ -308,6 +332,26 @@ video {
 
   margin-bottom: 0;
 }
+.background404 {
+  background-image: url("https://cdn4.geckoandfly.com/wp-content/uploads/2015/09/android-windows-mac-iphone-prank-4.jpg");
+  background-repeat: no-repeat;
+  height: 1005px;
+  width: 1920px;
+}
+
+.gif404 {
+  position: center;
+  border-radius: 25px;
+ 
+}
+
+.text404 {
+  font-size: 80px;
+  margin-bottom: 200px;
+  font-family: 'Pacifico', cursive;
+  color: white;
+  margin-top: 0px !important;
+}
 
 .backgroundy {
   background-image: url("https://www.imgbase.info/images/safe-wallpapers/photography/cityscape/49915_cityscape_city_life.jpg");
@@ -323,6 +367,10 @@ video {
 
   width: 1680px;
 
+}
+
+.background404 {
+  width: 1680px;
 }
 
 .descriptionRow {
@@ -354,6 +402,10 @@ position: absolute;
 
 }
 
+.background404 {
+  width: 1440px;
+}
+
 .descriptionRow {
   position: absolute;
   top: 55%;
@@ -381,6 +433,10 @@ position: absolute;
 
   width: 1024px;
 
+}
+
+.background404 {
+  width: 1024px;
 }
 
 .descriptionRow {
@@ -428,6 +484,11 @@ position: absolute;
 
 }
 
+.background404 {
+  width: 768px;
+}
+
+
 .descriptionRow {
   position: absolute;
   top: 60%;
@@ -443,6 +504,11 @@ position: absolute;
 
   width: 640px;
 
+}
+
+
+.background404 {
+  width: 640px;
 }
 
 .descriptionRow {

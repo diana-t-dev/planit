@@ -129,7 +129,7 @@ render() {
 
         <div className="col s6 m4 l4">
           <div className="col s12 top z-depth-2 bordy hoverable">
-           <h4>Search</h4>
+           <h4 className="searchText">Search</h4>
             <hr/>
            <form className="col s12">
                 <div className="input-field col s12">
@@ -149,7 +149,7 @@ render() {
                <a className="btn" onClick={this.search}>Places</a>
                <a className="btn" onClick={this.searchevent}>Events</a>
                <a className="btn" onClick={this.searchmovie}>Movies</a>
-          <h4>Results</h4>
+          <h4 className="resultsText">Results</h4>
           <hr/>
             <ul>
             {
