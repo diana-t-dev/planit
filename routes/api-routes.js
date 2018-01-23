@@ -162,15 +162,11 @@ module.exports = function(app) {
   })
 
   app.post('/groups/new/:userid', function (req, res) {
-    // console.log(req.body);
-    // console.log(req.params.userid);
-    // let members = req.body.groupMembers.join(", ");
     
     // create new group with group name and owner
     db.group.create({
       person: req.params.userid,
       name: req.body.groupName,
-      // members: members
     }).then(results => {
       res.send(results);
     });
@@ -183,7 +179,6 @@ module.exports = function(app) {
       }
     }).then(results => {
       let data = results[0].members;
-      console.log(results[0].members);
       let newMember = req.params.userId.toString();
 
       if (data && data !== null) {
