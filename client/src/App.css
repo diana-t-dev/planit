@@ -158,11 +158,35 @@ height: 90px;
 }
 .navTab {
   background-color: none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .transparent {
   position: absolute;z-index:999999999;
 }
+
+.groupHeader {
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+.searchText {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.resultsText {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.chatText{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.friendsText{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold !important; 
+}
+
 
 .video-container {
   height: 50vh;

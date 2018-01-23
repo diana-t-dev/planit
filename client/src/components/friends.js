@@ -177,10 +177,10 @@ class Friends extends Component {
                   <table className="table highlight">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>See Friend's Groups</th>
-                        <th>Friend Online</th>
-                        <th>Friend Online</th>
+                        <th className="friendsText">Name</th>
+                        <th className="friendsText">See Friend's Groups</th>
+                        <th className="friendsText">Friend Online</th>
+                        <th className="friendsText">Friend Online</th>
                       </tr>
                     </thead>
                     <tbody>

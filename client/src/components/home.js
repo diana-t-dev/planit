@@ -125,7 +125,7 @@ componentDidMount(){
 		</div>
 
 		<div className="col s12 top z-depth-2 bordy3 hoverable">
-		  <h4>Chat</h4>
+		  <h4 className="chatText">Chat</h4>
             <hr/>
            <form className="col s12">
                 <div className="input-field col s9 ">
