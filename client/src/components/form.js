@@ -83,6 +83,7 @@ class Form extends Component {
 	createGroup = (event) => {
 		event.preventDefault();
 		let userid = cookies.get('id');
+		console.log(userid);
 		let groupInfo = {
 			groupName: this.state.groupName,
 			// groupMembers: this.state.groupMembers
