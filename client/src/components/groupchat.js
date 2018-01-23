@@ -160,7 +160,9 @@ render() {
                 <div>
               <li className="hovy">{i.name}</li>
                <li className="hovy">{i.location.address}</li>
-               <li className="hovy">{i.categories[0].name}</li>
+
+               {i.categories[0] !== undefined ?(
+               <li className="hovy">{i.categories[0].name}</li>):("")}
               <a className="btn" onClick={() =>this.add(i.name)}>Add to Group</a>
                </div>
 
