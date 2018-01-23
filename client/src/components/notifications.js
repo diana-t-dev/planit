@@ -35,8 +35,6 @@ class Notifications extends Component {
     }
 
     renderNotifications = () => {
-        console.log('went in render function');
-
         // get request for user notifications
         axios.get(`/notifications/${this.state.id}`)
         .then((results) => {           
@@ -48,7 +46,7 @@ class Notifications extends Component {
             // else, set the state to their notifications as a list
             else {
                 let notifications = results.data.map((notification) => {
-                    return {id: notification.id, userId: notification.userId, from: notification.user, type: notification.type}
+                    return {id: notification.id, userId: notification.userId, from: notification.user, type: notification.type, groupId: notification.groupId}
                 })
                 this.setState({notifications: notifications});
               	
@@ -78,9 +76,12 @@ class Notifications extends Component {
         // if it's a group request, update group members
         // then delete notifications
         else if (notificationType === 'Group Invite') {
+            console.log(`groupId ${groupId}`);
             axios.post(`/groups/members/${userId}/${groupId}`)
                  .then(results => {
                      console.log(results);
+                     this.deleteNotification(notificationId);
+
                  })
         }
         
@@ -121,7 +122,7 @@ class Notifications extends Component {
                             return <tr>
                                 <td>{el.from}</td>
                                 <td>{el.type}</td>
-                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user, el.groupId)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
+                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.id, el.groupId)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                             </tr>
                             }
                             })}

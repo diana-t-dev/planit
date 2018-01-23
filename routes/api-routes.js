@@ -84,13 +84,11 @@ module.exports = function(app) {
 
 
   app.get("/notifications/:userId", function (req ,res) {
-    console.log(req.params.userId);
     db.notification.findAll({
       where: {
         to: req.params.userId
       }
     }).then(function (results) {
-      console.log(results);
       res.json(results);
     })
   })
@@ -179,15 +177,43 @@ module.exports = function(app) {
   });
 
   app.post('/groups/members/:userId/:groupId', function (req, res) {
-    console.log(req.params.userId);
-    console.log(req.params.groupId);
     db.group.findAll({
       where: {
-        groupId: req.params.groupId
+        id: req.params.groupId
       }
     }).then(results => {
-      console.log(results);
-      res.end();
+      let data = results[0].members;
+      console.log(results[0].members);
+      let newMember = req.params.userId.toString();
+
+      if (data && data !== null) {
+        let members = data.split(', ');
+      // if new member isn't already part of the group, add them
+        if (!members.includes(newMember)) {
+          members.push(newMember);
+          members = members.join(', ');
+          db.group.update({
+            members: members
+          }, {
+            where: {
+              id: req.params.groupId
+            }
+          }).then(results => {
+            res.send('updated members');
+          })
+        }
+      }
+      else {
+        db.group.update({
+          members: newMember
+        }, {
+          where: {
+            id: req.params.groupId
+          }
+        }).then(results => {
+          res.send('first member added');
+        })
+      }
     })
   })
 
