@@ -2,6 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   var event = sequelize.define("event", {
     
     name: DataTypes.TEXT,
+    person: DataTypes.TEXT,
     votes: {type: DataTypes.INTEGER, defaultValue: 0}
     
   },
