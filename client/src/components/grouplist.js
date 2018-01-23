@@ -67,7 +67,7 @@ render() {
             <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>My Groups</a>
                   <ul id='dropdown1' className='dropdown-content'>
 
-            {this.state.groups !== null ?(
+            {this.state.groups !== null && this.state.groups !== undefined ?(
 
               this.state.groups.map(i =>{
 
