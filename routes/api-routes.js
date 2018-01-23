@@ -412,8 +412,11 @@ module.exports = function(app) {
                 console.log(typeof data);
                 if (data && data !== null) {
                   let groups = data.split(', ');
-                  console.log(groups);
-                  let allGroups = userGroups.concat(groups);
+                  let groupIds = groups.map(groupId => {
+                    return parseInt(groupId);
+                  })
+                  console.log(groupIds);
+                  let allGroups = userGroups.concat(groupIds);
                   console.log(allGroups);
                   res.send(allGroups)
                 }
