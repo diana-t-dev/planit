@@ -76,15 +76,18 @@ class Notifications extends Component {
                       });
              });
         }
-        // if it's a group request, update group members
+        // if it's a group request, update group members and add group id to user record
         // then delete notifications
         else if (notificationType === 'Group Invite') {
             console.log(`groupId ${groupId}`);
             axios.post(`/groups/members/${userId}/${groupId}`)
                  .then(results => {
                      console.log(results);
-                     this.deleteNotification(notificationId);
-
+                     axios.post(`/newgroup/${userId}/${groupId}`)
+                          .then(results => {
+                              console.log(results);
+                              this.deleteNotification(notificationId);
+                          })
                  })
         }
         

@@ -21,24 +21,24 @@ class List extends Component {
     form: false
   };
 
-    toggleForm = () => {
+  toggleForm = () => {
     this.state.form ? (this.setState({form:false})):(this.setState({form:true}))
 
   };
 
   getGroups = () =>{
 
-    let namey = cookies.get('name');
+    let userId = cookies.get('id');
 
-    axios.get(/mygroups/+namey).then(data => {
+    axios.get('/mygroups/' + userId).then(data => {
 
       console.log("got groups");
       console.log(data);
 
-      this.setState({
+      // this.setState({
 
-        groups: data.data[0].groupy
-      })
+      //   groups: data.data[0].groupy
+      // })
 
     })
   }

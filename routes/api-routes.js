@@ -213,6 +213,49 @@ module.exports = function(app) {
     })
   })
 
+  app.post('/newgroup/:userId/:groupId', function (req, res) {
+    console.log(`&&&&&&&&&&${req.params.userId}`);
+    // find user record
+    db.user.findAll({
+      where: {
+        id: req.params.userId
+      }
+    }).then(results => {
+      let data = results[0].groups;
+      let newGroup = req.params.groupId.toString();
+
+      // if there are groups, update the string of group ids
+      if (data && data !== null) {
+        let groups = data.split(', ');
+        if (!groups.includes(newGroup)) {
+          groups.push(newGroup);
+          groups = groups.join(', ');
+          db.group.update({
+            groups: groups
+          }, {
+            where: {
+              id: req.params.groupId
+            }
+          }).then(results => {
+            res.send('updated groups');
+          })
+        }
+      }
+      // else, add first group
+      else {
+        db.user.update({
+          groups: newGroup
+        }, {
+          where: {
+            id: req.params.userId
+          }
+        }).then(results => {
+          res.send('first group added');
+        })
+      }
+    })
+  })
+
 
   app.delete('/notifications/delete/:id', function (req, res) {
     db.notification.destroy({
@@ -340,21 +383,30 @@ module.exports = function(app) {
 
   });
 
-        app.get("/mygroups/:name", function(req, res){
-
-
-          console.log(req.params.name)
-
+        app.get("/mygroups/:userId", function(req, res){
+          // get all group ids of user
           db.user.findAll({
-
-            where:{
-
-              username: req.params.name
+            where: {
+              usernameId: req.params.userId
             }
-          }).then(function(results){
+          }).then(results => {
+            console.log(results[0].dataValues);
+            res.end();
 
-            res.json(results)
           })
+
+          // console.log(req.params.name)
+
+          // db.user.findAll({
+
+          //   where:{
+
+          //     username: req.params.name
+          //   }
+          // }).then(function(results){
+
+          //   res.json(results)
+          // })
 
         });
 
