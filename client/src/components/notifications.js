@@ -14,32 +14,31 @@ const cookies = new Cookies();
 class Notifications extends Component {
     state = {
         notifications: [],
-        deletion: false,
-        user: ""
+        user: "",
+        id: ""
     }
 
     componentDidMount () {
-        this.renderNotifications();
+        let namey = cookies.get('name');
+    
+        axios.get('/users/' + namey).then(user => {
+    
+          console.log(user);
+    
+          user.data && user.data[0] ? (  this.setState({ id: user.data[0].id })) :("")
+
+          console.log(this.state.id);
+    
+        }).then(results => {
+            this.renderNotifications();
+        })
     }
 
     renderNotifications = () => {
-        this.setState({notifications: []})
-
-        // set new cookie
-        const cookies = new Cookies();
-
-        axios.get(`/users/${cookies.get('name')}`).then(user =>{  
-
-            user.data && user.data[0] ? (
-
-            this.setState({user: user.data[0].id})
-
-            ):
-            ("")
-        })
+        console.log('went in render function');
 
         // get request for user notifications
-        axios.get(`/notifications/${cookies.get('name')}`)
+        axios.get(`/notifications/${this.state.id}`)
         .then((results) => {           
             // if user has none, display a message
             if (results.data[0] === undefined) {
@@ -58,7 +57,6 @@ class Notifications extends Component {
     }
 
     deleteNotification = (notificationId) => {
-        this.setState({deletion: !this.state.deletion});
 
         axios.delete(`/notifications/delete/${notificationId}`)
              .then((results) => {
@@ -66,7 +64,7 @@ class Notifications extends Component {
              })
     }
 
-    acceptRequest = (notificationId, userRequestId, notificationType, userId) => {
+    acceptRequest = (notificationId, userRequestId, notificationType, userId, groupId) => {
         // if it's a friend request, update both users' friends list
         if (notificationType === 'friend request') {
             axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
@@ -80,7 +78,10 @@ class Notifications extends Component {
         // if it's a group request, update group members
         // then delete notifications
         else if (notificationType === 'Group Invite') {
-            
+            axios.post(`/groups/members/${userId}/${groupId}`)
+                 .then(results => {
+                     console.log(results);
+                 })
         }
         
     }
@@ -120,7 +121,7 @@ class Notifications extends Component {
                             return <tr>
                                 <td>{el.from}</td>
                                 <td>{el.type}</td>
-                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
+                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.user, el.groupId)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                             </tr>
                             }
                             })}

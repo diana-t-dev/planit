@@ -83,12 +83,14 @@ module.exports = function(app) {
 
 
 
-  app.get("/notifications/:user", function (req ,res) {
+  app.get("/notifications/:userId", function (req ,res) {
+    console.log(req.params.userId);
     db.notification.findAll({
       where: {
-        to: req.params.user
+        to: req.params.userId
       }
     }).then(function (results) {
+      console.log(results);
       res.json(results);
     })
   })
@@ -174,8 +176,19 @@ module.exports = function(app) {
     }).then(results => {
       res.send(results);
     });
+  });
 
-
+  app.post('/groups/members/:userId/:groupId', function (req, res) {
+    console.log(req.params.userId);
+    console.log(req.params.groupId);
+    db.group.findAll({
+      where: {
+        groupId: req.params.groupId
+      }
+    }).then(results => {
+      console.log(results);
+      res.end();
+    })
   })
 
 
