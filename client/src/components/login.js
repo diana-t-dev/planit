@@ -4,27 +4,43 @@ import FacebookLogin from 'react-facebook-login';
 import Cookies from 'universal-cookie';
 import Home from "./home.js";
 import axios from "axios";
-import Footer from './footer.js';
+import { GoogleLogin } from 'react-google-login';
 const cookies = new Cookies();
 
   class Login extends React.Component {
 
-	state={
-		loggedin: false
-	};
+  state={
+    loggedin: false
+  };
 
-  responseFacebook = (response) => {
+  responseGoogle = (response) => {
 
-    var id = response.id
+    var id_token = response.getAuthResponse().id_token;
+    axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token}`)
+    .then( googleUser => this.validate(googleUser.data) )
+
+
+
+  
+  };
+
+
+
+  validate = (response) => {
+    console.log('***********',response.sub)
+    console.log('11111111111',response.name)
+    console.log('@@@@@@@@@@@',response.picture)
+
+    var id = response.sub
     axios.get('/user/' + id)
       .then(user => {
 
         if (user.data === null) {
 
           var newUser = {
-            usernameId: response.id,
+            usernameId: response.sub,
             username: response.name,
-            image: response.picture.data.url
+            image: response.picture
           }
 
           axios.post('/newUser', { newUser })
@@ -37,7 +53,7 @@ const cookies = new Cookies();
         } 
         else {
             cookies.set('name', response.name);
-            cookies.set('id', response.id);
+            cookies.set('id', response.sub);
             this.setState({ loggedin: true });
             this.props.history.push('/');
         }
@@ -54,7 +70,7 @@ const cookies = new Cookies();
 
       return (this.state.loggedin === true ? (<Home/>): 
 
-      	(
+        (
               <div className="backgroundy">
 
                   <div className="container">
@@ -62,20 +78,15 @@ const cookies = new Cookies();
                         <div className="col s12 m8 l8">
                           <div className="loginCard card blue-grey darken-1">
                             <div className="loginContent card-content white-text">
-                             
-       
                                <div className="center loginButton">
-                                  <FacebookLogin
-                                  appId="397807444004424"
-                                  autoLoad={false}
-                                  size="small"
-                                  fields="name,email,picture"
-                                  scope="public_profile,user_friends,user_actions.books"
-                                  icon="fa-facebook-square fa-fw"
-                                  textButton="Login with Facebook"
-                                  callback={this.responseFacebook} />
-                                </div>  
-                           
+                                    <GoogleLogin
+                                      clientId="1057993298286-11clhhie8id2del793p0usgcb1vh3spu.apps.googleusercontent.com"
+                                      buttonText="Login with Google"
+                                      onSuccess={this.responseGoogle}
+                                      onFailure={this.responseGoogle}
+                                      icon="fa fa-google"
+                                    />
+                                </div>             
                             </div>
                             
                           </div>
