@@ -11,17 +11,17 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false
   });
 
-  event.associate = function(models) {
+  // event.associate = function(models) {
     
-    event.belongsTo(models.group, {
-      foreignKey: {
-        allowNull: true
-      }
-    });
+  //   event.belongsTo(models.group, {
+  //     foreignKey: {
+  //       allowNull: true
+  //     }
+  //   });
 
-     event.hasMany(models.comment, {
-      onDelete: "cascade"
-    });
+  //    event.hasMany(models.comment, {
+  //     onDelete: "cascade"
+  //   });
 
 
 }

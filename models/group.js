@@ -1,7 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
   var group = sequelize.define("group", {
     
-    person: DataTypes.TEXT,
+    event: DataTypes.TEXT,
+    user: DataTypes.TEXT,
     name: DataTypes.TEXT,
     members: DataTypes.TEXT
   },
@@ -10,18 +11,18 @@ module.exports = function(sequelize, DataTypes) {
   });
 
 
-  group.associate = function(models) {
+  // group.associate = function(models) {
     
-    group.belongsTo(models.user, {
-       foreignKey: {
-        allowNull: true
-      }
-    });
+  //   group.belongsTo(models.user, {
+  //      foreignKey: {
+  //       allowNull: true
+  //     }
+  //   });
 
-    group.hasMany(models.event, {
-      onDelete: "cascade"
-    });
-  };
+  //   group.hasMany(models.event, {
+  //     onDelete: "cascade"
+  //   });
+  // };
 
   return group;
 };
