@@ -375,12 +375,17 @@ module.exports = function(app) {
       name: req.body.data.name,
       type: req.body.data.type,
       person: req.body.data.person,
-      groupId: req.body.data.groupid
+      groupId: req.body.data.groupId
 
     }).then(function(results) {
 
+      console.log(results);
       res.json(results);
-    });
+    }).catch(function(err){
+
+    console.log(err);
+
+  });
 
   });
 

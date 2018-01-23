@@ -14,7 +14,7 @@ class Chat extends Component {
     results: [],
     results2: [],
     results3: [],
-    groupid: ""
+    groupId: ""
 
   };
 
@@ -110,23 +110,29 @@ searchevent = () => {
       name: name,
       type: type,
       person: person,
-      groupid: this.state.groupid
+      groupId: this.state.groupId
     
     }
 
     axios.post('/addevent', {data}).then(data =>{
 
       console.log('event added')
+      console.log(data)
 
     })
 
   }
 
-  componentDidMount () {
+  componentWillReceiveProps (props) {
+
+    console.log(props);
+    console.log(props.group)
 
 this.setState({
-    groupid: this.props.group
+    groupId: props.group
     })
+
+console.log(this.state.groupId)
 
   }
 
