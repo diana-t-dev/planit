@@ -26,26 +26,26 @@ class List extends Component {
 
   };
 
-  getGroups = () =>{
+  // getGroups = () =>{
 
-    let namey = cookies.get('name');
+  //   let namey = cookies.get('name');
 
-    axios.get(/mygroups/+namey).then(data => {
+  //   axios.get(/mygroups/+namey).then(data => {
 
-      console.log("got groups");
-      console.log(data);
+  //     console.log("got groups");
+  //     console.log(data);
 
-      this.setState({
+  //     this.setState({
 
-        groups: data.data[0].groupy
-      })
+  //       groups: data.data[0].group
+  //     })
 
-    })
-  }
+  //   })
+  // }
 
   componentDidMount () {
 
-    this.getGroups();
+    // this.getGroups();
 
   };
   

@@ -330,7 +330,8 @@ module.exports = function(app) {
 
       name: req.body.data.name,
       type: req.body.data.type,
-      person: req.body.data.person
+      person: req.body.data.person,
+      groupId: req.body.data.groupid
 
     }).then(function(results) {
 
@@ -351,6 +352,26 @@ module.exports = function(app) {
               username: req.params.name
             }
           }).then(function(results){
+
+            res.json(results)
+          })
+
+        });
+
+      app.get("/events/:group", function(req, res){
+
+          console.log(req.params.group)
+
+          db.group.findAll({
+
+            where:{
+
+              id: req.params.group
+            },
+            include:[db.event]
+          }).then(function(results){
+
+            console.log(results);
 
             res.json(results)
           })

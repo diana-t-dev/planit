@@ -13,7 +13,8 @@ class Chat extends Component {
     location: "",
     results: [],
     results2: [],
-    results3: []
+    results3: [],
+    groupid: ""
 
   };
 
@@ -63,6 +64,7 @@ searchevent = () => {
       results2: [...this.state.results2, data.data.events[i]],
       results: [],
       results3: []
+
     })
      
     }
@@ -107,7 +109,8 @@ searchevent = () => {
 
       name: name,
       type: type,
-      person: person
+      person: person,
+      groupid: this.state.groupid
     
     }
 
@@ -120,6 +123,10 @@ searchevent = () => {
   }
 
   componentDidMount () {
+
+this.setState({
+    groupid: this.props.group
+    })
 
   }
 
