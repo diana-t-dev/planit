@@ -166,7 +166,7 @@ module.exports = function(app) {
     
     // create new group with group name and owner
     db.group.create({
-      person: req.params.userid,
+      user: req.params.userid,
       name: req.body.groupName,
     }).then(results => {
       res.send(results);
@@ -391,8 +391,17 @@ module.exports = function(app) {
             }
           }).then(results => {
             console.log(results[0].dataValues);
-            res.end();
+            // find groups they own, obtain their ids
+            db.group.findAll({
+              where: {
+                user: req.params.userId
+              }
+            }).then(results => {
+              console.log(results);
+              res.end();
 
+            })
+            // push ids in groups field to new array
           })
 
           // console.log(req.params.name)
