@@ -30,18 +30,23 @@ class Home extends React.Component {
 
   };
 
-  chats = () => {
-
+  chats = (event) => {
+  	event.preventDefault();
   if (this.state.chat !== ""){
 
   	  this.socket.emit('SEND_MESSAGE', {
 
         chat: this.state.chat,
         name: cookies.get('name')
+
+
     });  
 
+console.log();	
+
   }
-	
+
+
 };
 
 getChat = () =>{
@@ -127,10 +132,10 @@ componentDidMount(){
 		<div className="col s12 top z-depth-2 bordy3 hoverable">
 		  <h4 className="chatText">Chat</h4>
             <hr/>
-           <form className="col s12">
+           <form className="col s12" onSubmit={this.chats} >
                 <div className="input-field col s9 ">
                  <i className="material-icons icon-blue prefix">message</i>
-                 <input id="icon_name" type="text" className="validate"  name="chat" onChange={this.inputChange} />
+                 <input id="icon_name" value={this.state.chat} type="text" className="validate"  name="chat" onChange={this.inputChange} />
                <label for="icon_name">What's on your mind'?</label>
                 </div>
                 <div className="col s3">
