@@ -21,27 +21,34 @@ class List extends Component {
     form: false
   };
 
-    toggleForm = () => {
+  toggleForm = () => {
     this.state.form ? (this.setState({form:false})):(this.setState({form:true}))
 
   };
 
   // getGroups = () =>{
 
-  //   let namey = cookies.get('name');
 
-  //   axios.get(/mygroups/+namey).then(data => {
+    let userId = cookies.get('id');
 
-  //     console.log("got groups");
-  //     console.log(data);
+    axios.get('/mygroups/' + userId).then(result => {
 
-  //     this.setState({
+      console.log("got groups");
+      console.log(result.data);
 
-  //       groups: data.data[0].group
-  //     })
+      // this.setState({groups: result.data});
+      let groups = [];
+      for (let i=0; i < result.data.length; i++) {
+        axios.get('/groupnames/' + result.data[i]).then(result => {
+          console.log(result.data);
+          groups.push(result.data);
+          this.setState({groups: groups});
+          console.log(this.state.groups);    
+        })
+      }      
+    })
+  }
 
-  //   })
-  // }
 
   componentDidMount () {
 
@@ -69,9 +76,9 @@ render() {
 
             {this.state.groups !== null && this.state.groups !== undefined ?(
 
-              this.state.groups.map(i =>{
+              this.state.groups.map(group =>{
 
-      return <li><a type="button" className="mygroups" data-id="username" onClick={() => { this.props.setgroup({i}) }}>{i}</a></li>
+      return <li><a type="button" className="mygroups" data-id="username" onClick={() => { this.props.setgroup(group.id) }}>{group.name}</a></li>
             
             })
               ):("")}

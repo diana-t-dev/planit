@@ -84,6 +84,7 @@ module.exports = function(app) {
 
 
   app.get("/notifications/:userId", function (req ,res) {
+    console.log(`params:::: ${req.params.userId}`);
     db.notification.findAll({
       where: {
         to: req.params.userId
@@ -165,7 +166,7 @@ module.exports = function(app) {
     
     // create new group with group name and owner
     db.group.create({
-      person: req.params.userid,
+      user: req.params.userid,
       name: req.body.groupName,
     }).then(results => {
       res.send(results);
@@ -207,6 +208,49 @@ module.exports = function(app) {
           }
         }).then(results => {
           res.send('first member added');
+        })
+      }
+    })
+  })
+
+  app.post('/newgroup/:userId/:groupId', function (req, res) {
+    console.log(`&&&&&&&&&&${req.params.userId}`);
+    // find user record
+    db.user.findAll({
+      where: {
+        id: req.params.userId
+      }
+    }).then(results => {
+      let data = results[0].groups;
+      let newGroup = req.params.groupId.toString();
+
+      // if there are groups, update the string of group ids
+      if (data && data !== null) {
+        let groups = data.split(', ');
+        if (!groups.includes(newGroup)) {
+          groups.push(newGroup);
+          groups = groups.join(', ');
+          db.group.update({
+            groups: groups
+          }, {
+            where: {
+              id: req.params.groupId
+            }
+          }).then(results => {
+            res.send('updated groups');
+          })
+        }
+      }
+      // else, add first group
+      else {
+        db.user.update({
+          groups: newGroup
+        }, {
+          where: {
+            id: req.params.userId
+          }
+        }).then(results => {
+          res.send('first group added');
         })
       }
     })
@@ -340,23 +384,62 @@ module.exports = function(app) {
 
   });
 
-        app.get("/mygroups/:name", function(req, res){
-
-
-          console.log(req.params.name)
-
+        app.get("/mygroups/:userId", function(req, res){
+          // get all group ids of user
           db.user.findAll({
-
-            where:{
-
-              username: req.params.name
+            where: {
+              usernameId: req.params.userId
             }
-          }).then(function(results){
+          }).then(results => {
+            let userGroups = [];
+            // find groups they own, obtain their ids
+            db.group.findAll({
+              where: {
+                user: req.params.userId
+              }
+            }).then(results => {
+              for (let i=0; i < results.length; i++) {
+                // push ids in groups field to new array
+                userGroups.push(results[i].dataValues.id);
+              }
+              // find groups they're a member of
+              db.user.findAll({
+                where: {
+                  usernameId: req.params.userId
+                }
+              }).then(result => {
+                let data = result[0].dataValues.groups;
+                console.log(data);
+                console.log(typeof data);
+                if (data && data !== null) {
+                  let groups = data.split(', ');
+                  let groupIds = groups.map(groupId => {
+                    return parseInt(groupId);
+                  })
+                  console.log(groupIds);
+                  let allGroups = userGroups.concat(groupIds);
+                  console.log(allGroups);
+                  res.send(allGroups)
+                }
+                res.end();
+              })
 
-            res.json(results)
+            })
           })
 
         });
+
+
+        app.get('/groupnames/:groupId', function (req, res) {
+          db.group.findAll({
+            where: {
+              id: req.params.groupId
+            }
+          }).then(results => {
+           // console.log(results[0].dataValues);
+            res.send(results[0].dataValues)
+          })
+        })
 
       app.get("/events/:group", function(req, res){
 
@@ -377,6 +460,7 @@ module.exports = function(app) {
           })
 
         });
+
 
 
 
