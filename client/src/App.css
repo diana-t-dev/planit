@@ -1,3 +1,9 @@
+table { table-layout: fixed; }
+td, th { 
+  width: 25%;
+
+ }
+
 .image{
 
   width: 100%;
@@ -72,9 +78,12 @@ li{
   background-color: dodgerblue;
 }
 
-.namey {
 
-  padding-right: 15%;
+
+.friendImg{
+  width: 100px;
+  height: 85px;
+  border-radius: 50%;
 }
 
  .input-field input:focus + label {
