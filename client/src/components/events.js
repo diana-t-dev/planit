@@ -63,7 +63,7 @@ this.setState({
       axios.put(`/upvote/${eventId}`)
            .then(results => {
              console.log(results);
-             console.log(`incremented votes for ${eventId}`);
+             console.log(`incremented votes for event ${eventId}`);
            })
     }
     // if the user downvotes, decrement current votes by one
@@ -71,7 +71,7 @@ this.setState({
       axios.put(`/downvote/${eventId}`)
            .then(results => {
              console.log(results.data);
-             console.log(`decremented votes for ${eventId}`);
+             console.log(`decremented votes for event ${eventId}`);
            })
     }
 

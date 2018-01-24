@@ -503,5 +503,27 @@ module.exports = function(app) {
               })
             })
   })
+  // downvote route
+  app.put('/downvote/:eventId', function (req, res) {
+    console.log(`eventId: ${req.params.eventId}`);
+    db.event.findById(req.params.eventId)
+            .then(results => {
+              console.log('$$$$$$$$$$$$$$$$$$$$')
+              let event = results.dataValues;
+              // increment votes by 1
+              let newVotes = event.votes - 1;
+              console.log(newVotes);
+              // store new votes in db
+              db.event.update({
+                votes: newVotes
+              }, {
+                where: {
+                  id: req.params.eventId
+                }
+              }).then(data => {
+                res.end();
+              })
+            })
+  })
 
 };
