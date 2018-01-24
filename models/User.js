@@ -5,18 +5,18 @@ module.exports = function(sequelize, DataTypes) {
     usernameId: {type: DataTypes.STRING, allowNull:false},
     image: {type: DataTypes.STRING, allowNull:false},
     friends: DataTypes.TEXT,
-    groups: DataTypes.TEXT
+    // groups: DataTypes.TEXT
   },
   {
     timestamps: false
   });
 
-// user.associate = function(models) {
+user.associate = function(models) {
     
-//     user.hasMany(models.group, {
-//        onDelete: "cascade"
-//     });
-//   };
+    user.belongsToMany(models.group, {
+       through: 'userGroup'
+    });
+  };
   
   return user;
 };

@@ -83,30 +83,27 @@ class Form extends Component {
 	createGroup = (event) => {
 		event.preventDefault();
 		let userid = cookies.get('id');
-		console.log(userid);
 		let groupInfo = {
 			groupName: this.state.groupName,
-			// groupMembers: this.state.groupMembers
 		}
-		console.log(`groupinfo: ${groupInfo}`)
 
 		// create new group record
 		axios.post('/groups/new/' + userid, groupInfo).then(results => {
-			console.log(results);
-			this.setState({groupId: results.data.id});
-			// send notifications to all group members
-			for (let i=0; i < this.state.groupMembers.length; i++) {
-				let groupNotification = {
-					user: cookies.get('name'),
-					ids: this.state.id,
-					to: this.state.groupMembers[i],
-					type: 'Group Invite',
-					groupId: this.state.groupId
-				}
-				axios.post('/notification', groupNotification).then(results => {
-					console.log(results);
-				});
-			}		
+			console.log(results.data);
+			// this.setState({groupId: results.data.id});
+			// // send notifications to all group members
+			// for (let i=0; i < this.state.groupMembers.length; i++) {
+			// 	let groupNotification = {
+			// 		user: cookies.get('name'),
+			// 		ids: this.state.id,
+			// 		to: this.state.groupMembers[i],
+			// 		type: 'Group Invite',
+			// 		groupId: this.state.groupId
+			// 	}
+			// 	axios.post('/notification', groupNotification).then(results => {
+			// 		console.log(results);
+			// 	});
+			// }		
 		});
 
 	}
