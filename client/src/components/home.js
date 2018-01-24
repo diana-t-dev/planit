@@ -23,7 +23,6 @@ class Home extends React.Component {
 
 	getImage = () => {
 		var id = cookies.get('id')
-
 		axios.get("/image/"+id)
 		.then(user => {
 			this.setState({image: user.data[0].image});
