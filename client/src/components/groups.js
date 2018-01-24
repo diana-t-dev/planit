@@ -27,17 +27,10 @@ this.setState({
     mygroup: group
 })
 
-// this.sendgroup();
 
 console.log(this.state.mygroup)
 
   };
-
-//   sendgroup = () =>{
-
-// return this.state.mygroup
-
-//   }
 
   componentDidMount () {
 
