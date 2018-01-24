@@ -332,6 +332,7 @@ module.exports = function(app) {
     db.chat.create({
       name: req.body.name,
       text: req.body.chat,
+      image: req.body.image,
       channelId: req.body.room
 
     }).then(function(results) {
@@ -512,5 +513,21 @@ module.exports = function(app) {
     })
 
   })
+
+  app.get("/image/:id", function(req, res){
+
+    console.log(req.params.id)
+    db.user.findAll({
+      where:{
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+      console.log('***************',results);
+
+      res.json(results);
+    });
+
+});
 
 };

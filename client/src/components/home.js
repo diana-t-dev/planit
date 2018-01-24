@@ -8,6 +8,10 @@ import Form from "./form.js";
 import io from "socket.io-client";
 import axios from "axios";
 import ChanForm from "./channelform.js";
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+import $ from "jquery";
 
 const cookies = new Cookies();
 
@@ -22,8 +26,19 @@ class Home extends React.Component {
     chat: "",
     all: [],
     channels: [],
-    room: 1
+    room: 1,
+    image: ""
   };
+
+  getImage = () => {
+		var id = cookies.get('id')
+		axios.get("/image/"+id)
+		.then(user => {
+			if(user.data[0] !== undefined){
+			this.setState({image: user.data[0].image});
+			}
+		})	
+	};
 
      inputChange = event => {
     const name = event.target.name;
@@ -82,6 +97,18 @@ axios.get("/channels").then(data => {
 		channels: data.data
 	})
 
+  $('.dropdown-button').dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrainWidth: true, // Does not change width of dropdown to that of the activator
+          hover: false, // Activate on hover
+          gutter: 0, // Spacing from edge
+          belowOrigin: false, // Displays dropdown below the button
+          alignment: 'left', // Displays dropdown with edge aligned to the left of button
+          stopPropagation: false // Stops event propagation	
+
+});
+  
 data.data[0] === undefined?(
 
 axios.post("/channel", {daty}).then(data => {
@@ -122,7 +149,8 @@ run = () => {
 
   name: cookies.get('name'),
   chat: this.state.chat,
-  room: this.state.room
+  room: this.state.room,
+  image: this.state.image
 }
 
 axios.post("/chat", data).then( data => {
@@ -157,6 +185,7 @@ componentDidMount(){
 
 	this.getChat();
 	this.getChannels();
+	this.getImage();
 
 	 socket.on('RECEIVE_MESSAGE', (data) =>{
 
@@ -207,15 +236,10 @@ componentDidMount(){
 		<h4 className="chatText">Channel: {room}</h4>
             <hr/>
 		<ul>
-		{ this.state.all !== [] ?(
-
-			this.state.all.map(i => {
-
-				return <li>{i.name} says: {i.text}</li>
-			})
-
-			): ("")
-		}
+{ this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
+		<li><img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
+		<li><img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
+		}  )): ("") }
 		</ul>
 		</div>
 
