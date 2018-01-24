@@ -18,7 +18,8 @@ class List extends Component {
 
   state = {
     groups: [],
-    form: false
+    form: false,
+    id: ""
   };
 
   toggleForm = () => {
@@ -26,26 +27,29 @@ class List extends Component {
 
   };
 
-  getGroups = () =>{
+  getUser = () => {
+    let name = cookies.get('name');
+    axios.get('/users/' + name).then(user => {
+      console.log(user);
+      user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
+    }).then(() => {
+      this.getGroups();
+    })
+  };
+
+  getGroups = () => {
 
 
-    let userId = cookies.get('id');
+    // let userId = cookies.get('id');
 
-    axios.get('/mygroups/' + userId).then(result => {
+    axios.get('/mygroups/' + this.state.id).then(result => {
 
       console.log("got groups");
       console.log(result.data);
 
-      // this.setState({groups: result.data});
-      let groups = [];
-      for (let i=0; i < result.data.length; i++) {
-        axios.get('/groupnames/' + result.data[i]).then(result => {
-          console.log(result.data);
-          groups.push(result.data);
-          this.setState({groups: groups});
-          console.log(this.state.groups);    
-        })
-      }      
+      // set group state equal to the list of group objs
+      this.setState({groups: result.data});
+
     })
   }
 
@@ -53,8 +57,7 @@ class List extends Component {
   componentDidMount () {
 
     console.log(this.props)
-
-    this.getGroups();
+    this.getUser();
 
   };
   
