@@ -471,7 +471,9 @@ module.exports = function(app) {
             include:[db.event]
           }).then(function(results){
 
-            console.log(results);
+            console.log("***EVENTS***", results[0].events[0]);
+
+            // **********Second Include Here?*********
 
             res.json(results)
           })
@@ -507,6 +509,33 @@ module.exports = function(app) {
 
   });
 
+  app.post("/comment", function(req, res){
 
+    console.log(req.body.data)
+    db.comment.create({
 
-}
+      user: req.body.data.name,
+      comment: req.body.data.comment,
+      eventId: req.body.data.eventId,
+
+  }).then(function(results){
+
+    res.json(results);
+  })
+});
+
+  app.get("/comment/:id", function(req, res){
+
+    console.log(req.params.id)
+    db.comment.findAll({
+
+      where:{
+        eventId: req.params.id
+      }
+    }).then(function(results){
+
+    res.json(results);
+  })
+});
+
+};
