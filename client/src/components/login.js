@@ -18,20 +18,14 @@ const cookies = new Cookies();
     var id_token = response.getAuthResponse().id_token;
     axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token}`)
     .then( googleUser => this.validate(googleUser.data) )
-
-
-
   
   };
 
 
-
   validate = (response) => {
-    console.log('***********',response.sub)
-    console.log('11111111111',response.name)
-    console.log('@@@@@@@@@@@',response.picture)
 
     var id = response.sub
+
     axios.get('/user/' + id)
       .then(user => {
 
@@ -52,10 +46,17 @@ const cookies = new Cookies();
             })
         } 
         else {
+          console.log('id: ', id)
+           axios.put('/find/' + id)
+            .then( data  => {
+          console.log('111111111111 made it here')
             cookies.set('name', response.name);
             cookies.set('id', response.sub);
             this.setState({ loggedin: true });
             this.props.history.push('/');
+
+            } )
+
         }
       })
   }
@@ -96,19 +97,19 @@ const cookies = new Cookies();
                       <div className="descriptionRow center row">
                         <div className=" col s4 m4 l4">
                           <div className="descriptionBorder">
-                          <img className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                          <img alt='img1' className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
                           <p className="descriptText"> description placeholder</p>
                           </div>
                         </div>
                         <div className=" col s4 m4 l4">
                           <div className="descriptionBorder">
-                          <img className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                          <img alt='img2' className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
                           <p className="descriptText"> description placeholder</p>
                           </div>
                         </div>
                         <div className=" col s4 m4 l4">
                           <div className="descriptionBorder">
-                          <img className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                          <img alt='img3' className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
                           <p className="descriptText"> description placeholder </p>
                           </div>
                         </div>

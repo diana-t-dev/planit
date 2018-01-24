@@ -59,7 +59,18 @@ module.exports = function(app) {
             }
           }
         }).then( function(list){
+          
           var friends = list.map( users => users.username );
+          var friendsObj = list.map( users => {
+            return {
+              name: users.username,
+              image: users.image,
+              loggedIn: users.loggedIn
+            }
+
+             }
+          );
+          console.log('@@@@@@@@@@@@@',friendsObj)
 
           var nonFriends = userList.filter(function (user) {
             return this.indexOf(user) < 0
@@ -68,7 +79,8 @@ module.exports = function(app) {
           var data = {
             daty: friends,
             names: nonFriends,
-            friendIds: list.map(users => users.id)
+            friendIds: list.map(users => users.id),
+            friendsObj: friendsObj
           }
             res.json({data})            
 
@@ -466,6 +478,34 @@ module.exports = function(app) {
 
         });
 
+
+  app.put("/find/:id", function(req, res) {
+    db.user.update({
+      loggedIn: true
+    }, {
+      where: {
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+      res.end();
+    });
+
+  });
+
+  app.put("/logout/:id", function(req, res) {
+    db.user.update({
+      loggedIn: false
+    }, {
+      where: {
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+      res.end();
+    });
+
+  });
 
 
 

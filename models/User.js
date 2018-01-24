@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
     usernameId: {type: DataTypes.STRING, allowNull:false},
     image: {type: DataTypes.STRING, allowNull:false},
     friends: DataTypes.TEXT,
-    groups: DataTypes.TEXT
+    groups: DataTypes.TEXT,
+    loggedIn: { type: DataTypes.BOOLEAN, defaultValue: true }
   },
   {
     timestamps: false

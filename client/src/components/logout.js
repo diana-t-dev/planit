@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import axios from "axios";
 import '../App.css';
 import Cookies from 'universal-cookie';
 import { GoogleLogin } from 'react-google-login';
@@ -15,7 +15,13 @@ class Logout extends Component {
 		loggedin: false,
 		gifs: [],
 		pick: ""
-	};
+	}
+
+	update = () => {
+		var id = cookies.get('id');
+		axios.put("/logout/"+id)
+
+	}	
 
 	responseGoogle = (response) => {
 
@@ -66,8 +72,10 @@ class Logout extends Component {
 
 
 	componentDidMount() {
+		this.update()
+
 		var key = "api_key=IelN2EsP53lCGIzF6kjIakIkgXbSa3bL"
-		Axios.get("https://api.giphy.com/v1/gifs/search?q=crying&limit=20&offset=0&rating=G&lang=en&"+key)
+		axios.get("https://api.giphy.com/v1/gifs/search?q=crying&limit=20&offset=0&rating=G&lang=en&"+key)
 			.then((data) => {
 
 				cookies.remove('name');
@@ -91,6 +99,7 @@ class Logout extends Component {
 	render() {
 
 		return (
+
 			<div className="backgroundLogout">
 			
 					

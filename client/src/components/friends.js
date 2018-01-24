@@ -28,33 +28,23 @@ class Friends extends Component {
     let userid = cookies.get('id');
 
     axios.get('/friends/' + userid).then(friend => {
-      // console.log('qqqqqqqqqqq',friend.data.data.daty)
+   
 
       if (friend.data.data.daty===undefined) {
-        console.log('undefined')
+        
         this.setState({
-
           users: friend.data.data.names
-
         })
       }
       else{
-        console.log('not undefined')
+        
         this.setState({
 
           users: friend.data.data.names,
-          friends: friend.data.data.daty
+          friends: friend.data.data.friendsObj
 
         })        
       }
-      // console.log('eeeeeeeee',friend.data.data.daty)
-
-      // this.setState({
-
-      //   users: friend.data.data.names,
-      //   friends: friend.data.data.daty
-
-      // })
 
     })
 
@@ -119,23 +109,6 @@ class Friends extends Component {
 
   };
 
-  // test = () => {
-  
-
-  // this.state.friends.map(i => {
-
-
-  // return  (<tr>
-  //   <td className="namey">{i}</td>
-  //   <td><a href="/friends">{i}'s Groups</a></td>
-  //   <td>*</td>
-  //   <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i)}>Remove Friend</a></td>
-  //   </tr>)
-
-  //   })
-
-
-  // };
 
 
   componentDidMount(){
@@ -177,9 +150,6 @@ class Friends extends Component {
                     {
                     this.state.users.map(i => {
                     return <li><a type="button" className="addFriend" data-id="username" onClick={() => { this.addFriend(i) }
-
-
-
                     }>{i}</a></li>
                     })
                     }
@@ -187,8 +157,8 @@ class Friends extends Component {
                   <table className="table highlight">
                     <thead>
                       <tr>
+                        <th className="friendsText">Image</th>
                         <th className="friendsText">Name</th>
-                        <th className="friendsText">See Friend's Groups</th>
                         <th className="friendsText">Friend Online</th>
                         <th className="friendsText">Friend Online</th>
                       </tr>
@@ -196,15 +166,12 @@ class Friends extends Component {
                     <tbody>
                     {this.state.friends[0]==='0'? <p>You have no friends</p>: (this.state.friends.map(i => {
                       return  (<tr>
-                        <td className="namey">{i}</td>
-                        <td><a href="/friends">{i}'s Groups</a></td>
-                        <td>*</td>
-                        <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i)}>Remove Friend</a></td>
+                        <td><img className="friendImg" alt={i.name} src={i.image}/></td>
+                        <td>{i.name}</td>
+                        <td>{i.loggedIn===true? <span>✅</span> : <span>❌</span>  }</td>
+                        <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i.name)}>Remove Friend</a></td>
                         </tr>)} 
-                      ) )
-
-}
-                      
+                     ))}
                     </tbody>
                   </table>
                 </div>
