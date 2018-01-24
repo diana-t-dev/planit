@@ -1,6 +1,5 @@
 import React from "react";
 import './login.css';
-import FacebookLogin from 'react-facebook-login';
 import Cookies from 'universal-cookie';
 import Home from "./home.js";
 import axios from "axios";

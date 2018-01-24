@@ -25,6 +25,7 @@ li{
   font-size: 25px;
 }
 
+
 .small{
 
   margin-left: -20px !important;
@@ -103,7 +104,8 @@ font-family: 'Amatic SC', cursive;
 .friendImg{
   width: 100px;
   height: 85px;
-  border-radius: 50%;
+  border-radius: 15%;
+  border: solid black 1px;
 }
 
  .input-field input:focus + label {
@@ -117,6 +119,14 @@ font-family: 'Amatic SC', cursive;
 
 i.icon-blue {
     color: dodgerblue;
+}
+
+.chatImages{
+  width: 100px;
+  height: 75px;
+  border-radius: 50%;
+  border: solid black 1px;
+  vertical-align: middle;
 }
 
 .groupText {
@@ -211,6 +221,13 @@ height: 90px;
 
 .chatText{
   font-family: 'Montserrat', sans-serif;
+}
+
+.chatwords{
+  padding: 13px;
+  border-radius: 25px;
+  color:white;
+
 }
 
 .friendsText{

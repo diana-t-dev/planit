@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //<a href="" className="brand-logo logo"><Link to="/">Super Party Planner </Link></a>
 
 const Nav = props => (
-<div class="header">
+<div className="header">
 
        <nav className="transparent z-depth-0">
 

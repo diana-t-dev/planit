@@ -7,7 +7,7 @@ import Footer from './footer.js';
 import List from './grouplist.js';
 import Chat from './groupchat.js';
 import Events from './events.js';
-import axios from 'axios';
+
 
 
 const cookies = new Cookies();

@@ -51,6 +51,7 @@ module.exports = function(app) {
       else {
         var friendsList = data[0].friends.split(", ");
         var idList = friendsList.map( id => parseInt(id) );
+        console.log("adfadfadfadsfadf",idList)
 
         db.user.findAll({
           where: {
@@ -60,17 +61,21 @@ module.exports = function(app) {
           }
         }).then( function(list){
           
+
+
+
           var friends = list.map( users => users.username );
           var friendsObj = list.map( users => {
             return {
+              id: users.id,
               name: users.username,
               image: users.image,
               loggedIn: users.loggedIn
             }
-
+                console.log('.............',friendsObj)
              }
           );
-          console.log('@@@@@@@@@@@@@',friendsObj)
+          
 
           var nonFriends = userList.filter(function (user) {
             return this.indexOf(user) < 0
@@ -255,26 +260,24 @@ module.exports = function(app) {
 
    app.put("/delfriend", function(req, res) {
 
+
     db.user.findAll({
 
       where: {
-
         username: req.body.data.user
       }
 
     }).then(function(results) {
+      console.log(req.body.data.friend)
+
 
       var friends = results[0].friends;
-
-
-      var friendsList = friends.split(",");
-
-
+      var friendsList = friends.split(", ");
       var number = friendsList.indexOf(req.body.data.friend);
 
       friendsList.splice(number, 1);
 
-      var newList = friendsList.toString();
+      var newList = friendsList.join(', ');
 
 
       db.user.update({
@@ -330,21 +333,19 @@ module.exports = function(app) {
 
     db.chat.create({
       name: req.body.name,
+      image: req.body.image,
       text: req.body.chat
 
     }).then(function(results) {
-
-
       res.json(results);
     });
 
   });
 
 
-      app.get("/chats", function(req, res) {
+  app.get("/chats", function(req, res) {
 
-    db.chat.findAll({
-    }).then(function(results) {
+    db.chat.findAll({}).then(function(results) {
 
       res.json(results);
     });
@@ -466,18 +467,35 @@ module.exports = function(app) {
   })
 });
 
-  app.get("/comment/:id", function(req, res){
+  app.get("/comment/:id", function(req, res) {
 
     console.log(req.params.id)
     db.comment.findAll({
 
-      where:{
+      where: {
         eventId: req.params.id
       }
-    }).then(function(results){
+    }).then(function(results) {
 
-    res.json(results);
-  })
+      res.json(results);
+    })
+  });
+
+  app.get("/image/:id", function(req, res){
+
+    console.log(req.params.id)
+    db.user.findAll({
+      where:{
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+      console.log('***************',results);
+
+      res.json(results);
+    });
+
 });
+
 
 };
