@@ -173,16 +173,9 @@ module.exports = function(app) {
     });
   });
 
+  // creates new user-group association record in joined table
   app.post('/groups/members/:userId/:groupId', function (req, res) {
-    
-    // db.userGroup.create({
-    //   userId: req.params.userId,
-    //   groupId: req.params.groupId
-    // }).then(result => {
-    //   console.log(result);
-    //   res.end();
-    // })
-
+    console.log(req.params.userId);
     console.log(req.params.groupId);
 
     db.user.findById(req.params.userId).then(user => {

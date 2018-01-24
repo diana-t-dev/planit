@@ -82,12 +82,8 @@ class Notifications extends Component {
             console.log(`groupId ${groupId}`);
             axios.post(`/groups/members/${userId}/${groupId}`)
                  .then(results => {
-                     console.log(results);
-                    //  axios.post(`/newgroup/${userId}/${groupId}`)
-                    //       .then(results => {
-                    //           console.log(results);
-                    //           this.deleteNotification(notificationId);
-                    //       })
+                    console.log(results);
+                    this.deleteNotification(notificationId);
                  })
         }
         

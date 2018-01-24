@@ -90,21 +90,27 @@ class Form extends Component {
 		// create new group record
 		axios.post('/groups/new/' + userid, groupInfo).then(results => {
 			console.log(results.data);
-			// this.setState({groupId: results.data.id});
-			// // send notifications to all group members
-			// for (let i=0; i < this.state.groupMembers.length; i++) {
-			// 	let groupNotification = {
-			// 		user: cookies.get('name'),
-			// 		ids: this.state.id,
-			// 		to: this.state.groupMembers[i],
-			// 		type: 'Group Invite',
-			// 		groupId: this.state.groupId
-			// 	}
-			// 	axios.post('/notification', groupNotification).then(results => {
-			// 		console.log(results);
-			// 	});
-			// }		
+			this.setState({groupId: results.data.id});
+			console.log(`STATE ID ${this.state.id}`);
+			console.log(`STATE GROUP ID ${this.state.groupId}`);
+			axios.post(`/groups/members/${this.state.id}/${this.state.groupId}`).then(results => {
+				console.log(results);
+			});
+			// send notifications to all group members
+			for (let i=0; i < this.state.groupMembers.length; i++) {
+				let groupNotification = {
+					user: cookies.get('name'),
+					ids: this.state.id,
+					to: this.state.groupMembers[i],
+					type: 'Group Invite',
+					groupId: this.state.groupId
+				}
+				axios.post('/notification', groupNotification).then(results => {
+					console.log(results);
+				});
+			}		
 		});
+
 
 	}
  
