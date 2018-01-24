@@ -52,6 +52,8 @@ class List extends Component {
 
   componentDidMount () {
 
+    console.log(this.props)
+
     this.getGroups();
 
   };
@@ -78,7 +80,7 @@ render() {
 
               this.state.groups.map(group =>{
 
-      return <li><a type="button" className="mygroups" data-id="username" onClick={() => { this.props.setgroup(group.id) }}>{group.name}</a></li>
+      return <li><a type="button" className="mygroups" data-id="username" onClick={() => this.props.group(group.id)}>{group.name}</a></li>
             
             })
               ):("")}

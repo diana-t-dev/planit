@@ -27,6 +27,7 @@ this.setState({
     mygroup: group
 })
 
+
 console.log(this.state.mygroup)
 
   };
@@ -50,7 +51,8 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
    
         <div className="row toprow">
           <div className="col s12 top borders">
-          <List />
+          <List 
+           group={this.setgroup}/>
           <Events 
           group={this.state.mygroup}/>
           <Chat 
