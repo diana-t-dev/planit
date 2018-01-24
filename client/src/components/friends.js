@@ -95,15 +95,18 @@ class Friends extends Component {
 
   delFriend = (i) => {
 
+console.log("FRIEND ID", i)
     let namey = cookies.get('name');
     let friend = i;
     let data = {
       user: namey,
-      friend: friend.i
+      friend: i.toString()
     }
 
     axios.put('/delfriend', {data})
     .then(friend => {
+
+    	this.getFriends();
       
     })
 
@@ -159,8 +162,8 @@ class Friends extends Component {
                       <tr>
                         <th className="friendsText">Image</th>
                         <th className="friendsText">Name</th>
-                        <th className="friendsText">Friend Online</th>
-                        <th className="friendsText">Friend Online</th>
+                        <th className="friendsText">Online</th>
+                        <th className="friendsText">Remove</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -169,7 +172,7 @@ class Friends extends Component {
                         <td><img className="friendImg" alt={i.name} src={i.image}/></td>
                         <td>{i.name}</td>
                         <td>{i.loggedIn===true? <span>✅</span> : <span>❌</span>  }</td>
-                        <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i.name)}>Remove Friend</a></td>
+                        <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i.id)}>Remove Friend</a></td>
                         </tr>)} 
                      ))}
                     </tbody>

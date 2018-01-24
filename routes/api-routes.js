@@ -65,7 +65,8 @@ module.exports = function(app) {
             return {
               name: users.username,
               image: users.image,
-              loggedIn: users.loggedIn
+              loggedIn: users.loggedIn,
+              id: users.id
             }
 
              }
@@ -255,6 +256,8 @@ module.exports = function(app) {
 
    app.put("/delfriend", function(req, res) {
 
+    console.log("&*&*&&*", req.body.user);
+
     db.user.findAll({
 
       where: {
@@ -267,14 +270,14 @@ module.exports = function(app) {
       var friends = results[0].friends;
 
 
-      var friendsList = friends.split(",");
+      var friendsList = friends.split(", ");
 
 
       var number = friendsList.indexOf(req.body.data.friend);
 
       friendsList.splice(number, 1);
 
-      var newList = friendsList.toString();
+      var newList = friendsList.join(", ");
 
 
       db.user.update({
