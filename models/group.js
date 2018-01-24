@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
     group.hasMany(models.event, {
       onDelete: "cascade"
     });
+
+    group.belongsToMany(models.user, {
+      through: 'userGroup'
+    });
   };
 
   return group;

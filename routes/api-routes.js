@@ -185,44 +185,18 @@ module.exports = function(app) {
     });
   });
 
+  // creates new user-group association record in joined table
   app.post('/groups/members/:userId/:groupId', function (req, res) {
-    db.group.findAll({
-      where: {
-        id: req.params.groupId
-      }
-    }).then(results => {
-      let data = results[0].members;
-      let newMember = req.params.userId.toString();
+    console.log(req.params.userId);
+    console.log(req.params.groupId);
 
-      if (data && data !== null) {
-        let members = data.split(', ');
-      // if new member isn't already part of the group, add them
-        if (!members.includes(newMember)) {
-          members.push(newMember);
-          members = members.join(', ');
-          db.group.update({
-            members: members
-          }, {
-            where: {
-              id: req.params.groupId
-            }
-          }).then(results => {
-            res.send('updated members');
-          })
-        }
-      }
-      else {
-        db.group.update({
-          members: newMember
-        }, {
-          where: {
-            id: req.params.groupId
-          }
-        }).then(results => {
-          res.send('first member added');
-        })
-      }
-    })
+    db.user.findById(req.params.userId).then(user => {
+      user.addGroup(req.params.groupId).then(() => {
+        console.log('success');
+        res.end();
+      })
+    });
+
   })
 
   app.post('/newgroup/:userId/:groupId', function (req, res) {
@@ -401,50 +375,16 @@ module.exports = function(app) {
 
   });
 
-        app.get("/mygroups/:userId", function(req, res){
-          // get all group ids of user
-          db.user.findAll({
-            where: {
-              usernameId: req.params.userId
-            }
-          }).then(results => {
-            let userGroups = [];
-            // find groups they own, obtain their ids
-            db.group.findAll({
-              where: {
-                user: req.params.userId
-              }
-            }).then(results => {
-              for (let i=0; i < results.length; i++) {
-                // push ids in groups field to new array
-                userGroups.push(results[i].dataValues.id);
-              }
-              // find groups they're a member of
-              db.user.findAll({
-                where: {
-                  usernameId: req.params.userId
-                }
-              }).then(result => {
-                let data = result[0].dataValues.groups;
-                console.log(data);
-                console.log(typeof data);
-                if (data && data !== null) {
-                  let groups = data.split(', ');
-                  let groupIds = groups.map(groupId => {
-                    return parseInt(groupId);
-                  })
-                  console.log(groupIds);
-                  let allGroups = userGroups.concat(groupIds);
-                  console.log(allGroups);
-                  res.send(allGroups)
-                }
-                res.send(userGroups);
-              })
-
-            })
-          })
-
-        });
+  // renders all groups for specified user
+  app.get("/mygroups/:userId", function(req, res){
+    console.log(`params userid: ${req.params.userId}, type: ${typeof req.params.userId}`)
+    db.user.findById(req.params.userId).then(user => {
+      user.getGroups().then((results) => {
+        console.log('success');
+        res.send(results);
+      })
+    });
+  });
 
 
         app.get('/groupnames/:groupId', function (req, res) {

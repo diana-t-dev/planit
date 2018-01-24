@@ -83,17 +83,19 @@ class Form extends Component {
 	createGroup = (event) => {
 		event.preventDefault();
 		let userid = cookies.get('id');
-		console.log(userid);
 		let groupInfo = {
 			groupName: this.state.groupName,
-			// groupMembers: this.state.groupMembers
 		}
-		console.log(`groupinfo: ${groupInfo}`)
 
 		// create new group record
 		axios.post('/groups/new/' + userid, groupInfo).then(results => {
-			console.log(results);
+			console.log(results.data);
 			this.setState({groupId: results.data.id});
+			console.log(`STATE ID ${this.state.id}`);
+			console.log(`STATE GROUP ID ${this.state.groupId}`);
+			axios.post(`/groups/members/${this.state.id}/${this.state.groupId}`).then(results => {
+				console.log(results);
+			});
 			// send notifications to all group members
 			for (let i=0; i < this.state.groupMembers.length; i++) {
 				let groupNotification = {
@@ -108,6 +110,7 @@ class Form extends Component {
 				});
 			}		
 		});
+
 
 	}
  
