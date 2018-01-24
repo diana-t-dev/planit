@@ -408,8 +408,10 @@ module.exports = function(app) {
 
               id: req.params.group
             },
-            include:[db.event]
+            include:[{model:db.event, include:[db.comment]}]
           }).then(function(results){
+
+            console.log(results);
 
             console.log("***EVENTS***", results[0].events[0]);
 

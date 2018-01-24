@@ -10,8 +10,7 @@ class Events extends Component {
     group: "",
     name: "",
     events: [],
-    form: false,
-    comments: []
+    form: false
   };
 
   getEvents = (group) =>{
@@ -32,27 +31,11 @@ this.setState({
 
     events: data.data[0].events,
     name: data.data[0].name
-}),
-
-this.getComment();
-
-    })
-  };
-
-
-  getComment = () =>{
-
-  	let id = this.state.events[0].id;
-
-  axios.get("/comment/"+id).then(data => {
-
-    console.log("got comments");
-    console.log(data.data);
-    this.setState({
-      comments: data.data
-    })
 })
-};
+
+  });
+
+  };
 
   toggleForm = () =>{
 
@@ -62,7 +45,7 @@ this.getComment();
 
   			form:true
   		})):(
-  		this.getComment(),
+  		this.getEvents(this.props.group),
 		this.setState({
 
   			form:false
@@ -93,24 +76,21 @@ render() {
             this.state.events.map(i =>{
               return <div className="eventy">
           <h5>{i.type}: {i.name} - Posted By: {i.person}</h5>
-           <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
+          <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
            Vote<i class="large material-icons">arrow_downward</i></a><a className="btn" onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
-          <p className="votey">Votes: {i.votes}</p>
            {this.state.form === true ?(
            	<CommentCard
            	form={this.toggleForm}
            	id={i.id}
            	/>
            	):("")}
-
-              <div className="coms">
-             { this.state.comments !== undefined && this.state.comments !== null ?(
-            this.state.comments.map(i =>{
-            return<div>
-            <p> {i.user} said: {i.comment}</p>
-           </div>
-           })):("")}
-             </div>
+           <p className="votey">Votes: {i.votes}</p>
+               <div className="coms">
+         { i.comments.map(el =>{
+          return<p>{el.user} said: {el.comment}</p>
+          })   
+        }
+          </div>
              </div>
            })
             ):("")}
