@@ -4,6 +4,20 @@ td, th {
 
  }
 
+ .chatImages{
+  width: 100px;
+  height: 75px;
+  border-radius: 50%;
+  border: solid black 1px;
+  vertical-align: middle;
+}
+
+.chatwords{
+  padding: 13px;
+  border-radius: 25px;
+  color:white;
+}
+
 .image{
 
   width: 100%;
@@ -371,18 +385,87 @@ video {
 }
 
 .gif404 {
-  position: center;
+   position: absolute;
+   left: 35%;
+   height: 300px;
+   width: 450px;
+   top: 110%;
+   animation-delay: 1s !important;
+   overflow: hidden;
+   
+
   border-radius: 25px;
-  height:250px;
- 
+  animation: slide-up 4s;
+  animation-fill-mode: forwards;
 }
 
+@keyframes slide-up {
+  0% { top: 100%; }
+ 100% { top: 60% ; }
+}
+
+
+.btnText {
+  background-color: pink;
+  font-color: white !important;
+   animation: pulse 2s infinite;
+
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #001F3F;
+  }
+  100% {
+    background-color: #FF4136;
+  }
+}
+
+.homeButton .btnText {
+  font-color: white !important;
+}
+
+.homeButton {
+    
+  
+  position: absolute !important;
+    left: -1235px !important;
+    top: 40%;
+    width: 100% !important;
+    height: 100px !important;
+    
+ 
+    animation: slide .5s forwards !important;
+    animation-delay: 3s !important;
+}
+
+
 .text404 {
+
+    position: absolute !important;
+    left: -1235px !important;
+    top: 50px;
+    width: 100% !important;
+    height: 100px !important;
+    
+ 
+    animation: slide 2s forwards !important;
+    animation-delay: 2s !important;
+
   font-size: 80px;
+  margin-top: 40px;
   margin-bottom: 200px;
   font-family: 'Pacifico', cursive;
   color: white;
   margin-top: 0px !important;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}
+
+@keyframes slide {
+    100% { left: 0; }
 }
 
 .backgroundy {

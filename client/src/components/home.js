@@ -7,18 +7,38 @@ import Footer from './footer.js';
 import Form from "./form.js";
 import io from "socket.io-client";
 import axios from "axios";
+import ChanForm from "./channelform.js";
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+import $ from "jquery";
 
 const cookies = new Cookies();
+
+var socket = io("/");
+
+var room = "general";
 
 class Home extends React.Component {
 
 	  state = {
     form: false,
     chat: "",
-    all: []
+    all: [],
+    channels: [],
+    room: 1,
+    image: ""
   };
 
- socket = io("/");
+  getImage = () => {
+		var id = cookies.get('id')
+		axios.get("/image/"+id)
+		.then(user => {
+			if(user.data[0] !== undefined){
+			this.setState({image: user.data[0].image});
+			}
+		})	
+	};
 
      inputChange = event => {
     const name = event.target.name;
@@ -34,24 +54,19 @@ class Home extends React.Component {
   	event.preventDefault();
   if (this.state.chat !== ""){
 
-  	  this.socket.emit('SEND_MESSAGE', {
-
+  	  socket.emit('SEND_MESSAGE', {
         chat: this.state.chat,
         name: cookies.get('name')
-
-
     });  
 
-console.log();	
-
   }
-
-
 };
 
 getChat = () =>{
 
-	axios.get("/chats").then(data => {
+	let roomy = this.state.room;
+
+	axios.get("/chats/"+roomy).then(data => {
 
 		console.log("got chats");
 		console.log(data.data);
@@ -65,6 +80,67 @@ console.log(this.state.all)
 })
 };
 
+getChannels = () => {
+
+		let daty = {
+
+	name: "general"
+}
+
+axios.get("/channels").then(data => {
+
+		console.log("got channels");
+		console.log(data.data);
+
+	this.setState({
+
+		channels: data.data
+	})
+
+  $('.dropdown-button').dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrainWidth: true, // Does not change width of dropdown to that of the activator
+          hover: false, // Activate on hover
+          gutter: 0, // Spacing from edge
+          belowOrigin: false, // Displays dropdown below the button
+          alignment: 'left', // Displays dropdown with edge aligned to the left of button
+          stopPropagation: false // Stops event propagation	
+
+});
+  
+data.data[0] === undefined?(
+
+axios.post("/channel", {daty}).then(data => {
+
+	console.log("general channel set");
+	console.log(data);
+	this.setState({
+
+		room: data.data.id
+	})
+	this.getChannels();
+})):("")
+
+})
+};
+
+goToChan = (chan, name) => {
+
+console.log("CHANNEL ", chan);
+
+this.setState({
+
+	room: chan
+})
+
+room = name;
+
+setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500);
+
+};
+
+
 run = () => {
 
   if (this.state.chat !== ""){
@@ -72,7 +148,9 @@ run = () => {
       const data = {
 
   name: cookies.get('name'),
-  chat: this.state.chat
+  chat: this.state.chat,
+  room: this.state.room,
+  image: this.state.image
 }
 
 axios.post("/chat", data).then( data => {
@@ -88,12 +166,28 @@ this.setState({
 }
 };
 
+ toggleForm = () =>{
+
+  	this.state.form === false ?(
+
+  		this.setState({
+
+  			form:true
+  		})):(
+		this.setState({
+
+  			form:false
+  		})
+		
+  		)};
 
 componentDidMount(){
 
 	this.getChat();
+	this.getChannels();
+	this.getImage();
 
-	 this.socket.on('RECEIVE_MESSAGE', (data) =>{
+	 socket.on('RECEIVE_MESSAGE', (data) =>{
 
     this.run();
 
@@ -110,22 +204,42 @@ componentDidMount(){
 
 		<div>
 			<Nav/>
-		
 					<h1 className="center titles groupText">My Dashboard</h1>
 
+<div className="row">
+<div className="col s1">
+					 <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>Channels</a>
+					  <ul id='dropdown1' className='dropdown-content'>
+					 {this.state.channels.map(i =>{
+					 return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }
+                    }>{i.name}</a></li> 	
+
+					 })}
+                  </ul>
+               </div>
+               </div>
 	<div  className="container">
+
+	<div  className="row">
+		<div className="col s12 center">
+					<a className="btn" onClick={this.toggleForm}>Add Channel</a>
+   {this.state.form ?(
+                  	<ChanForm
+                  	form={this.toggleForm}
+                  	getchan={this.getChannels}/>
+                  	):("")}
+</div>
+</div>
+
 	<div  className="row">
 		<div className="col s12 top z-depth-2 bordy4 hoverable">
+		<h4 className="chatText">Channel: {room}</h4>
+            <hr/>
 		<ul>
-		{ this.state.all !== [] ?(
-
-			this.state.all.map(i => {
-
-				return <li>{i.name} says: {i.text}</li>
-			})
-
-			): ("")
-		}
+{ this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
+		<li><img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
+		<li><img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
+		}  )): ("") }
 		</ul>
 		</div>
 

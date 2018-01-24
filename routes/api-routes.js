@@ -65,7 +65,8 @@ module.exports = function(app) {
             return {
               name: users.username,
               image: users.image,
-              loggedIn: users.loggedIn
+              loggedIn: users.loggedIn,
+              id: users.id
             }
 
              }
@@ -255,6 +256,8 @@ module.exports = function(app) {
 
    app.put("/delfriend", function(req, res) {
 
+    console.log("&*&*&&*", req.body.user);
+
     db.user.findAll({
 
       where: {
@@ -267,14 +270,14 @@ module.exports = function(app) {
       var friends = results[0].friends;
 
 
-      var friendsList = friends.split(",");
+      var friendsList = friends.split(", ");
 
 
       var number = friendsList.indexOf(req.body.data.friend);
 
       friendsList.splice(number, 1);
 
-      var newList = friendsList.toString();
+      var newList = friendsList.join(", ");
 
 
       db.user.update({
@@ -327,10 +330,13 @@ module.exports = function(app) {
 
    app.post("/chat", function(req, res) {
 
+    console.log(req.body)
 
     db.chat.create({
       name: req.body.name,
-      text: req.body.chat
+      text: req.body.chat,
+      image: req.body.image,
+      channelId: req.body.room
 
     }).then(function(results) {
 
@@ -341,9 +347,14 @@ module.exports = function(app) {
   });
 
 
-      app.get("/chats", function(req, res) {
+      app.get("/chats/:id", function(req, res) {
 
     db.chat.findAll({
+
+      where:{
+
+        channelId: req.params.id
+      }
     }).then(function(results) {
 
       res.json(results);
@@ -525,5 +536,48 @@ module.exports = function(app) {
               })
             })
   })
+
+
+  app.post("/channel", function(req, res){
+
+    console.log(req.body.daty)
+
+    db.channel.create({
+
+      name:req.body.daty.name
+
+    }).then(function(results){
+
+      console.log("channel created");
+      res.json(results);
+    })
+
+  })
+
+  app.get("/channels", function(req, res){
+
+    db.channel.findAll({}).then(function(results){
+
+      console.log("got channels");
+      res.json(results);
+    })
+
+  })
+
+  app.get("/image/:id", function(req, res){
+
+    console.log(req.params.id)
+    db.user.findAll({
+      where:{
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+      console.log('***************',results);
+
+      res.json(results);
+    });
+
+});
 
 };

@@ -30,16 +30,17 @@ var socket = require('socket.io');
 io = socket(server);
 
 io.on('connection', (socket) => {
+
     console.log(socket.id, "SOCKET CONNECTED!!");
+   
 
      socket.on('SEND_MESSAGE', function(data){
 
-        io.emit('RECEIVE_MESSAGE', data);
-
+	io.emit('RECEIVE_MESSAGE', data);
+  
       });
 
-});
-
+ });
 
 
 
