@@ -13,47 +13,62 @@ class Events extends Component {
     form: false
   };
 
-  getEvents = (group) =>{
-
-       this.setState({
+  getEvents = (group) => {
+    this.setState({
       group: group
     })
-
-  let groupy = this.state.group;
-
-console.log(groupy);
-
-    axios.get("events/"+groupy).then(data =>{
-
-console.log(data.data[0]);
-
-this.setState({
-
-    events: data.data[0].events,
-    name: data.data[0].name
-})
-
-  });
-
+    let groupy = this.state.group;
+    console.log(groupy);
+    axios.get("/events/" + groupy).then(data => {
+      console.log("&&&&&& " + JSON.stringify(data.data[0]));
+      this.setState({
+        events: data.data[0].events,
+        name: data.data[0].name
+      })
+    });
   };
 
-  toggleForm = () =>{
+  toggleForm = () => {
+    this.state.form === false ? (
+      this.setState({
+        form: true
+      })) : (
+        this.getEvents(this.props.group),
+        this.setState({
+          form: false
+        })
+      )
+  };
+      
+  // updates votes for selected event
+  handleVotes = (event, eventId) => {
+    // capture vote type
+    let voteType = event.target.getAttribute('for');
+    // if the user upvotes, increment current votes by one
+    if (voteType === 'upvote') {
+      axios.put(`/upvote/${eventId}`)
+           .then(results => {
+             console.log(results);
+             console.log(`incremented votes for event ${eventId}`);
+             // re-render event
+             this.getEvents(this.state.group);
+           })
+    }
+    // if the user downvotes, decrement current votes by one
+    else if (voteType === 'downvote') {
+      axios.put(`/downvote/${eventId}`)
+           .then(results => {
+             console.log(results.data);
+             console.log(`decremented votes for event ${eventId}`);
+             //re-render event
+             this.getEvents(this.state.group);
+           })
+    }
 
-  	this.state.form === false ?(
-
-  		this.setState({
-
-  			form:true
-  		})):(
-  		this.getEvents(this.props.group),
-		this.setState({
-
-  			form:false
-  		})
-		
-  		)};
+  }
 
   componentWillReceiveProps (props) {
+    console.log(props);
 
     console.log("event props");
     console.log(props.group)
@@ -76,8 +91,7 @@ render() {
             this.state.events.map(i =>{
               return <div className="eventy">
           <h5>{i.type}: {i.name} - Posted By: {i.person}</h5>
-          <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
-           Vote<i class="large material-icons">arrow_downward</i></a><a className="btn" onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
+          <a className="btn" eventid={i.id} for="upvote" onClick={(event) => this.handleVotes(event, i.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn" eventid={i.id} for="downvote" onClick={(event) => this.handleVotes(event, i.id)}>Downvote<i class="large material-icons">arrow_downward</i></a><a className="btn" onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
            {this.state.form === true ?(
            	<CommentCard
            	form={this.toggleForm}
