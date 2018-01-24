@@ -471,7 +471,9 @@ module.exports = function(app) {
             include:[db.event]
           }).then(function(results){
 
-            console.log(results);
+            console.log("***EVENTS***", results[0].events[0]);
+
+            // **********Second Include Here?*********
 
             res.json(results)
           })

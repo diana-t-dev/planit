@@ -26,7 +26,7 @@ console.log(groupy);
 
     axios.get("events/"+groupy).then(data =>{
 
-console.log(data.data[0].events);
+console.log(data.data[0]);
 
 this.setState({
 
