@@ -34,7 +34,7 @@ const cookies = new Cookies();
           var newUser = {
             usernameId: response.sub,
             username: response.name,
-            image: response.picture,
+            image: response.picture
           }
 
           axios.post('/newUser', { newUser })
