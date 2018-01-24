@@ -13,49 +13,35 @@ class Events extends Component {
     form: false
   };
 
-  getEvents = (group) =>{
-
-       this.setState({
+  getEvents = (group) => {
+    this.setState({
       group: group
     })
-
-  let groupy = this.state.group;
-
-console.log(groupy);
-
-    axios.get("events/"+groupy).then(data =>{
-
-console.log(data.data[0]);
-
-this.setState({
-
-    events: data.data[0].events,
-    name: data.data[0].name
-})
-
-  });
-
+    let groupy = this.state.group;
+    console.log(groupy);
+    axios.get("/events/" + groupy).then(data => {
+      console.log("&&&&&& " + JSON.stringify(data.data[0]));
+      this.setState({
+        events: data.data[0].events,
+        name: data.data[0].name
+      })
+    });
   };
 
-  toggleForm = () =>{
-
-  	this.state.form === false ?(
-
-  		this.setState({
-
-  			form:true
-  		})):(
-  		this.getEvents(this.props.group),
-		this.setState({
-
-  			form:false
-  		})
-		
-      )};
+  toggleForm = () => {
+    this.state.form === false ? (
+      this.setState({
+        form: true
+      })) : (
+        this.getEvents(this.props.group),
+        this.setState({
+          form: false
+        })
+      )
+  };
       
   // updates votes for selected event
   handleVotes = (event, eventId) => {
-    // console.log(event.target.getAttribute('for'));
     // capture vote type
     let voteType = event.target.getAttribute('for');
     // if the user upvotes, increment current votes by one
@@ -64,6 +50,8 @@ this.setState({
            .then(results => {
              console.log(results);
              console.log(`incremented votes for event ${eventId}`);
+             // re-render event
+             this.getEvents(this.state.group);
            })
     }
     // if the user downvotes, decrement current votes by one
@@ -72,12 +60,15 @@ this.setState({
            .then(results => {
              console.log(results.data);
              console.log(`decremented votes for event ${eventId}`);
+             //re-render event
+             this.getEvents(this.state.group);
            })
     }
 
   }
 
   componentWillReceiveProps (props) {
+    console.log(props);
 
     console.log("event props");
     console.log(props.group)

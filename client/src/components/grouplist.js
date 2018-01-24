@@ -44,12 +44,7 @@ class List extends Component {
 
     axios.get('/mygroups/' + this.state.id).then(results => {
 
-      console.log("got groups");
-      console.log(results.data);
-
       // set group state equal to the list of group objs
-      // this.setState({groups: result.data});
-
       if (!results.data[0]) {
         this.setState({groups: ['no groups yet']})
       }
@@ -104,7 +99,6 @@ render() {
             <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>My Groups</a>
                   <ul id='dropdown1' className='dropdown-content'>
                   {this.state.groups.map((group) => {
-                    console.log('rendered first');
                     if (group === 'no groups yet') {
                       return <li>No groups yet</li>
                     }
