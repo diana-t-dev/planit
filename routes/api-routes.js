@@ -362,50 +362,16 @@ module.exports = function(app) {
 
   });
 
-        app.get("/mygroups/:userId", function(req, res){
-          // get all group ids of user
-          db.user.findAll({
-            where: {
-              usernameId: req.params.userId
-            }
-          }).then(results => {
-            let userGroups = [];
-            // find groups they own, obtain their ids
-            db.group.findAll({
-              where: {
-                user: req.params.userId
-              }
-            }).then(results => {
-              for (let i=0; i < results.length; i++) {
-                // push ids in groups field to new array
-                userGroups.push(results[i].dataValues.id);
-              }
-              // find groups they're a member of
-              db.user.findAll({
-                where: {
-                  usernameId: req.params.userId
-                }
-              }).then(result => {
-                let data = result[0].dataValues.groups;
-                console.log(data);
-                console.log(typeof data);
-                if (data && data !== null) {
-                  let groups = data.split(', ');
-                  let groupIds = groups.map(groupId => {
-                    return parseInt(groupId);
-                  })
-                  console.log(groupIds);
-                  let allGroups = userGroups.concat(groupIds);
-                  console.log(allGroups);
-                  res.send(allGroups)
-                }
-                res.send(userGroups);
-              })
-
-            })
-          })
-
-        });
+  // renders all groups for specified user
+  app.get("/mygroups/:userId", function(req, res){
+    console.log(`params userid: ${req.params.userId}, type: ${typeof req.params.userId}`)
+    db.user.findById(req.params.userId).then(user => {
+      user.getGroups().then((results) => {
+        console.log('success');
+        res.send(results);
+      })
+    });
+  });
 
 
         app.get('/groupnames/:groupId', function (req, res) {
