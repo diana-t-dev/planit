@@ -27,43 +27,68 @@ class List extends Component {
 
   };
 
-  getUser = () => {
-    let name = cookies.get('name');
-    axios.get('/users/' + name).then(user => {
-      console.log(user);
-      user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
-    }).then(() => {
-      this.getGroups();
-    })
-  };
+  // getUser = () => {
+  //   let name = cookies.get('name');
+  //   axios.get('/users/' + name).then(user => {
+  //     console.log(user);
+  //     user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
+  //   }).then(() => {
+  //     this.getGroups();
+  //   })
+  // };
 
   getGroups = () => {
 
 
     // let userId = cookies.get('id');
 
-    axios.get('/mygroups/' + this.state.id).then(result => {
+    axios.get('/mygroups/' + this.state.id).then(results => {
 
       console.log("got groups");
-      console.log(result.data);
+      console.log(results.data);
 
       // set group state equal to the list of group objs
-      this.setState({groups: result.data});
+      // this.setState({groups: result.data});
+
+      if (!results.data[0]) {
+        this.setState({groups: ['no groups yet']})
+      }
+      else {
+        let groups = results.data;
+        this.setState({groups: groups});
+        $('.dropdown-button').dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrainWidth: true, // Does not change width of dropdown to that of the activator
+          hover: false, // Activate on hover
+          gutter: 0, // Spacing from edge
+          belowOrigin: false, // Displays dropdown below the button
+          alignment: 'left', // Displays dropdown with edge aligned to the left of button
+          stopPropagation: false // Stops event propagation
+        }
+      );
+      }
 
     })
+
   }
 
 
   componentDidMount () {
 
-    console.log(this.props)
-    this.getUser();
-
+    // console.log(this.props)
+    // this.getUser();
+    let namey = cookies.get('name');
+      axios.get('/users/' + namey).then(user => {
+        user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) : ("");
+      }).then(results => {
+          this.getGroups();
+      })
   };
   
 
 render() { 
-
+  
   return ( 
   
 <div>
@@ -78,16 +103,15 @@ render() {
         <div className="col s12">
             <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>My Groups</a>
                   <ul id='dropdown1' className='dropdown-content'>
-
-            {this.state.groups !== null && this.state.groups !== undefined ?(
-
-              this.state.groups.map(group =>{
-
-      return <li><a type="button" className="mygroups" data-id="username" onClick={() => this.props.group(group.id)}>{group.name}</a></li>
-            
-            })
-              ):("")}
-
+                  {this.state.groups.map((group) => {
+                    console.log('rendered first');
+                    if (group === 'no groups yet') {
+                      return <li>No groups yet</li>
+                    }
+                    else {
+                      return <li><a type="button" className="mygroups" data-id="username" onClick={() => this.props.group(group.id)}>{group.name}</a></li>
+                    }
+                  })}
             </ul>
            
          </div>
