@@ -51,7 +51,31 @@ this.setState({
   			form:false
   		})
 		
-  		)};
+      )};
+      
+  // updates votes for selected event
+  handleVotes = (event, eventId) => {
+    // console.log(event.target.getAttribute('for'));
+    // capture vote type
+    let voteType = event.target.getAttribute('for');
+    // if the user upvotes, increment current votes by one
+    if (voteType === 'upvote') {
+      axios.put(`/upvote/${eventId}`)
+           .then(results => {
+             console.log(results);
+             console.log(`incremented votes for ${eventId}`);
+           })
+    }
+    // if the user downvotes, decrement current votes by one
+    else if (voteType === 'downvote') {
+      axios.put(`/downvote/${eventId}`)
+           .then(results => {
+             console.log(results.data);
+             console.log(`decremented votes for ${eventId}`);
+           })
+    }
+
+  }
 
   componentWillReceiveProps (props) {
 
@@ -76,8 +100,7 @@ render() {
             this.state.events.map(i =>{
               return <div className="eventy">
           <h5>{i.type}: {i.name} - Posted By: {i.person}</h5>
-          <a className="btn">Vote<i class="large material-icons">arrow_upward</i></a><a className="btn">
-           Vote<i class="large material-icons">arrow_downward</i></a><a className="btn" onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
+          <a className="btn" eventid={i.id} for="upvote" onClick={(event) => this.handleVotes(event, i.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn" eventid={i.id} for="downvote" onClick={(event) => this.handleVotes(event, i.id)}>Downvote<i class="large material-icons">arrow_downward</i></a><a className="btn" onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
            {this.state.form === true ?(
            	<CommentCard
            	form={this.toggleForm}
