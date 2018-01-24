@@ -26,7 +26,7 @@ class Logout extends Component {
 	responseGoogle = (response) => {
 
     var id_token = response.getAuthResponse().id_token;
-    Axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token}`)
+    axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token}`)
     .then( googleUser => this.validate(googleUser.data) )
 
 	};
@@ -37,7 +37,7 @@ class Logout extends Component {
     console.log('@@@@@@@@@@@',response.picture)
 
     var id = response.sub
-    Axios.get('/user/' + id)
+    axios.get('/user/' + id)
       .then(user => {
 
         if (user.data === null) {
@@ -48,7 +48,7 @@ class Logout extends Component {
             image: response.picture
           }
 
-          Axios.post('/newUser', { newUser })
+          axios.post('/newUser', { newUser })
             .then(user => {
                 cookies.set('name', user.data.username);
                 cookies.set('id', user.data.usernameId);
