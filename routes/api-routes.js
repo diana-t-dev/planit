@@ -327,10 +327,12 @@ module.exports = function(app) {
 
    app.post("/chat", function(req, res) {
 
+    console.log(req.body)
 
     db.chat.create({
       name: req.body.name,
-      text: req.body.chat
+      text: req.body.chat,
+      channelId: req.body.room
 
     }).then(function(results) {
 
@@ -341,9 +343,14 @@ module.exports = function(app) {
   });
 
 
-      app.get("/chats", function(req, res) {
+      app.get("/chats/:id", function(req, res) {
 
     db.chat.findAll({
+
+      where:{
+
+        channelId: req.params.id
+      }
     }).then(function(results) {
 
       res.json(results);
@@ -479,5 +486,31 @@ module.exports = function(app) {
     res.json(results);
   })
 });
+
+  app.post("/channel", function(req, res){
+
+    console.log(req.body.daty)
+
+    db.channel.create({
+
+      name:req.body.daty.name
+
+    }).then(function(results){
+
+      console.log("channel created");
+      res.json(results);
+    })
+
+  })
+
+  app.get("/channels", function(req, res){
+
+    db.channel.findAll({}).then(function(results){
+
+      console.log("got channels");
+      res.json(results);
+    })
+
+  })
 
 };

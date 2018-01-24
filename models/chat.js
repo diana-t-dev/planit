@@ -7,6 +7,14 @@ module.exports = function(sequelize, DataTypes) {
   {
     timestamps: false
   });
-  
+
+    chat.associate = function(models) {
+    
+    chat.belongsTo(models.channel, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return chat;
 };
