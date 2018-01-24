@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import axios from "axios";
 import '../App.css';
 import Cookies from 'universal-cookie';
 import { GoogleLogin } from 'react-google-login';
@@ -15,12 +15,18 @@ class Logout extends Component {
 		loggedin: false,
 		gifs: [],
 		pick: ""
-	};
+	}
+
+	update = () => {
+		var id = cookies.get('id');
+		axios.put("/logout/"+id)
+
+	}	
 
 	responseGoogle = (response) => {
 
     var id_token = response.getAuthResponse().id_token;
-    Axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token}`)
+    axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${id_token}`)
     .then( googleUser => this.validate(googleUser.data) )
 
 	};
@@ -31,7 +37,7 @@ class Logout extends Component {
     console.log('@@@@@@@@@@@',response.picture)
 
     var id = response.sub
-    Axios.get('/user/' + id)
+    axios.get('/user/' + id)
       .then(user => {
 
         if (user.data === null) {
@@ -42,7 +48,7 @@ class Logout extends Component {
             image: response.picture
           }
 
-          Axios.post('/newUser', { newUser })
+          axios.post('/newUser', { newUser })
             .then(user => {
                 cookies.set('name', user.data.username);
                 cookies.set('id', user.data.usernameId);
@@ -66,8 +72,10 @@ class Logout extends Component {
 
 
 	componentDidMount() {
+		this.update()
+
 		var key = "api_key=IelN2EsP53lCGIzF6kjIakIkgXbSa3bL"
-		Axios.get("https://api.giphy.com/v1/gifs/search?q=crying&limit=20&offset=0&rating=G&lang=en&"+key)
+		axios.get("https://api.giphy.com/v1/gifs/search?q=crying&limit=20&offset=0&rating=G&lang=en&"+key)
 			.then((data) => {
 
 				cookies.remove('name');
@@ -91,6 +99,7 @@ class Logout extends Component {
 	render() {
 
 		return (
+
 			<div className="backgroundLogout">
 			
 					

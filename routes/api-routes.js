@@ -59,7 +59,18 @@ module.exports = function(app) {
             }
           }
         }).then( function(list){
+          
           var friends = list.map( users => users.username );
+          var friendsObj = list.map( users => {
+            return {
+              name: users.username,
+              image: users.image,
+              loggedIn: users.loggedIn
+            }
+
+             }
+          );
+          console.log('@@@@@@@@@@@@@',friendsObj)
 
           var nonFriends = userList.filter(function (user) {
             return this.indexOf(user) < 0
@@ -68,7 +79,8 @@ module.exports = function(app) {
           var data = {
             daty: friends,
             names: nonFriends,
-            friendIds: list.map(users => users.id)
+            friendIds: list.map(users => users.id),
+            friendsObj: friendsObj
           }
             res.json({data})            
 
@@ -399,7 +411,9 @@ module.exports = function(app) {
             include:[db.event]
           }).then(function(results){
 
-            console.log(results);
+            console.log("***EVENTS***", results[0].events[0]);
+
+            // **********Second Include Here?*********
 
             res.json(results)
           })
@@ -407,6 +421,61 @@ module.exports = function(app) {
         });
 
 
+  app.put("/find/:id", function(req, res) {
+    db.user.update({
+      loggedIn: true
+    }, {
+      where: {
+        usernameId: req.params.id
+      }
 
+    }).then(function(results) {
+      res.end();
+    });
 
-}
+  });
+
+  app.put("/logout/:id", function(req, res) {
+    db.user.update({
+      loggedIn: false
+    }, {
+      where: {
+        usernameId: req.params.id
+      }
+
+    }).then(function(results) {
+      res.end();
+    });
+
+  });
+
+  app.post("/comment", function(req, res){
+
+    console.log(req.body.data)
+    db.comment.create({
+
+      user: req.body.data.name,
+      comment: req.body.data.comment,
+      eventId: req.body.data.eventId,
+
+  }).then(function(results){
+
+    res.json(results);
+  })
+});
+
+  app.get("/comment/:id", function(req, res){
+
+    console.log(req.params.id)
+    db.comment.findAll({
+
+      where:{
+        eventId: req.params.id
+      }
+    }).then(function(results){
+
+    res.json(results);
+  })
+});
+
+};

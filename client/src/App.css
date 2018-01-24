@@ -1,3 +1,9 @@
+table { table-layout: fixed; }
+td, th { 
+  width: 25%;
+
+ }
+
 .image{
 
   width: 100%;
@@ -82,6 +88,7 @@ font-family: 'Amatic SC', cursive;
   background-color: dodgerblue;
 }
 
+
 .loginButton2{
   margin-bottom: 100px;
 }
@@ -91,9 +98,12 @@ font-family: 'Amatic SC', cursive;
   border-radius: 25px;
 }
 
-.namey {
 
-  padding-right: 15%;
+
+.friendImg{
+  width: 100px;
+  height: 85px;
+  border-radius: 50%;
 }
 
  .input-field input:focus + label {
