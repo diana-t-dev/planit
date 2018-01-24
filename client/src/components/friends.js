@@ -35,6 +35,16 @@ class Friends extends Component {
         this.setState({
           users: friend.data.data.names
         })
+      $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: true, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: false, // Displays dropdown below the button
+        alignment: 'left', // Displays dropdown with edge aligned to the left of button
+        stopPropagation: false // Stops event propagation
+      });  
       }
       else{
         
@@ -43,7 +53,18 @@ class Friends extends Component {
           users: friend.data.data.names,
           friends: friend.data.data.friendsObj
 
-        })        
+        })   
+      $('.dropdown-button').dropdown({     
+        inDuration: 300,
+        outDuration: 225,
+        constrainWidth: true, // Does not change width of dropdown to that of the activator
+        hover: false, // Activate on hover
+        gutter: 0, // Spacing from edge
+        belowOrigin: false, // Displays dropdown below the button
+        alignment: 'left', // Displays dropdown with edge aligned to the left of button
+        stopPropagation: false // Stops event propagation
+      }); 
+
       }
 
     })
@@ -107,6 +128,7 @@ console.log("FRIEND ID", i)
     .then(friend => {
 
     	this.getFriends();
+
       
     })
 
