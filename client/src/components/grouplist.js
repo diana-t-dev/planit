@@ -45,18 +45,11 @@ class List extends Component {
     axios.get('/mygroups/' + this.state.id).then(result => {
 
       console.log("got groups");
-      console.log(result);
+      console.log(result.data);
 
-      // this.setState({groups: result.data});
-    //   let groups = [];
-    //   for (let i=0; i < result.data.length; i++) {
-    //     axios.get('/groupnames/' + result.data[i]).then(result => {
-    //       console.log(result.data);
-    //       groups.push(result.data);
-    //       this.setState({groups: groups});
-    //       console.log(this.state.groups);    
-    //     })
-    //   }      
+      // set group state equal to the list of group objs
+      this.setState({groups: result.data});
+
     })
   }
 

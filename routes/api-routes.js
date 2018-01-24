@@ -181,6 +181,7 @@ module.exports = function(app) {
     db.user.findById(req.params.userId).then(user => {
       user.addGroup(req.params.groupId).then(() => {
         console.log('success');
+        res.end();
       })
     });
 
