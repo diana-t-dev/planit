@@ -179,13 +179,18 @@ i.icon-blue {
 .bordy3 {
 
   border: 2px solid black;
-  height: 175px;
+  height: 200px;
   overflow: auto;
 }
 
 .bordy4 {
 
   border: 2px solid black;
+
+}
+
+.bordy5 {
+
   height: 525px;
   overflow: auto;
 }

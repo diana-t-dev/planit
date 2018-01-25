@@ -19,6 +19,12 @@ var socket = io("/");
 
 var room = "general";
 
+const styles = {
+
+	color: "red",
+	fontSize: "20px"
+}
+
 class Home extends React.Component {
 
 	  state = {
@@ -27,7 +33,8 @@ class Home extends React.Component {
     all: [],
     channels: [],
     room: 1,
-    image: ""
+    image: "",
+    error: ""
   };
 
   getImage = () => {
@@ -52,14 +59,30 @@ class Home extends React.Component {
 
   chats = (event) => {
   	event.preventDefault();
-  if (this.state.chat !== ""){
+
+	console.log("CHAT, ", $(".chatty").val())
+
+  if ($(".chatty").val().trim() !== ""){
 
   	  socket.emit('SEND_MESSAGE', {
-        chat: this.state.chat,
+        chat: $(".chatty").val().trim(),
         name: cookies.get('name')
-    });  
+    });
+
+    this.setState({
+
+    	error: ""
+    })  
 
   }
+
+  else{
+
+	this.setState({
+
+		error: "Chat Must Not Be Empty!"
+	})
+}
 };
 
 getChat = () =>{
@@ -143,12 +166,19 @@ setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500)
 
 run = () => {
 
-  if (this.state.chat !== ""){
+	console.log("CHAT 2, ", $(".chatty").val())
+
+  if ($(".chatty").val().trim() !== ""){
+
+  	this.setState({
+
+  		error: ""
+  	})
 
       const data = {
 
   name: cookies.get('name'),
-  chat: this.state.chat,
+  chat: $(".chatty").val().trim(),
   room: this.state.room,
   image: this.state.image
 }
@@ -164,6 +194,7 @@ this.setState({
 
 })
 }
+
 };
 
  toggleForm = () =>{
@@ -232,9 +263,11 @@ componentDidMount(){
 </div>
 
 	<div  className="row">
+
 		<div className="col s12 top z-depth-2 bordy4 hoverable">
 		<h4 className="chatText">Channel: {room}</h4>
             <hr/>
+		<div className="col s12 bordy5">
 		<ul>
 { this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
 		<li><img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
@@ -242,14 +275,14 @@ componentDidMount(){
 		}  )): ("") }
 		</ul>
 		</div>
-
+		</div>
 		<div className="col s12 top z-depth-2 bordy3 hoverable">
-		  <h4 className="chatText">Chat</h4>
+		  <h4 className="chatText">Chat <span style={styles}>{this.state.error}</span></h4>
             <hr/>
            <form className="col s12" onSubmit={this.chats} >
                 <div className="input-field col s9 ">
                  <i className="material-icons icon-blue prefix">message</i>
-                 <input id="icon_name" value={this.state.chat} type="text" className="validate"  name="chat" onChange={this.inputChange} />
+                 <input id="icon_name" value={this.state.chat} type="text" className="validate chatty"  name="chat" onChange={this.inputChange} />
                <label for="icon_name">What's on your mind'?</label>
                 </div>
                 <div className="col s3">
