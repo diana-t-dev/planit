@@ -39,7 +39,10 @@ class Home extends React.Component {
   };
 
   	scrollToBottom = () => {
+
+  		if (this.messagesEnd !== undefined){
 		this.messagesEnd.scrollIntoView({behavior: "smooth"});
+	}
 	};
 
   getImage = () => {
@@ -65,30 +68,53 @@ class Home extends React.Component {
   chats = (event) => {
   	event.preventDefault();
 
-	console.log("CHAT, ", $(".chatty").val())
+  		this.setState({
+  		error: ""
+  	})
 
-  if ($(".chatty").val().trim() !== ""){
+  	var profanity = ["fuck", "shit", "cock", "bitch", "asshole", 
+  	"goddammit", "tits", "8==>", "cunt", "ass", "motherfucker", "cocksucker", 
+  	"piss", "fag", "faggot", "dike", "whore", "dick", "8===>", "penis", "pussy"];
 
-  	  socket.emit('SEND_MESSAGE', {
-        chat: $(".chatty").val().trim(),
-        name: cookies.get('name')
-    });
+  	var chatWordy = this.state.chat.split(" ");
 
-    this.setState({
+  	console.log("SPLIT 1 ", chatWordy)
 
-    	error: ""
-    })  
+	console.log("CHAT, ", this.state.chat.trim())
 
-  }
+  if (this.state.chat.trim() === ""){
 
-  else{
-
-	this.setState({
+  		this.setState({
 
 		error: "Chat Must Not Be Empty!"
 	})
+  		return false;
 }
-};
+
+ for (var i = 0; i < chatWordy.length; i++) {
+
+for (var j = 0; j < profanity.length; j++) {
+	
+	if(chatWordy[i] === profanity[j]){
+
+		chatWordy[i] = "****";
+		j++;
+		this.setState({
+  		error: "No Profanity Please!"	})
+	}
+}
+ 	}
+
+console.log("SPLIT 2 ", chatWordy);
+
+this.setState({
+
+	chat: chatWordy.join(" ")
+})
+
+  socket.emit('SEND_MESSAGE');
+
+  	};
 
 getChat = () =>{
 
@@ -171,19 +197,19 @@ setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500)
 
 run = () => {
 
-	console.log("CHAT 2, ", $(".chatty").val())
+	console.log("CHAT 2, ", this.state.chat.trim())
 
-  if ($(".chatty").val().trim() !== ""){
+	if(this.state.error !== "No Profanity Please!"){
 
   	this.setState({
 
   		error: ""
   	})
-
+}
       const data = {
 
   name: cookies.get('name'),
-  chat: $(".chatty").val().trim(),
+  chat: this.state.chat.trim(),
   room: this.state.room,
   image: this.state.image
 }
@@ -196,9 +222,7 @@ this.setState({
   chat: ""
 })
 
-
 })
-}
 
 };
 
