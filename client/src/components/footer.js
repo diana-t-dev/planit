@@ -2,17 +2,25 @@ import React from "react";
 import '../App.css';
 
 const colors = {
-  backgroundColor: "dodgerblue"
+  backgroundColor: "dodgerblue",
+  paddingBottom: "20px",
+  marginTop:"60px"
+};
+
+const footerNames = {
+  color: "inherit"
 };
 
 const Footer = props => (
-  <footer className="page-footer" style={colors}>
-  <div className="footer-copyright">
-            <div className="container">
-            Made By Team BLJD © 2018
-            </div>
-          </div>
-       </footer>
+        <div className="page-footer" style={colors}>
+        	<div className='center'>
+        		Copyright © 2018   
+        		<a style={footerNames} target="_blank" href="https://github.com/lmm47766">  Luis  </a> | 
+        		<a style={footerNames} target="_blank" href="https://github.com/Spectrolyte">  Diana  </a> | 
+        		<a style={footerNames} target="_blank" href="https://github.com/JesusColoyan89">  Jesus  </a> | 
+        		<a style={footerNames} target="_blank" href="https://github.com/G-rant88">  Ben  </a>	
+        	</div>
+        </div>
 );
 
 export default Footer;
