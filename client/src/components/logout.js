@@ -57,13 +57,19 @@ class Logout extends Component {
             })
         } 
         else {
+            console.log('id: ', id)
+           axios.put('/find/' + id)
+            .then( data  => {
+          console.log('111111111111 made it here')
             cookies.set('name', response.name);
             cookies.set('id', response.sub);
             this.setState({ loggedin: true });
             this.props.history.push('/');
-        }
-      })
-  }
+
+        })
+      }
+  })
+ };
 
 
   
