@@ -36,6 +36,16 @@ io.on('connection', (socket) => {
 
      socket.on('SEND_MESSAGE', function(data){
 
+console.log("CHAT DATA ", data);
+
+   db.chat.create({
+      name: data.name,
+      text: data.chat,
+      image: data.image,
+      channelId: data.room
+
+     	})
+
 	io.emit('RECEIVE_MESSAGE', data);
   
       });

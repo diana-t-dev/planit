@@ -68,10 +68,6 @@ class Home extends React.Component {
   chats = (event) => {
   	event.preventDefault();
 
-  		this.setState({
-  		error: ""
-  	})
-
   	var profanity = ["fuck", "shit", "cock", "bitch", "asshole", 
   	"goddammit", "tits", "8==>", "cunt", "ass", "motherfucker", "cocksucker", 
   	"piss", "fag", "faggot", "dike", "whore", "dick", "8===>", "penis", "pussy"];
@@ -112,8 +108,22 @@ this.setState({
 	chat: chatWordy.join(" ")
 })
 
-  socket.emit('SEND_MESSAGE');
+  socket.emit('SEND_MESSAGE', ({
 
+  name: cookies.get('name'),
+  chat: this.state.chat.trim(),
+  room: this.state.room,
+  image: this.state.image
+
+  }));
+
+  	this.setState({
+  		error: "",
+  		chat: ""
+  	})
+
+  console.log('chat posted');
+  
   	};
 
 getChat = () =>{
@@ -194,38 +204,6 @@ setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500)
 
 };
 
-
-run = () => {
-
-	console.log("CHAT 2, ", this.state.chat.trim())
-
-	if(this.state.error !== "No Profanity Please!"){
-
-  	this.setState({
-
-  		error: ""
-  	})
-}
-      const data = {
-
-  name: cookies.get('name'),
-  chat: this.state.chat.trim(),
-  room: this.state.room,
-  image: this.state.image
-}
-
-axios.post("/chat", data).then( data => {
-
-console.log('chat posted');
-
-this.setState({
-  chat: ""
-})
-
-})
-
-};
-
  toggleForm = () =>{
 
   	this.state.form === false ?(
@@ -250,9 +228,7 @@ componentDidMount(){
 
 	 socket.on('RECEIVE_MESSAGE', (data) =>{
 
-    this.run();
-
-    setTimeout(() => { this.getChat(); }, 200);
+    this.getChat();
      
 });
 
