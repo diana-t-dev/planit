@@ -16,7 +16,8 @@ class Groups extends Component {
 
   state ={
 
-    mygroup: ""
+    mygroup: "",
+    eventAdded: false
   };
 
 
@@ -29,12 +30,20 @@ this.setState({
 
 
 console.log(this.state.mygroup)
+console.log('first click');
+
+// this.forceUpdate();
 
   };
 
-  componentDidMount () {
-
+  addedEvent = (change) => {
+    this.setState({eventAdded: change});
+    // this.setState({eventAdded: false});
   }
+
+  // componentDidUpdate () {
+  //   this.setgroup(this.state.mygroup);
+  // }
 
 render() { 
 
@@ -56,7 +65,8 @@ cookies.get('name') === undefined ? (<Login {...this.props}/>):(
           <Events 
           group={this.state.mygroup}/>
           <Chat 
-          group={this.state.mygroup}/>
+          group={this.state.mygroup}
+          addedEvent={this.addedEvent}/>
           </div>
         </div>
       </div>

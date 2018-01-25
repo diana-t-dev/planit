@@ -13,11 +13,47 @@ class Events extends Component {
     form: false
   };
 
+  componentDidMount() {
+    console.log("mounted");
+
+  }
+
+  componentDidUpdate(props) {
+    console.log("updated");
+    console.log(props);
+    // this.renderEvents();
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ group: props.group });
+    this.getEvents(props.group);
+    // this.renderEvents();
+  }
+
+  renderEvents = () => {
+    console.log(this.state.events);
+    
+    let eventsExist = this.state.events && this.state.events !== null;
+    if (eventsExist) {
+      let eventInfo = this.state.events.map(events => {
+        return <div className='eventy'>
+          <h5>{events.type}: {events.name} - Posted By: {events.person}</h5>
+          <a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
+          <p className="votey">Votes: {events.votes}</p>
+          </div>
+      })
+      return eventInfo;
+    }
+    else {
+      return <h5>No events for this groups yet!</h5>
+    }
+  }
+
   getEvents = (group) => {
-    this.setState({
-      group: group
-    })
-    let groupy = this.state.group;
+    // this.setState({
+    //   group: group
+    // })
+    let groupy = group;
     console.log(groupy);
     axios.get("/events/" + groupy).then(data => {
       console.log("&&&&&& " + JSON.stringify(data.data[0]));
@@ -39,7 +75,7 @@ class Events extends Component {
         })
       )
   };
-      
+
   // updates votes for selected event
   handleVotes = (event, eventId) => {
     // capture vote type
@@ -47,71 +83,42 @@ class Events extends Component {
     // if the user upvotes, increment current votes by one
     if (voteType === 'upvote') {
       axios.put(`/upvote/${eventId}`)
-           .then(results => {
-             console.log(results);
-             console.log(`incremented votes for event ${eventId}`);
-             // re-render event
-             this.getEvents(this.state.group);
-           })
+        .then(results => {
+          console.log(results);
+          console.log(`incremented votes for event ${eventId}`);
+          // re-render event
+          this.getEvents(this.state.group);
+        })
     }
     // if the user downvotes, decrement current votes by one
     else if (voteType === 'downvote') {
       axios.put(`/downvote/${eventId}`)
-           .then(results => {
-             console.log(results.data);
-             console.log(`decremented votes for event ${eventId}`);
-             //re-render event
-             this.getEvents(this.state.group);
-           })
+        .then(results => {
+          console.log(results.data);
+          console.log(`decremented votes for event ${eventId}`);
+          //re-render event
+          this.getEvents(this.state.group);
+        })
     }
 
   }
 
-  componentWillReceiveProps (props) {
-    console.log(props);
+  render() {
 
-    console.log("event props");
-    console.log(props.group)
-    this.getEvents(props.group);
-  }
+    return (
 
-render() { 
 
-  return ( 
-
-  
-        <div className="col s8 m7 l7">
+      <div className="col s8 m7 l7">
         <div className="col s12 top z-depth-2 bordy2 hoverable">
-           <h4 className="groupHeader">Group: {this.state.name}</h4>
-           <hr/>
-           <div className="col s10 offset-s1">
-           
-           { this.state.events !== undefined && this.state.events !== null ?(
+          <h4 className="groupHeader">Group: {this.state.name}</h4>
+          <hr />
+          <div className="col s10 offset-s1">
 
-            this.state.events.map(i =>{
-              return <div className="eventy">
-          <h5>{i.type}: {i.name} - Posted By: {i.person}</h5>
-          <a className="btn #42a5f5 blue lighten-1 " eventid={i.id} for="upvote" onClick={(event) => this.handleVotes(event, i.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={i.id} for="downvote" onClick={(event) => this.handleVotes(event, i.id)}>Downvote<i class="large material-icons">arrow_downward</i></a><a className="btn #42a5f5 blue lighten-1 " onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
-           {this.state.form === true ?(
-           	<CommentCard
-           	form={this.toggleForm}
-           	id={i.id}
-           	/>
-           	):("")}
-           <p className="votey">Votes: {i.votes}</p>
-               <div className="coms">
-         { i.comments.map(el =>{
-          return<p>{el.user} said: {el.comment}</p>
-          })   
-        }
+            {this.renderEvents()}
+
           </div>
-             </div>
-           })
-            ):("")}
-       		       	
-          </div>
-          </div>
-          </div>
+        </div>
+      </div>
     );
   };
 

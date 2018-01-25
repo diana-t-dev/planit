@@ -18,7 +18,7 @@ class Chat extends Component {
 
   };
 
-   inputChange = event => {
+  inputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
 
@@ -34,67 +34,67 @@ class Chat extends Component {
 
     axios.get(url).then(data => {
 
-    console.log(data.data.response.venues);
+      console.log(data.data.response.venues);
 
-    this.setState({
+      this.setState({
 
-      results: data.data.response.venues,
-      results2: [],
-      results3: []
-    })
+        results: data.data.response.venues,
+        results2: [],
+        results3: []
+      })
 
-    console.log(this.state.results);
+      console.log(this.state.results);
 
 
     })
   };
 
-searchevent = () => {
+  searchevent = () => {
 
-    let url = "https://www.eventbriteapi.com/v3/events/search/?q="+this.state.thing+"&sort_by=best&location.address="+this.state.location+"&token=ZHYMXVXF44JLXPWWBSYQ";
+    let url = "https://www.eventbriteapi.com/v3/events/search/?q=" + this.state.thing + "&sort_by=best&location.address=" + this.state.location + "&token=ZHYMXVXF44JLXPWWBSYQ";
 
     axios.get(url).then(data => {
 
-    console.log(data.data.events);
+      console.log(data.data.events);
 
-    for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 5; i++) {
 
-      this.setState({
+        this.setState({
 
-      results2: [...this.state.results2, data.data.events[i]],
-      results: [],
-      results3: []
+          results2: [...this.state.results2, data.data.events[i]],
+          results: [],
+          results3: []
 
-    })
-     
-    }
+        })
 
-    console.log(this.state.results2);
+      }
+
+      console.log(this.state.results2);
 
     })
   };
 
   searchmovie = () => {
 
- let BASEURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=c0f1c321f80530f1c8b9eeee2923c0f5&page=1";
+    let BASEURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=c0f1c321f80530f1c8b9eeee2923c0f5&page=1";
 
-  axios.get(BASEURL).then(data =>{
+    axios.get(BASEURL).then(data => {
 
-    console.log(data.data.results);
+      console.log(data.data.results);
 
 
-  for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 10; i++) {
 
-      this.setState({
+        this.setState({
 
-      results3: [...this.state.results3, data.data.results[i]],
-      results: [],
-      results2: []
-    })
-     
-    }
+          results3: [...this.state.results3, data.data.results[i]],
+          results: [],
+          results2: []
+        })
 
-    console.log(this.state.results3);
+      }
+
+      console.log(this.state.results3);
 
 
     })
@@ -105,16 +105,16 @@ searchevent = () => {
 
     let person = cookies.get('name');
 
-  let data = {
+    let data = {
 
       name: name,
       type: type,
       person: person,
       groupId: this.state.groupId
-    
+
     }
 
-    axios.post('/addevent', {data}).then(data =>{
+    axios.post('/addevent', { data }).then(data => {
 
       console.log('event added')
       console.log(data)
@@ -123,105 +123,114 @@ searchevent = () => {
 
   }
 
-  componentWillReceiveProps (props) {
+  componentWillReceiveProps(props) {
 
     console.log(props);
     console.log(props.group)
 
-this.setState({
-    groupId: props.group
+    this.setState({
+      groupId: props.group
     })
 
-console.log(this.state.groupId)
+    console.log(this.state.groupId)
 
   }
 
-render() { 
+  render() {
 
-  return ( 
+    return (
 
-        <div className="col s6 m4 l4">
-          <div className="col s12 top z-depth-2 bordy hoverable">
-           <h4 className="searchText">Search</h4>
-            <hr/>
-           <form className="col s12">
-                <div className="input-field col s12">
-                 <i className="material-icons icon-blue prefix">search</i>
-                 <input id="icon_name" type="text" name="thing" className="validate" onChange={this.inputChange} />
-               <label for="icon_name">What do you want to do?</label>
-               </div>
-               </form>
-               <form>
-               <div className="input-field col s12">
-                <i className="material-icons icon-blue prefix">location_on</i>
-               <input id="icon_location" type="text" name="location" className="validate" onChange={this.inputChange} />
-               <label for="icon_location">where are you searching?</label>
-                </div>
-               </form>
+      <div className="col s6 m4 l4">
+        <div className="col s12 top z-depth-2 bordy hoverable">
+          <h4 className="searchText">Search</h4>
+          <hr />
+          <form className="col s12">
+            <div className="input-field col s12">
+              <i className="material-icons icon-blue prefix">search</i>
+              <input id="icon_name" type="text" name="thing" className="validate" onChange={this.inputChange} />
+              <label for="icon_name">What do you want to do?</label>
+            </div>
+          </form>
+          <form>
+            <div className="input-field col s12">
+              <i className="material-icons icon-blue prefix">location_on</i>
+              <input id="icon_location" type="text" name="location" className="validate" onChange={this.inputChange} />
+              <label for="icon_location">where are you searching?</label>
+            </div>
+          </form>
 
-               <a className="btn #42a5f5 blue lighten-1 " onClick={this.search}>Places</a>
-               <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchevent}>Events</a>
-               <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchmovie}>Movies</a>
+          <a className="btn #42a5f5 blue lighten-1 " onClick={this.search}>Places</a>
+          <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchevent}>Events</a>
+          <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchmovie}>Movies</a>
           <h4 className="resultsText">Results</h4>
-          <hr/>
-            <ul>
+          <hr />
+          <ul>
             {
-              this.state.results !== undefined ?(
+              this.state.results !== undefined ? (
 
 
-              this.state.results.map(i => 
+                this.state.results.map(i =>
 
-                <div>
-              <li className="hovy">{i.name}</li>
-               <li className="hovy">{i.location.address}</li>
+                  <div>
+                    <li className="hovy">{i.name}</li>
+                    <li className="hovy">{i.location.address}</li>
 
-               {i.categories[0] !== undefined ?(
-               <li className="hovy">{i.categories[0].name}</li>):("")}
-              <a className="btn #42a5f5 blue lighten-1 " onClick={() =>this.add(i.name, "Place")}>Add to Group</a>
-               </div>
+                    {i.categories[0] !== undefined ? (
+                      <li className="hovy">{i.categories[0].name}</li>) : ("")}
+                    <a className="btn #42a5f5 blue lighten-1 " onClick={() => {
+                      this.add(i.name, "Place");
+                      this.props.addedEvent(true);
+                      }}>Add to Group</a>
+                  </div>
 
-           ) ):("")
+                )) : ("")
 
-              }
+            }
 
-              {
-              this.state.results2 !== undefined ?(
-
-
-              this.state.results2.map(i => 
-
-                <div>
-             <li className="hovy">{i.name.text}</li>
-              <li className="hovy">Date: {i.start.local}</li>
-              <li className="hovy"><a href={i.url} target="_blank">Link to Event</a></li>
-              <a className="btn #42a5f5 blue lighten-1 " onClick={() =>this.add(i.name.text, "Event")}>Add to Group</a>
-               </div>
-
-           ) ):("")
-
-              }
-
-         {
-              this.state.results3 !== undefined ?(
+            {
+              this.state.results2 !== undefined ? (
 
 
-              this.state.results3.map(i => 
+                this.state.results2.map(i =>
 
-                <div>
-             <li className="hovy">{i.original_title}</li>
-              <li className="hovy">Rating: {i.vote_average}</li>
-            <li className="hovy">Plot: {i.overview}</li>
-              <a className="btn #42a5f5 blue lighten-1 " onClick={() =>this.add(i.original_title, "Movie")}>Add to Group</a>
-               </div>
+                  <div>
+                    <li className="hovy">{i.name.text}</li>
+                    <li className="hovy">Date: {i.start.local}</li>
+                    <li className="hovy"><a href={i.url} target="_blank">Link to Event</a></li>
+                    <a className="btn #42a5f5 blue lighten-1 " onClick={() => {
+                      this.add(i.name.text, "Event");
+                      this.props.addedEvent(true);
+                      }}>Add to Group</a>
+                  </div>
 
-           ) ):("")
+                )) : ("")
 
-              }
-            
-            
+            }
 
-            </ul>
-          </div>
+            {
+              this.state.results3 !== undefined ? (
+
+
+                this.state.results3.map(i =>
+
+                  <div>
+                    <li className="hovy">{i.original_title}</li>
+                    <li className="hovy">Rating: {i.vote_average}</li>
+                    <li className="hovy">Plot: {i.overview}</li>
+                    <a className="btn #42a5f5 blue lighten-1 " onClick={() => {
+                      this.add(i.original_title, "Movie")
+                      this.props.addedEvent(true);
+                    }}>Add to Group</a>
+                  </div>
+
+                )) : ("")
+
+            }
+
+
+
+          </ul>
+        </div>
       </div>
     );
   };

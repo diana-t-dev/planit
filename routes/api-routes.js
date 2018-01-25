@@ -520,6 +520,7 @@ module.exports = function(app) {
     db.event.findById(req.params.eventId)
             .then(results => {
               console.log('$$$$$$$$$$$$$$$$$$$$')
+              console.log(results);
               let event = results.dataValues;
               // increment votes by 1
               let newVotes = event.votes - 1;
