@@ -2,57 +2,61 @@ import React, { Component } from "react";
 import '../App.css';
 import axios from 'axios';
 import CommentCard from './commentcard.js';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+import $ from "jquery";
+import "./events.css"
 
 class Events extends Component {
 
   state = {
 
     group: "",
-    name: "",
+    name: "Select a group to see suggested events!",
     events: [],
     form: false
   };
 
   componentDidMount() {
     console.log("mounted");
-
+    $('.tooltipped').tooltip({delay: 50});
   }
 
   componentDidUpdate(props) {
     console.log("updated");
     console.log(props);
-    // this.renderEvents();
+    $('.tooltipped').tooltip({delay: 50});
   }
 
   componentWillReceiveProps(props) {
     this.setState({ group: props.group });
     this.getEvents(props.group);
-    // this.renderEvents();
   }
 
   renderEvents = () => {
     console.log(this.state.events);
-    
     let eventsExist = this.state.events && this.state.events !== null;
     if (eventsExist) {
       let eventInfo = this.state.events.map(events => {
-        return <div className='eventy'>
-          <h5>{events.type}: {events.name} - Posted By: {events.person}</h5>
-          <a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
-          <p className="votey">Votes: {events.votes}</p>
+        return <li>
+          <div className="collapsible-header"><i className="material-icons">event</i>First<span>{events.name}</span></div>
+          <div className="collapsible-body">
+            <h5>Suggested by: {events.person}</h5>
+            <h6 className="votey">Current Votes: {events.votes}</h6>
+            <a className="btn tooltipped upvote" data-position="top" data-delay="50" data-tooltip="Upvote" eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}><i class="large material-icons">arrow_upward</i></a><a className="btn tooltipped downvote" data-position="top" data-delay="50" data-tooltip="Downvote" eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}><i class="large material-icons">arrow_downward</i></a>
           </div>
+        </li>
+
       })
       return eventInfo;
     }
     else {
-      return <h5>No events for this groups yet!</h5>
+      return <h5>No events for this group yet!</h5>
     }
   }
 
   getEvents = (group) => {
-    // this.setState({
-    //   group: group
-    // })
     let groupy = group;
     console.log(groupy);
     axios.get("/events/" + groupy).then(data => {
@@ -108,16 +112,14 @@ class Events extends Component {
     return (
 
 
-      <div className="col s8 m7 l7">
-        <div className="col s12 top z-depth-2 bordy2 hoverable">
-          <h4 className="groupHeader">Group: {this.state.name}</h4>
-          <hr />
-          <div className="col s10 offset-s1">
+      <div className="col s6">
+        <h4 className="groupHeader">{this.state.name}</h4>
+        <hr />
 
-            {this.renderEvents()}
+        <ul className="collapsible" data-collapsible="accordion">
+          {this.renderEvents()}
+        </ul>
 
-          </div>
-        </div>
       </div>
     );
   };

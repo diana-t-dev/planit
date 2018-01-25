@@ -140,7 +140,7 @@ class Chat extends Component {
 
     return (
 
-      <div className="col s6 m4 l4">
+      <div className="col s4">
         <div className="col s12 top z-depth-2 bordy hoverable">
           <h4 className="searchText">Search</h4>
           <hr />
@@ -181,6 +181,7 @@ class Chat extends Component {
                       this.add(i.name, "Place");
                       this.props.addedEvent(true);
                       }}>Add to Group</a>
+                      <hr/>
                   </div>
 
                 )) : ("")
@@ -195,12 +196,12 @@ class Chat extends Component {
 
                   <div>
                     <li className="hovy">{i.name.text}</li>
-                    <li className="hovy">Date: {i.start.local}</li>
                     <li className="hovy"><a href={i.url} target="_blank">Link to Event</a></li>
                     <a className="btn #42a5f5 blue lighten-1 " onClick={() => {
                       this.add(i.name.text, "Event");
                       this.props.addedEvent(true);
                       }}>Add to Group</a>
+                      <hr/>
                   </div>
 
                 )) : ("")
@@ -216,11 +217,11 @@ class Chat extends Component {
                   <div>
                     <li className="hovy">{i.original_title}</li>
                     <li className="hovy">Rating: {i.vote_average}</li>
-                    <li className="hovy">Plot: {i.overview}</li>
                     <a className="btn #42a5f5 blue lighten-1 " onClick={() => {
                       this.add(i.original_title, "Movie")
                       this.props.addedEvent(true);
                     }}>Add to Group</a>
+                    <hr/>
                   </div>
 
                 )) : ("")

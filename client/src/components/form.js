@@ -3,6 +3,7 @@ import '../App.css';
 import $ from "jquery";
 import Cookies from 'universal-cookie';
 import axios from "axios";
+import "./form.css";
 
 const cookies = new Cookies();
 
@@ -126,7 +127,7 @@ class Form extends Component {
 						 </div>
 						 <div className="card-content">
 							 <div className="row">
-								 <form className="col s6 offset-s3">
+								 <form className="">
 									 <div className="input-field col s12">
 										 <i className="material-icons icon-blue prefix">create</i>
 										 <input id="icon_name" type="text" className="validate" onChange={(event) => this.handleGroupName(event)} />
@@ -135,19 +136,16 @@ class Form extends Component {
 								 </form>
 							 </div>
 							 <div className="row">
-								 <form className="col s6 offset-s3">
-									 <div className="input-field col s12">
-										 <i className="material-icons icon-blue prefix">face</i>
-										 <a className='dropdown-button btn material-icons left add-to-group #42a5f5 blue lighten-1 ' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
+								 <form className="">
+									 <div className="input-field col s12 center">
+										 <a className='dropdown-button btn material-icons add-to-group friends-list' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
 										 <ul id='friend-dropdown' className='dropdown-content'>
 											 {this.state.friends.map(friend => <li key={friend}><a type="button" className="addFriend" data-id="username" onClick={() => this.addToGroup(friend)}>{friend}</a></li>)}
 										 </ul>
-									 </div>
-									 <div className="center">
-										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={(event) => {
+										 <a type="button" className="waves-effect btn" onClick={(event) => {
 											 this.createGroup(event);
 											 this.props.newGroup(true);
-											 }}>Submit</a>
+											 }}>Send Group Invites!</a>
 									 </div>
 								 </form>
 							 </div>
