@@ -37,6 +37,11 @@ td, th {
 
 }
 
+.card-text{
+
+	font-weight: bold;
+}
+
 .logo{
   margin-left: 2%;
 }

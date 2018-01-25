@@ -111,7 +111,7 @@ const cookies = new Cookies();
                                 <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p>Add your friends and form a group! In your groups, you can search for events, places, and movies.</p>
+                                <p className="card-text">Add your friends and form a group! In your groups, you can search for events, places, and movies.</p>
                               </div>    
                             </div>
                         </div>
@@ -122,7 +122,7 @@ const cookies = new Cookies();
                                 <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p>Vote events up and down, to pick the best one for your group!</p>
+                                <p className="card-text">Vote events up and down, to pick the best one for your group!</p>
                               </div>
                               
                             </div>
@@ -135,7 +135,7 @@ const cookies = new Cookies();
                                 <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p>Chat with users, friends, groups, and make your own chat channels!</p>
+                                <p className="card-text">Chat with users, friends, groups, and make your own chat channels!</p>
                               </div>
                               
                             </div>
