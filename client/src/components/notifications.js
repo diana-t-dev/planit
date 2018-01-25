@@ -9,6 +9,7 @@ import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import $ from "jquery";
+import './notifications.css';
 
 
 const cookies = new Cookies();
@@ -65,7 +66,7 @@ class Notifications extends Component {
 
     acceptRequest = (notificationId, userRequestId, notificationType, userId, groupId) => {
         // if it's a friend request, update both users' friends list
-        if (notificationType === 'friend request') {
+        if (notificationType === 'Friend Request') {
             axios.post(`/friends/update/${userRequestId}`, {friendId: userId})
              .then((results) => {
                  axios.post(`/friends/update/${userId}`, {friendId: userRequestId})
@@ -106,7 +107,8 @@ class Notifications extends Component {
                         <thead>
                             <tr>
                                 <th>From</th>
-                                <th>Type</th>
+                                <th>Request</th>
+                                <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
