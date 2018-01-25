@@ -27,22 +27,13 @@ class List extends Component {
 
   };
 
-  // getUser = () => {
-  //   let name = cookies.get('name');
-  //   axios.get('/users/' + name).then(user => {
-  //     console.log(user);
-  //     user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
-  //   }).then(() => {
-  //     this.getGroups();
-  //   })
-  // };
-
   getGroups = () => {
 
 
     // let userId = cookies.get('id');
 
     axios.get('/mygroups/' + this.state.id).then(results => {
+      console.log(results);
 
       // set group state equal to the list of group objs
       if (!results.data[0]) {
@@ -92,7 +83,7 @@ render() {
             <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
           </div>
         </div>    
-            { this.state.form ? (<Form  click={this.toggleForm}/> ):("") }
+            { this.state.form ? (<Form  click={this.toggleForm} newGroup={this.props.newGroup}/> ):("") }
           
         <div className="col s12 m1 l1 small">
         <div className="col s12">

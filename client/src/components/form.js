@@ -93,7 +93,7 @@ class Form extends Component {
 			this.setState({groupId: results.data.id});
 			console.log(`STATE ID ${this.state.id}`);
 			console.log(`STATE GROUP ID ${this.state.groupId}`);
-			axios.post(`/groups/members/${this.state.id}/${this.state.groupId}`).then(results => {
+			axios.post(`/groups/members/${this.state.id}/${results.data.id}`).then(results => {
 				console.log(results);
 			});
 			// send notifications to all group members
@@ -144,7 +144,10 @@ class Form extends Component {
 										 </ul>
 									 </div>
 									 <div className="center">
-										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={(event) => this.createGroup(event)}>Submit</a>
+										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={(event) => {
+											 this.createGroup(event);
+											 this.props.newGroup(true);
+											 }}>Submit</a>
 									 </div>
 								 </form>
 							 </div>
