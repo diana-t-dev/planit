@@ -212,7 +212,8 @@ console.log("FRIEND ID", typeof i)
                         <td><img className="friendImg" alt={i.name} src={i.image}/></td>
                         <td>{i.name}</td>
                         <td>{i.loggedIn===true? <span>✅</span> : <span>❌</span>  }</td>
-                        <td><a className="waves-effect waves-light btn delfriend" onClick={() => this.delFriend(i.id)}>Remove Friend</a></td>
+                        <td><a className="waves-effect waves-light btn delfriend #ef5350 red lighten-1
+" onClick={() => this.delFriend(i.id)}>Remove Friend</a></td>
                         </tr>)} 
                      ))}
                     </tbody>
