@@ -83,7 +83,7 @@ render() {
             <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
           </div>
         </div>    
-            { this.state.form ? (<Form  click={this.toggleForm}/> ):("") }
+            { this.state.form ? (<Form  click={this.toggleForm} newGroup={this.props.newGroup}/> ):("") }
           
         <div className="col s12 m1 l1 small">
         <div className="col s12">

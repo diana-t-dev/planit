@@ -144,7 +144,10 @@ class Form extends Component {
 										 </ul>
 									 </div>
 									 <div className="center">
-										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={(event) => this.createGroup(event)}>Submit</a>
+										 <a type="button" className="waves-effect #42a5f5 blue lighten-1 btn" onClick={(event) => {
+											 this.createGroup(event);
+											 this.props.newGroup(true);
+											 }}>Submit</a>
 									 </div>
 								 </form>
 							 </div>
