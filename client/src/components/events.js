@@ -91,7 +91,7 @@ render() {
             this.state.events.map(i =>{
               return <div className="eventy">
           <h5>{i.type}: {i.name} - Posted By: {i.person}</h5>
-          <a className="btn" eventid={i.id} for="upvote" onClick={(event) => this.handleVotes(event, i.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn" eventid={i.id} for="downvote" onClick={(event) => this.handleVotes(event, i.id)}>Downvote<i class="large material-icons">arrow_downward</i></a><a className="btn" onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
+          <a className="btn #42a5f5 blue lighten-1 " eventid={i.id} for="upvote" onClick={(event) => this.handleVotes(event, i.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={i.id} for="downvote" onClick={(event) => this.handleVotes(event, i.id)}>Downvote<i class="large material-icons">arrow_downward</i></a><a className="btn #42a5f5 blue lighten-1 " onClick={this.toggleForm}><i class="large material-icons">add</i> comment</a>
            {this.state.form === true ?(
            	<CommentCard
            	form={this.toggleForm}

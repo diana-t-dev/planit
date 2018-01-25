@@ -96,22 +96,40 @@ const cookies = new Cookies();
 
                       <div className="descriptionRow center row">
                         <div className=" col s4 m4 l4">
-                          <div className="descriptionBorder">
-                          <img alt='img1' className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
-                          <p className="descriptText"> description placeholder</p>
-                          </div>
+                          <div className="card">
+                              <div className="card-image">
+                                <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                                <span className="cardText card-title">Form Groups with your friends!</span>
+                              </div>
+                              <div className="card-content">
+                                <p>Add your friends and form a group!</p>
+                              </div>
+                              
+                            </div>
                         </div>
                         <div className=" col s4 m4 l4">
-                          <div className="descriptionBorder">
-                          <img alt='img2' className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
-                          <p className="descriptText"> description placeholder</p>
-                          </div>
+                           <div className="card">
+                              <div className="card-image">
+                                <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                                <span className="cardText card-title">Vote on events!</span>
+                              </div>
+                              <div className="card-content">
+                                <p>In your groups, you can search for events and vote. The highest voted event will make it to the top of the groups page.</p>
+                              </div>
+                              
+                            </div>
                         </div>
                         <div className=" col s4 m4 l4">
-                          <div className="descriptionBorder">
-                          <img alt='img3' className="descriptGif" src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
-                          <p className="descriptText"> description placeholder </p>
-                          </div>
+                           <div className="card">
+                              <div className="card-image">
+                                <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                                <span className="cardText card-title">Have fun!</span>
+                              </div>
+                              <div className="card-content">
+                                <p>Enjoy!</p>
+                              </div>
+                              
+                            </div>
                         </div>
                        </div> 
                               

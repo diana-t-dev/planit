@@ -251,7 +251,7 @@ componentDidMount(){
 
 <div className="row">
 <div className="col s1">
-					 <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>Channels</a>
+					 <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>Channels</a>
 					  <ul id='dropdown1' className='dropdown-content'>
 					 {this.state.channels.map(i =>{
 					 return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }
@@ -265,7 +265,7 @@ componentDidMount(){
 
 	<div  className="row">
 		<div className="col s12 center">
-					<a className="btn" onClick={this.toggleForm}>Add Channel</a>
+					<a className="btn #42a5f5 blue lighten-1 " onClick={this.toggleForm}>Add Channel</a>
    {this.state.form ?(
                   	<ChanForm
                   	form={this.toggleForm}
@@ -300,7 +300,7 @@ componentDidMount(){
                <label for="icon_name">What's on your mind'?</label>
                 </div>
                 <div className="col s3">
-                <a className="btn center" onClick={this.chats}>Enter</a>
+                <a className="btn #42a5f5 blue lighten-1  center" onClick={this.chats}>Enter</a>
                 </div>
                </form>
 

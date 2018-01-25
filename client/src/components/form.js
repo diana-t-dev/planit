@@ -137,7 +137,7 @@ class Form extends Component {
 								 <form className="col s6 offset-s3">
 									 <div className="input-field col s12">
 										 <i className="material-icons icon-blue prefix">face</i>
-										 <a className='dropdown-button btn material-icons left add-to-group' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
+										 <a className='dropdown-button btn material-icons left add-to-group #42a5f5 blue lighten-1 ' href='#' data-activates='friend-dropdown'>Add friends to this group</a>
 										 <ul id='friend-dropdown' className='dropdown-content'>
 											 {this.state.friends.map(friend => <li key={friend}><a type="button" className="addFriend" data-id="username" onClick={() => this.addToGroup(friend)}>{friend}</a></li>)}
 										 </ul>

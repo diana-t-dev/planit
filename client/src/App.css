@@ -4,6 +4,17 @@ td, th {
 
  }
 
+.descriptionRow{
+  margin-top: 100px;
+  margin-left: -177px !important;
+  width: 60%;
+  opacity: 0.8;
+}
+
+.cardText {
+  
+}
+
  .chatImages{
   width: 100px;
   height: 75px;

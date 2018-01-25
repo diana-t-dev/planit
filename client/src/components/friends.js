@@ -188,7 +188,7 @@ console.log("FRIEND ID", typeof i)
             <div className="container">
               <div className="row toprow">
                 <div className="col s12">
-                  <a className='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'>Add Friend</a>
+                  <a className='dropdown-button btn material-icons left add-friend #42a5f5 blue lighten-1 ' href='#' data-activates='dropdown1'>Add Friend</a>
                   <ul id='dropdown1' className='dropdown-content'>
                     {
                     this.state.users.map(i => {
