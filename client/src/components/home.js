@@ -8,6 +8,7 @@ import Form from "./form.js";
 import io from "socket.io-client";
 import axios from "axios";
 import ChanForm from "./channelform.js";
+import Img from 'react-image';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
@@ -21,181 +22,188 @@ var room = "general";
 
 class Home extends React.Component {
 
-	  state = {
-    form: false,
-    chat: "",
-    all: [],
-    channels: [],
-    room: 1,
-    image: ""
-  };
-
-  getImage = () => {
-		var id = cookies.get('id')
-		axios.get("/image/"+id)
-		.then(user => {
-			if(user.data[0] !== undefined){
-			this.setState({image: user.data[0].image});
-			}
-		})	
+	state = {
+		form: false,
+		chat: "",
+		all: [],
+		channels: [],
+		room: 1,
+		image: ""
 	};
 
-     inputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
 
-    this.setState({
-      [name]: value
-    });
 
-  };
+	scrollToBottom = () => {
+		this.messagesEnd.scrollIntoView({behavior: "smooth"});
+	};
 
-  chats = (event) => {
-  	event.preventDefault();
-  if (this.state.chat !== ""){
+	getImage = () => {
+		var id = cookies.get('id')
+		axios.get("/image/" + id)
+			.then(user => {
+				if (user.data[0] !== undefined) {
+					this.setState({ image: user.data[0].image });
+				}
+			})
+	};
 
-  	  socket.emit('SEND_MESSAGE', {
-        chat: this.state.chat,
-        name: cookies.get('name')
-    });  
+	inputChange = event => {
+		const name = event.target.name;
+		const value = event.target.value;
 
-  }
-};
+		this.setState({
+			[name]: value
+		});
 
-getChat = () =>{
+	};
 
-	let roomy = this.state.room;
+	chats = (event) => {
+		event.preventDefault();
+		if (this.state.chat !== "") {
 
-	axios.get("/chats/"+roomy).then(data => {
+			socket.emit('SEND_MESSAGE', {
+				chat: this.state.chat,
+				name: cookies.get('name')
+			});
 
-		console.log("got chats");
-		console.log(data.data);
+		}
+	};
 
-	this.setState({
+	getChat = () => {
 
-		all: data.data
-	})
+		let roomy = this.state.room;
 
-console.log(this.state.all)
-})
-};
+		axios.get("/chats/" + roomy).then(data => {
 
-getChannels = () => {
+			this.setState({	all: data.data	})
+			console.log(this.state.all)
+		})
+	};
+
+	getChannels = () => {
 
 		let daty = {
 
-	name: "general"
-}
+			name: "general"
+		}
 
-axios.get("/channels").then(data => {
+		axios.get("/channels").then(data => {
 
-		console.log("got channels");
-		console.log(data.data);
+			console.log("got channels");
+			console.log(data.data);
 
-	this.setState({
+			this.setState({
 
-		channels: data.data
-	})
+				channels: data.data
+			})
 
-  $('.dropdown-button').dropdown({
-          inDuration: 300,
-          outDuration: 225,
-          constrainWidth: true, // Does not change width of dropdown to that of the activator
-          hover: false, // Activate on hover
-          gutter: 0, // Spacing from edge
-          belowOrigin: false, // Displays dropdown below the button
-          alignment: 'left', // Displays dropdown with edge aligned to the left of button
-          stopPropagation: false // Stops event propagation	
+			$('.dropdown-button').dropdown({
+				inDuration: 300,
+				outDuration: 225,
+				constrainWidth: true, // Does not change width of dropdown to that of the activator
+				hover: false, // Activate on hover
+				gutter: 0, // Spacing from edge
+				belowOrigin: false, // Displays dropdown below the button
+				alignment: 'left', // Displays dropdown with edge aligned to the left of button
+				stopPropagation: false // Stops event propagation	
 
-});
-  
-data.data[0] === undefined?(
+			});
 
-axios.post("/channel", {daty}).then(data => {
+			data.data[0] === undefined ? (
 
-	console.log("general channel set");
-	console.log(data);
-	this.setState({
+				axios.post("/channel", { daty })
+				.then(data => {
+					console.log("general channel set");
+					console.log(data);
+					this.setState({	room: data.data.id })
+					this.getChannels();
+				})) : ("")
 
-		room: data.data.id
-	})
-	this.getChannels();
-})):("")
+		})
+	};
 
-})
-};
+	goToChan = (chan, name) => {
 
-goToChan = (chan, name) => {
+		console.log("CHANNEL ", chan);
 
-console.log("CHANNEL ", chan);
-
-this.setState({
-
-	room: chan
-})
-
-room = name;
-
-setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500);
-
-};
-
-
-run = () => {
-
-  if (this.state.chat !== ""){
-
-      const data = {
-
-  name: cookies.get('name'),
-  chat: this.state.chat,
-  room: this.state.room,
-  image: this.state.image
-}
-
-axios.post("/chat", data).then( data => {
-
-console.log('chat posted');
-
-this.setState({
-  chat: ""
-})
-
-
-})
-}
-};
-
- toggleForm = () =>{
-
-  	this.state.form === false ?(
-
-  		this.setState({
-
-  			form:true
-  		})):(
 		this.setState({
+			room: chan
+		})
 
-  			form:false
-  		})
-		
-  		)};
+		room = name;
 
-componentDidMount(){
+		setTimeout(() => {
+			console.log("ROOM", this.state.room), this.getChat();
+		}, 500);
 
-	this.getChat();
-	this.getChannels();
-	this.getImage();
+	};
 
-	 socket.on('RECEIVE_MESSAGE', (data) =>{
 
-    this.run();
+	run = () => {
 
-    setTimeout(() => { this.getChat(); }, 200);
-     
-});
+		if (this.state.chat !== "") {
 
-}
+			const data = {
+
+				name: cookies.get('name'),
+				chat: this.state.chat,
+				room: this.state.room,
+				image: this.state.image
+			}
+
+			axios.post("/chat", data).then(data => {
+
+				console.log('chat posted');
+
+				this.setState({
+					chat: ""
+				})
+
+
+			})
+		}
+	};
+
+	toggleForm = () => {
+
+		this.state.form === false ? (
+
+			this.setState({
+
+				form: true
+			})) : (
+			this.setState({
+
+				form: false
+			})
+
+		)
+	};
+
+	componentDidMount() {
+
+		this.getChat();
+		this.getChannels();
+		this.getImage();
+		this.scrollToBottom();
+
+		socket.on('RECEIVE_MESSAGE', (data) => {
+
+			this.run();
+
+			setTimeout(() => {
+				this.getChat();
+			}, 200);
+
+		});
+
+	}
+
+	componentDidUpdate() {
+		this.scrollToBottom();
+	}
+
+	
 	render(){
 
 	 return (
@@ -205,14 +213,12 @@ componentDidMount(){
 		<div>
 			<Nav/>
 					<h1 className="center titles groupText">My Dashboard</h1>
-
-<div className="row">
-<div className="col s1">
+					<div className="row">
+					<div className="col s1">
 					 <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>Channels</a>
 					  <ul id='dropdown1' className='dropdown-content'>
-					 {this.state.channels.map(i =>{
-					 return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }
-                    }>{i.name}</a></li> 	
+					 {this.state.channels.map(i =>{ 
+					 	return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }}>{i.name}</a></li> 	
 
 					 })}
                   </ul>
@@ -232,15 +238,19 @@ componentDidMount(){
 </div>
 
 	<div  className="row">
+		<h4 className="chatText">Channel: {room}</h4>
 		<div className="col s12 top z-depth-2 bordy4 hoverable">
 		<h4 className="chatText">Channel: {room}</h4>
             <hr/>
 		<ul>
 { this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
-		<li><img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
-		<li><img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
+		<li><Img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
+		<li><Img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
 		}  )): ("") }
 		</ul>
+		 <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
 		</div>
 
 		<div className="col s12 top z-depth-2 bordy3 hoverable">

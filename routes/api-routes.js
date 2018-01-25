@@ -256,7 +256,7 @@ module.exports = function(app) {
 
    app.put("/delfriend", function(req, res) {
 
-    console.log("&*&*&&*", req.body.user);
+    // console.log("&&&&&&&&&&&&&&&&", req.body.data.user);
 
     db.user.findAll({
 
@@ -290,11 +290,13 @@ module.exports = function(app) {
           username: req.body.data.user
 
         }
-      })
+      }).then( (data)=> {
+          res.end();
+      });
 
     });
 
-    res.end();
+    
   });
 
   app.get("/user/:id", function(req, res) {
@@ -579,5 +581,46 @@ module.exports = function(app) {
     });
 
 });
+
+   app.put("/deleteMe", function(req, res) {
+
+    console.log("&&&&&&&&&&&&&&&&", req.body.data);
+
+    db.user.findById(req.body.data.friendId)
+    .then(function(results) {
+
+      var friendsList = results.friends.split(", ");
+      console.log('!!!!!!!!!!!!!!!!!',friendsList);
+
+      if(friendsList.length===1){
+        newList=null;
+      }
+      else{     
+        var number = friendsList.indexOf(req.body.data.myid);
+        friendsList.splice(number, 1);
+        var newList = friendsList.join(", ");
+      }
+
+
+      db.user.update({
+
+        friends: newList
+
+      }, {
+        where: {
+
+          id: req.body.data.friendId
+
+        }
+      }).then(data => {
+          res.end();
+      });
+
+    });
+    
+
+  });
+
+
 
 };

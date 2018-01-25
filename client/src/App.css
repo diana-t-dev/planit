@@ -14,7 +14,8 @@ td, th {
 
 .chatwords{
   padding: 13px;
-  border-radius: 25px;
+  padding-left: 15px;
+  border-radius: 70px 50px 50px 5px;
   color:white;
 }
 
@@ -188,6 +189,8 @@ i.icon-blue {
   border: 2px solid black;
   height: 525px;
   overflow: auto;
+
+flex-direction: column-reverse;
 }
 
 .coms {
