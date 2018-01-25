@@ -8,6 +8,7 @@ import Form from "./form.js";
 import io from "socket.io-client";
 import axios from "axios";
 import ChanForm from "./channelform.js";
+import Img from 'react-image';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
@@ -280,8 +281,8 @@ componentDidMount(){
 		<div className="col s12 bordy5">
 		<ul>
 { this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
-		<li><img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
-		<li><img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
+		<li><Img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
+		<li><Img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
 		}  )): ("") }
 		</ul>
 		 <div style={{ float:"left", clear: "both" }}
