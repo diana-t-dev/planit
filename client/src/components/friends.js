@@ -100,7 +100,7 @@ class Friends extends Component {
         user: namey,
         ids: this.state.id,
         to: user.data[0].id,
-        type: "friend request"
+        type: "Friend Request"
       }
 
       axios.post('/notification', data)

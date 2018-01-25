@@ -1,0 +1,16 @@
+.accept-btn {
+    background-color: #0fdd49;
+    margin-right: 15px;
+}
+
+.accept-btn:hover {
+    background-color: green;
+}
+
+.delete-btn {
+    background-color: red;
+}
+
+.delete-btn:hover {
+    background-color: #d10000;
+}
