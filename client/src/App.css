@@ -220,8 +220,12 @@ height: 90px;
 .navTab {
   font-size: 12px !important;
   background-color: none;
-  
+}
 
+.brand-logo{
+  font-size: 16px !important;
+  padding-left: 20px !important;
+  top: 0px;
 }
 
 .transparent {
@@ -334,7 +338,7 @@ video {
 
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-  margin-left: 33%;
+  margin-left: 50%;
   position:relative;
   top: 80px;
   font-size: 50px;
@@ -581,7 +585,7 @@ position: absolute;
 
 .head{
 
-	margin-left: 26%;
+	margin-left: 43%;
 }
 
 .right {
