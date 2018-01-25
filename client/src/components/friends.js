@@ -78,7 +78,7 @@ class Friends extends Component {
 
     axios.get('/users/' + namey).then(user => {
 
-      console.log(user);
+      console.log("********", user);
 
       user.data && user.data[0] ? (  this.setState({ id: user.data[0].id })) :("")
 
@@ -116,7 +116,7 @@ class Friends extends Component {
 
   delFriend = (i) => {
 
-console.log("FRIEND ID", i)
+console.log("FRIEND ID", typeof i)
     let namey = cookies.get('name');
     let friend = i;
     let data = {
@@ -128,11 +128,29 @@ console.log("FRIEND ID", i)
     .then(friend => {
 
     	this.getFriends();
+      this.deleteMe(i)
 
       
     })
 
   };
+
+    deleteMe = (friendid) => {
+
+    console.log("My id is ", this.state.id)
+    console.log("Friend id is ", friendid )
+    let myid = this.state.id.toString()
+    let data = {
+      friendId: friendid,
+      myid: myid
+    }
+
+    axios.put('/deleteMe', {data})
+      .then(friend => {
+       console.log('made it back')
+      })
+
+  };  
 
 
 
