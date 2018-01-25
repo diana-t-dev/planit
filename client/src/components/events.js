@@ -26,19 +26,16 @@ class Events extends Component {
   componentDidUpdate(props) {
     console.log("updated");
     console.log(props);
-    // this.renderEvents();
     $('.tooltipped').tooltip({delay: 50});
   }
 
   componentWillReceiveProps(props) {
     this.setState({ group: props.group });
     this.getEvents(props.group);
-    // this.renderEvents();
   }
 
   renderEvents = () => {
     console.log(this.state.events);
-
     let eventsExist = this.state.events && this.state.events !== null;
     if (eventsExist) {
       let eventInfo = this.state.events.map(events => {
@@ -55,14 +52,11 @@ class Events extends Component {
       return eventInfo;
     }
     else {
-      return <h5>No events for this groups yet!</h5>
+      return <h5>No events for this group yet!</h5>
     }
   }
 
   getEvents = (group) => {
-    // this.setState({
-    //   group: group
-    // })
     let groupy = group;
     console.log(groupy);
     axios.get("/events/" + groupy).then(data => {
