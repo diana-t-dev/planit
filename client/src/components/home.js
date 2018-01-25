@@ -225,9 +225,9 @@ setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500)
 
 componentDidMount(){
 
+	this.getImage();
 	this.getChat();
 	this.getChannels();
-	this.getImage();
 	this.scrollToBottom();
 
 	 socket.on('RECEIVE_MESSAGE', (data) =>{
