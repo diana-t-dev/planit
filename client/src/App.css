@@ -178,8 +178,8 @@ i.icon-blue {
 .eventy {
 
   border: 2px solid darkgray;
-  height: 220px;
-  overflow: auto;
+  /* height: 220px;
+  overflow: auto; */
 }
 
 .bordy2 {

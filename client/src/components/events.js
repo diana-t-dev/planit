@@ -32,15 +32,19 @@ class Events extends Component {
 
   renderEvents = () => {
     console.log(this.state.events);
-    
+
     let eventsExist = this.state.events && this.state.events !== null;
     if (eventsExist) {
       let eventInfo = this.state.events.map(events => {
-        return <div className='eventy'>
-          <h5>{events.type}: {events.name} - Posted By: {events.person}</h5>
-          <a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
-          <p className="votey">Votes: {events.votes}</p>
+        return <li>
+          <div className="collapsible-header"><i className="material-icons">event</i>First<span>{events.name}</span></div>
+          <div className="collapsible-body">
+            <p>Suggested by: {events.person}</p>
+            <h6 className="votey">Current Votes: {events.votes}</h6>
+            <a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
           </div>
+        </li>
+
       })
       return eventInfo;
     }
@@ -108,16 +112,14 @@ class Events extends Component {
     return (
 
 
-      <div className="col s8 m7 l7">
-        <div className="col s12 top z-depth-2 bordy2 hoverable">
-          <h4 className="groupHeader">Group: {this.state.name}</h4>
-          <hr />
-          <div className="col s10 offset-s1">
+      <div className="col s6">
+        <h4 className="groupHeader">Group: {this.state.name}</h4>
+        <hr />
 
-            {this.renderEvents()}
+        <ul className="collapsible" data-collapsible="accordion">
+          {this.renderEvents()}
+        </ul>
 
-          </div>
-        </div>
       </div>
     );
   };

@@ -77,31 +77,21 @@ render() {
   
   return ( 
   
-<div>
- <div className="row toprow">
-          <div className="col s2 offset-s5">
-            <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
-          </div>
-        </div>    
-            { this.state.form ? (<Form  click={this.toggleForm} newGroup={this.props.newGroup}/> ):("") }
-          
-        <div className="col s12 m1 l1 small">
-        <div className="col s12">
-            <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>My Groups</a>
-                  <ul id='dropdown1' className='dropdown-content'>
-                  {this.state.groups.map((group) => {
-                    if (group === 'no groups yet') {
-                      return <li>No groups yet</li>
-                    }
-                    else {
-                      return <li><a type="button" className="mygroups" data-id="username" onClick={() => this.props.group(group.id)}>{group.name}</a></li>
-                    }
-                  })}
-            </ul>
-           
-         </div>
-      </div>
-  </div>
+<div className="col s2">
+  <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
+  { this.state.form ? (<Form  click={this.toggleForm} newGroup={this.props.newGroup}/> ):("") }
+  <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>My Groups</a>
+    <ul id='dropdown1' className='dropdown-content'>
+          {this.state.groups.map((group) => {
+            if (group === 'no groups yet') {
+              return <li>No groups yet</li>
+            }
+            else {
+              return <li><a type="button" className="mygroups" data-id="username" onClick={() => this.props.group(group.id)}>{group.name}</a></li>
+            }
+          })}
+    </ul>
+</div>
 
      );
 

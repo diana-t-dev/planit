@@ -140,7 +140,7 @@ class Chat extends Component {
 
     return (
 
-      <div className="col s6 m4 l4">
+      <div className="col s4">
         <div className="col s12 top z-depth-2 bordy hoverable">
           <h4 className="searchText">Search</h4>
           <hr />
