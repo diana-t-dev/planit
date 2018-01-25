@@ -95,7 +95,7 @@ class Home extends React.Component {
 
 for (var j = 0; j < profanity.length; j++) {
 	
-	if(chatWordy[i] === profanity[j]){
+	if(chatWordy[i].toLowerCase() === profanity[j]){
 
 		chatWordy[i] = "****";
 		j++;
