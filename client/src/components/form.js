@@ -18,7 +18,7 @@ class Form extends Component {
 		groupId: ""
 	}
 
-	componentDidMount () {
+	componentDidMount (props) {
 		this.getUser();
 		this.getFriends();
     $('.dropdown-button').dropdown({
@@ -107,11 +107,12 @@ class Form extends Component {
 				}
 				axios.post('/notification', groupNotification).then(results => {
 					console.log(results);
+					
 				});
 			}		
 		});
 
-
+		this.props.click();
 	}
  
  render() {
