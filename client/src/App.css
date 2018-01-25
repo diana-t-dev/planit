@@ -5,7 +5,7 @@ td, th {
  }
 
 .descriptionRow{
-  margin-top: 100px;
+  /*margin-top: 100px;*/
   margin-left: -177px !important;
   width: 60%;
   opacity: 0.8;
@@ -346,12 +346,13 @@ video {
   width: 100%;
   height: 100%;
 
+
 }
 .loginCard {
-  position: absolute;
+/*  position: absolute;
   left: 25%;
-  top: 350px;
-  opacity: 0.8;
+  top: 350px;*/
+  opacity: 1;
 }
 
 .loginContent {
@@ -362,13 +363,37 @@ video {
 }
 
 .loginRow {
+
+  /*margin-top: 200px;*/
+  /*position: absolute;
+  top: 200px;
+  left: 200px;*/
   background: transparent;
 
 }
+
+.loginCard {
+  margin-top: -1px !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.loginContainer{
+
+     position: relative;
+     top: 300px;
+      height: 490px !important;
+      background-color: #6A8689;
+      opacity: 0.8 !important;
+
+}
 .descriptionRow {
-  position: absolute;
+  margin-top: 0 !important;
+  margin-left: 185px !important;
+  width: 66% !important;
+  /*position: absolute;
   top: 55%;
-  left: 35%;
+  left: 35%;*/
   background-color: transparent;
 }
 .descriptionBorder {
@@ -395,7 +420,7 @@ video {
   margin-bottom: 0;
 }
 .background404 {
-  background-image: url("https://cdn4.geckoandfly.com/wp-content/uploads/2015/09/android-windows-mac-iphone-prank-4.jpg");
+  background-image: url("/images/background404.jpg");
   background-repeat: no-repeat;
   height: 1005px;
   width: 1920px;
@@ -486,7 +511,7 @@ video {
 }
 
 .backgroundy {
-  background-image: url("https://www.imgbase.info/images/safe-wallpapers/photography/cityscape/49915_cityscape_city_life.jpg");
+  background-image: url("/images/loginBackground.jpg");
   background-repeat: no-repeat;
  
   height: 1005px;
@@ -494,7 +519,7 @@ video {
 }
 
 .backgroundLogout {
-  background-image: url("http://www.magazinereel.com/wp-content/uploads/2016/04/1-2.jpg");
+  background-image: url("/images/backgroundLogout.jpg");
   background-repeat: no-repeat;
 background-size: 100% 100%;
   height: 1005px;
@@ -514,9 +539,9 @@ background-size: 100% 100%;
 }
 
 .descriptionRow {
-  position: absolute;
+ /* position: absolute;
   top: 55%;
-  left: 33%;
+  left: 33%;*/
 
 }
 
@@ -547,9 +572,9 @@ position: absolute;
 }
 
 .descriptionRow {
-  position: absolute;
+/*  position: absolute;
   top: 55%;
-  left: 32%;
+  left: 32%;*/
 
 }
 
@@ -580,10 +605,10 @@ position: absolute;
 }
 
 .descriptionRow {
-  position: absolute;
+ /* position: absolute;
   top: 60%;
   left: 26%;
-
+*/
 }
 
 .head{
@@ -630,9 +655,9 @@ position: absolute;
 
 
 .descriptionRow {
-  position: absolute;
+  /*position: absolute;
   top: 60%;
-  left: 17%;
+  left: 17%;*/
 
 }
 
@@ -652,9 +677,9 @@ position: absolute;
 }
 
 .descriptionRow {
-  position: absolute;
+  /*position: absolute;
   top: 60%;
-  left: 10%;
+  left: 10%;*/
 
 }
 

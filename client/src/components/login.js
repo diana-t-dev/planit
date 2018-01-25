@@ -74,9 +74,9 @@ const cookies = new Cookies();
         (
               <div className="backgroundy">
 
-                  <div className="container">
+                  <div className="container loginContainer">
                     <div className="row loginRow">
-                        <div className="col s12 m8 l8">
+                        <div className="col s12">
                           <div className="loginCard card blue-grey darken-1">
                             <div className="loginContent card-content white-text">
                                <div className="center loginButton">
@@ -94,9 +94,10 @@ const cookies = new Cookies();
                         </div>
                       </div>
 
+
                       <div className="descriptionRow center row">
                         <div className=" col s4 m4 l4">
-                          <div className="card">
+                          <div className="loginCard card">
                               <div className="card-image">
                                 <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
                                 <span className="cardText card-title">Form Groups with your friends!</span>
@@ -108,7 +109,7 @@ const cookies = new Cookies();
                             </div>
                         </div>
                         <div className=" col s4 m4 l4">
-                           <div className="card">
+                           <div className="loginCard card">
                               <div className="card-image">
                                 <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
                                 <span className="cardText card-title">Vote on events!</span>
@@ -120,7 +121,7 @@ const cookies = new Cookies();
                             </div>
                         </div>
                         <div className=" col s4 m4 l4">
-                           <div className="card">
+                           <div className="loginCard card">
                               <div className="card-image">
                                 <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
                                 <span className="cardText card-title">Have fun!</span>
