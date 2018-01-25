@@ -8,6 +8,7 @@ import Form from "./form.js";
 import io from "socket.io-client";
 import axios from "axios";
 import ChanForm from "./channelform.js";
+import Img from 'react-image';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
@@ -36,6 +37,10 @@ class Home extends React.Component {
     image: "",
     error: ""
   };
+
+  	scrollToBottom = () => {
+		this.messagesEnd.scrollIntoView({behavior: "smooth"});
+	};
 
   getImage = () => {
 		var id = cookies.get('id')
@@ -217,6 +222,7 @@ componentDidMount(){
 	this.getChat();
 	this.getChannels();
 	this.getImage();
+	this.scrollToBottom();
 
 	 socket.on('RECEIVE_MESSAGE', (data) =>{
 
@@ -227,6 +233,12 @@ componentDidMount(){
 });
 
 }
+
+	componentDidUpdate() {
+		this.scrollToBottom();
+	}
+
+
 	render(){
 
 	 return (
@@ -263,17 +275,19 @@ componentDidMount(){
 </div>
 
 	<div  className="row">
-
 		<div className="col s12 top z-depth-2 bordy4 hoverable">
 		<h4 className="chatText">Channel: {room}</h4>
             <hr/>
 		<div className="col s12 bordy5">
 		<ul>
 { this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
-		<li><img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
-		<li><img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
+		<li><Img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
+		<li><Img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
 		}  )): ("") }
 		</ul>
+		 <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
 		</div>
 		</div>
 		<div className="col s12 top z-depth-2 bordy3 hoverable">
