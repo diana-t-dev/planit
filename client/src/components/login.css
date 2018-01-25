@@ -1,4 +1,9 @@
 
+.loginTitle{
+
+font-family: 'Pacifico', cursive;
+/*font-family: 'Bungee', cursive;*/
+}
 
 .signHeader{
 	height: 70px;

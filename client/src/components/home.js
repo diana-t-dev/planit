@@ -254,22 +254,18 @@ componentDidMount(){
 			<Nav/>
 					<h1 className="center titles groupText">My Dashboard</h1>
 
-<div className="row">
+<div  className="container">
+<div  className="row">
 <div className="col s1">
 					 <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>Channels</a>
 					  <ul id='dropdown1' className='dropdown-content'>
 					 {this.state.channels.map(i =>{
 					 return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }
                     }>{i.name}</a></li> 	
-
 					 })}
                   </ul>
                </div>
-               </div>
-	<div  className="container">
-
-	<div  className="row">
-		<div className="col s12 center">
+		<div className="col s11 center">
 					<a className="btn #42a5f5 blue lighten-1 " onClick={this.toggleForm}>Add Channel</a>
    {this.state.form ?(
                   	<ChanForm
