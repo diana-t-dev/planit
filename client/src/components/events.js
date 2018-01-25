@@ -35,11 +35,11 @@ class Events extends Component {
     
     let eventsExist = this.state.events && this.state.events !== null;
     if (eventsExist) {
-      let eventInfo = this.state.events.map(event => {
+      let eventInfo = this.state.events.map(events => {
         return <div className='eventy'>
-          <h5>{event.type}: {event.name} - Posted By: {event.person}</h5>
-          <a className="btn #42a5f5 blue lighten-1 " eventid={event.id} for="upvote" onClick={(event) => this.handleVotes(event, event.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={event.id} for="downvote" onClick={(event) => this.handleVotes(event, event.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
-          <p className="votey">Votes: {event.votes}</p>
+          <h5>{events.type}: {events.name} - Posted By: {events.person}</h5>
+          <a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
+          <p className="votey">Votes: {events.votes}</p>
           </div>
       })
       return eventInfo;
