@@ -84,7 +84,7 @@ componentDidMount(){
                <label for="icon_name">What's on your mind?</label>
                 </div>
                 <div className="col s3">
-                <a className="btn center" onClick={this.coms}>Enter</a>
+                <a className="btn center #42a5f5 blue lighten-1 " onClick={this.coms}>Enter</a>
                 </div>
                </form>
 

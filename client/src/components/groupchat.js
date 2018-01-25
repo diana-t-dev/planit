@@ -159,9 +159,9 @@ render() {
                 </div>
                </form>
 
-               <a className="btn" onClick={this.search}>Places</a>
-               <a className="btn" onClick={this.searchevent}>Events</a>
-               <a className="btn" onClick={this.searchmovie}>Movies</a>
+               <a className="btn #42a5f5 blue lighten-1 " onClick={this.search}>Places</a>
+               <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchevent}>Events</a>
+               <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchmovie}>Movies</a>
           <h4 className="resultsText">Results</h4>
           <hr/>
             <ul>
@@ -177,7 +177,7 @@ render() {
 
                {i.categories[0] !== undefined ?(
                <li className="hovy">{i.categories[0].name}</li>):("")}
-              <a className="btn" onClick={() =>this.add(i.name, "Place")}>Add to Group</a>
+              <a className="btn #42a5f5 blue lighten-1 " onClick={() =>this.add(i.name, "Place")}>Add to Group</a>
                </div>
 
            ) ):("")
@@ -194,7 +194,7 @@ render() {
              <li className="hovy">{i.name.text}</li>
               <li className="hovy">Date: {i.start.local}</li>
               <li className="hovy"><a href={i.url} target="_blank">Link to Event</a></li>
-              <a className="btn" onClick={() =>this.add(i.name.text, "Event")}>Add to Group</a>
+              <a className="btn #42a5f5 blue lighten-1 " onClick={() =>this.add(i.name.text, "Event")}>Add to Group</a>
                </div>
 
            ) ):("")
@@ -211,7 +211,7 @@ render() {
              <li className="hovy">{i.original_title}</li>
               <li className="hovy">Rating: {i.vote_average}</li>
             <li className="hovy">Plot: {i.overview}</li>
-              <a className="btn" onClick={() =>this.add(i.original_title, "Movie")}>Add to Group</a>
+              <a className="btn #42a5f5 blue lighten-1 " onClick={() =>this.add(i.original_title, "Movie")}>Add to Group</a>
                </div>
 
            ) ):("")

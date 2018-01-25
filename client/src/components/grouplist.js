@@ -96,7 +96,7 @@ render() {
           
         <div className="col s12 m1 l1 small">
         <div className="col s12">
-            <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>My Groups</a>
+            <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>My Groups</a>
                   <ul id='dropdown1' className='dropdown-content'>
                   {this.state.groups.map((group) => {
                     if (group === 'no groups yet') {
