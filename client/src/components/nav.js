@@ -7,7 +7,7 @@ const Nav = props => (
 <div class="header">
   <nav className="transparent z-depth-0">
     <a class="brand-logo"><Link to="/"><i class="material-icons">home</i></Link></a>
-    <a className="head"><Link to="/">S u p e r P a r t y P l a n n e r </Link></a>
+    <a className="head center"><Link to="/">p l a n I t </Link></a>
     <ul id="nav-mobile" className="right hide-on-med-and-down navTab">     
       <li className="navTab"><Link to="/friends">Friends</Link></li>
       <li className="navTab"><Link to="/groups">Groups</Link></li>
