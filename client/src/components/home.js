@@ -73,9 +73,9 @@ class Home extends React.Component {
   	})
 
   	var profanity = ["fuck", "shit", "cock", "bitch", "asshole", 
-  	"goddammit", "tits", "8==D", "cunt", "ass", "motherfucker", "cocksucker", 
-  	"piss", "fag", "faggot", "dyke", "whore", "dick", "8===D", "penis", "pussy", "8=D",
-  	"8====D", "8=====D", "8======D", 'fayg', "nigger", "nigga", "wetback", "spic", "gook", "mooncricket"];
+  	"goddammit", "tits", "8==d", "cunt", "ass", "motherfucker", "cocksucker", 
+  	"piss", "fag", "faggot", "dyke", "whore", "dick", "8===d", "penis", "pussy", "8=d",
+  	"8====d", "8=====d", "8======d", 'fayg', "nigger", "nigga", "wetback", "spic", "gook", "mooncricket", "chink"];
 
   	var chatWordy = this.state.chat.split(" ");
 
