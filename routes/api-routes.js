@@ -192,7 +192,7 @@ module.exports = function(app) {
     console.log(req.params.groupId);
 
     db.user.findById(req.params.userId).then(user => {
-      user.addGroup(req.params.groupId).then(() => {
+      user.addGroups(req.params.groupId).then(() => {
         console.log('success');
         res.end();
       })
@@ -391,6 +391,7 @@ module.exports = function(app) {
     console.log(`params userid: ${req.params.userId}, type: ${typeof req.params.userId}`)
     db.user.findById(req.params.userId).then(user => {
       user.getGroups().then((results) => {
+        console.log(`####### ${JSON.stringify(results)}`);
         console.log('success');
         res.send(results);
       })

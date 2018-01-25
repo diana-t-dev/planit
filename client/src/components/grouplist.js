@@ -27,22 +27,13 @@ class List extends Component {
 
   };
 
-  // getUser = () => {
-  //   let name = cookies.get('name');
-  //   axios.get('/users/' + name).then(user => {
-  //     console.log(user);
-  //     user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
-  //   }).then(() => {
-  //     this.getGroups();
-  //   })
-  // };
-
   getGroups = () => {
 
 
     // let userId = cookies.get('id');
 
     axios.get('/mygroups/' + this.state.id).then(results => {
+      console.log(results);
 
       // set group state equal to the list of group objs
       if (!results.data[0]) {

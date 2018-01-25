@@ -93,7 +93,7 @@ class Form extends Component {
 			this.setState({groupId: results.data.id});
 			console.log(`STATE ID ${this.state.id}`);
 			console.log(`STATE GROUP ID ${this.state.groupId}`);
-			axios.post(`/groups/members/${this.state.id}/${this.state.groupId}`).then(results => {
+			axios.post(`/groups/members/${this.state.id}/${results.data.id}`).then(results => {
 				console.log(results);
 			});
 			// send notifications to all group members
