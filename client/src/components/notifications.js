@@ -114,7 +114,8 @@ class Notifications extends Component {
                             return <tr key={el.id}>
                                 <td>{el.from}</td>
                                 <td>{el.type}</td>
-                                <td><a className="btn" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.id, el.groupId)}>Accept</a><a className="btn" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
+                                <td><a className="btn #42a5f5 blue lighten-1" data-id={el.id} onClick={() => this.acceptRequest(el.id, el.userId, el.type, this.state.id, el.groupId)}>Accept</a><a className="btn #ef5350 red lighten-1
+" data-id={el.id} onClick={() => this.deleteNotification(el.id)}>Decline</a></td>
                             </tr>
                             }
                             })}
