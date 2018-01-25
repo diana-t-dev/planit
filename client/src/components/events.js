@@ -13,7 +13,7 @@ class Events extends Component {
   state = {
 
     group: "",
-    name: "",
+    name: "Select a group to see suggested events!",
     events: [],
     form: false
   };
@@ -119,7 +119,7 @@ class Events extends Component {
 
 
       <div className="col s6">
-        <h4 className="groupHeader">Group: {this.state.name}</h4>
+        <h4 className="groupHeader">{this.state.name}</h4>
         <hr />
 
         <ul className="collapsible" data-collapsible="accordion">
