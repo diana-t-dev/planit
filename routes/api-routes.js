@@ -328,23 +328,23 @@ module.exports = function(app) {
 
   });
 
-   app.post("/chat", function(req, res) {
+  //  app.post("/chat", function(req, res) {
 
-    console.log(req.body)
+  //   console.log(req.body)
 
-    db.chat.create({
-      name: req.body.name,
-      text: req.body.chat,
-      image: req.body.image,
-      channelId: req.body.room
+  //   db.chat.create({
+  //     name: req.body.name,
+  //     text: req.body.chat,
+  //     image: req.body.image,
+  //     channelId: req.body.room
 
-    }).then(function(results) {
+  //   }).then(function(results) {
 
 
-      res.json(results);
-    });
+  //     res.json(results);
+  //   });
 
-  });
+  // });
 
 
       app.get("/chats/:id", function(req, res) {
