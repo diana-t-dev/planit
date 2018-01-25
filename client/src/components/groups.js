@@ -29,12 +29,15 @@ this.setState({
 
 
 console.log(this.state.mygroup)
+console.log('first click');
+
+// this.forceUpdate();
 
   };
 
-  componentDidMount () {
-
-  }
+  // componentDidUpdate () {
+  //   this.setgroup(this.state.mygroup);
+  // }
 
 render() { 
 
