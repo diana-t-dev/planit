@@ -68,6 +68,10 @@ class Home extends React.Component {
   chats = (event) => {
   	event.preventDefault();
 
+  	  	this.setState({
+  		error: ""
+  	})
+
   	var profanity = ["fuck", "shit", "cock", "bitch", "asshole", 
   	"goddammit", "tits", "8==>", "cunt", "ass", "motherfucker", "cocksucker", 
   	"piss", "fag", "faggot", "dike", "whore", "dick", "8===>", "penis", "pussy"];
@@ -111,14 +115,14 @@ this.setState({
   socket.emit('SEND_MESSAGE', ({
 
   name: cookies.get('name'),
-  chat: this.state.chat.trim(),
+  chat: chatWordy.join(" "),
   room: this.state.room,
   image: this.state.image
 
   }));
 
+
   	this.setState({
-  		error: "",
   		chat: ""
   	})
 
