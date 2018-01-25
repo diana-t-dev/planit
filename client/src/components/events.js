@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import '../App.css';
 import axios from 'axios';
 import CommentCard from './commentcard.js';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
+import 'materialize-css/dist/js/materialize.min.js';
+import $ from "jquery";
+import "./events.css"
 
 class Events extends Component {
 
@@ -15,13 +20,14 @@ class Events extends Component {
 
   componentDidMount() {
     console.log("mounted");
-
+    $('.tooltipped').tooltip({delay: 50});
   }
 
   componentDidUpdate(props) {
     console.log("updated");
     console.log(props);
     // this.renderEvents();
+    $('.tooltipped').tooltip({delay: 50});
   }
 
   componentWillReceiveProps(props) {
@@ -39,9 +45,9 @@ class Events extends Component {
         return <li>
           <div className="collapsible-header"><i className="material-icons">event</i>First<span>{events.name}</span></div>
           <div className="collapsible-body">
-            <p>Suggested by: {events.person}</p>
+            <h5>Suggested by: {events.person}</h5>
             <h6 className="votey">Current Votes: {events.votes}</h6>
-            <a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}>Upvote<i class="large material-icons">arrow_upward</i></a><a className="btn #42a5f5 blue lighten-1 " eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}>Downvote<i class="large material-icons">arrow_downward</i></a>
+            <a className="btn tooltipped upvote" data-position="top" data-delay="50" data-tooltip="Upvote" eventid={events.id} for="upvote" onClick={(event) => this.handleVotes(event, events.id)}><i class="large material-icons">arrow_upward</i></a><a className="btn tooltipped downvote" data-position="top" data-delay="50" data-tooltip="Downvote" eventid={events.id} for="downvote" onClick={(event) => this.handleVotes(event, events.id)}><i class="large material-icons">arrow_downward</i></a>
           </div>
         </li>
 

@@ -1,0 +1,17 @@
+.upvote {
+    background-color: red;
+    margin-right: 15px;
+}
+
+.upvote:hover {
+    background-color: #d10000;
+}
+
+.downvote {
+    background-color: #0f79dd;
+    margin-right: 15px;
+}
+
+.downvote:hover {
+    background-color: #0f61dd;
+}
