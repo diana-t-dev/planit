@@ -75,6 +75,13 @@ const cookies = new Cookies();
               <div className="backgroundy">
 
                   <div className="container loginContainer">
+                     <div className="row loginRow">
+                        <div className="col s12 center">
+                   <h2 className="loginTitle"><img src="/images/fav.gif" height="75px"/>planIt</h2>
+                  
+                        <h4 className="loginTitle">Do fun stuff with friends</h4>
+                        </div>
+                        </div>
                     <div className="row loginRow">
                         <div className="col s12">
                           <div className="loginCard card blue-grey darken-1">
@@ -96,38 +103,39 @@ const cookies = new Cookies();
 
 
                       <div className="descriptionRow center row">
-                        <div className=" col s4 m4 l4">
-                          <div className="loginCard card">
+               
+                       <div className=" col s4 m4 l4">
+                           <div className="loginCard card">
                               <div className="card-image">
                                 <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
-                                <span className="cardText card-title">Form Groups with your friends!</span>
+                                <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p>Add your friends and form a group!</p>
-                              </div>
-                              
+                                <p>Add your friends and form a group! In your groups, you can search for events, places, and movies.</p>
+                              </div>    
                             </div>
                         </div>
                         <div className=" col s4 m4 l4">
                            <div className="loginCard card">
                               <div className="card-image">
                                 <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
-                                <span className="cardText card-title">Vote on events!</span>
+                                <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p>In your groups, you can search for events and vote. The highest voted event will make it to the top of the groups page.</p>
+                                <p>Vote events up and down, to pick the best one for your group!</p>
                               </div>
                               
                             </div>
                         </div>
-                        <div className=" col s4 m4 l4">
+
+                          <div className=" col s4 m4 l4">
                            <div className="loginCard card">
                               <div className="card-image">
                                 <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
-                                <span className="cardText card-title">Have fun!</span>
+                                <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p>Enjoy!</p>
+                                <p>Chat with users, friends, groups, and make your own chat channels!</p>
                               </div>
                               
                             </div>
