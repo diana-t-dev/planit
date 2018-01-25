@@ -37,6 +37,10 @@ class Home extends React.Component {
     error: ""
   };
 
+  	scrollToBottom = () => {
+		this.messagesEnd.scrollIntoView({behavior: "smooth"});
+	};
+
   getImage = () => {
 		var id = cookies.get('id')
 		axios.get("/image/"+id)
@@ -217,6 +221,7 @@ componentDidMount(){
 	this.getChat();
 	this.getChannels();
 	this.getImage();
+	this.scrollToBottom();
 
 	 socket.on('RECEIVE_MESSAGE', (data) =>{
 
@@ -227,6 +232,12 @@ componentDidMount(){
 });
 
 }
+
+	componentDidUpdate() {
+		this.scrollToBottom();
+	}
+
+
 	render(){
 
 	 return (
@@ -263,7 +274,6 @@ componentDidMount(){
 </div>
 
 	<div  className="row">
-
 		<div className="col s12 top z-depth-2 bordy4 hoverable">
 		<h4 className="chatText">Channel: {room}</h4>
             <hr/>
@@ -274,6 +284,9 @@ componentDidMount(){
 		<li><img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
 		}  )): ("") }
 		</ul>
+		 <div style={{ float:"left", clear: "both" }}
+             ref={(el) => { this.messagesEnd = el; }}>
+        </div>
 		</div>
 		</div>
 		<div className="col s12 top z-depth-2 bordy3 hoverable">
