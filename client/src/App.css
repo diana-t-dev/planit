@@ -219,8 +219,12 @@ height: 90px;
 .navTab {
   font-size: 12px !important;
   background-color: none;
-  
+}
 
+.brand-logo{
+  font-size: 16px !important;
+  padding-left: 20px !important;
+  top: 0px;
 }
 
 .transparent {
