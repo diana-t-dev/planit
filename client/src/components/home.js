@@ -18,7 +18,7 @@ const cookies = new Cookies();
 
 var socket = io("/");
 
-var room = "general";
+var room = "General";
 
 const styles = {
 

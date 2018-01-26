@@ -2,9 +2,9 @@ import React from "react";
 import '../App.css';
 
 const colors = {
-  backgroundColor: "dodgerblue",
+  backgroundColor: "#31708E",
   paddingBottom: "20px",
-  marginTop:"60px"
+  marginTop:"160px"
 };
 
 const footerNames = {

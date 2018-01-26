@@ -1,5 +1,5 @@
 .accept-btn {
-    background-color: #0fdd49;
+    background-color: #43a047;
     margin-right: 15px;
 }
 
@@ -8,7 +8,7 @@
 }
 
 .delete-btn {
-    background-color: red;
+    background-color: #b71c1c;
 }
 
 .delete-btn:hover {

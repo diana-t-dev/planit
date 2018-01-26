@@ -188,7 +188,7 @@ console.log("FRIEND ID", typeof i)
             <div className="container">
               <div className="row toprow">
                 <div className="col s12">
-                  <a className='dropdown-button btn material-icons left add-friend #42a5f5 blue lighten-1 ' href='#' data-activates='dropdown1'>Add Friend</a>
+                  <a className='dropdown-button btn material-icons left' id='add-friend' href='#' data-activates='dropdown1'>Add Friend</a>
                   <ul id='dropdown1' className='dropdown-content'>
                     {
                     this.state.users.map(i => {
@@ -212,7 +212,7 @@ console.log("FRIEND ID", typeof i)
                         <td><img className="friendImg" alt={i.name} src={i.image}/></td>
                         <td>{i.name}</td>
                         <td>{i.loggedIn===true? <span>✅</span> : <span>❌</span>  }</td>
-                        <td><a className="waves-effect waves-light btn delfriend #ef5350 red lighten-1
+                        <td><a className="waves-effect waves-light btn delfriend #ef5350 red darken-4
 " onClick={() => this.delFriend(i.id)}>Remove Friend</a></td>
                         </tr>)} 
                      ))}

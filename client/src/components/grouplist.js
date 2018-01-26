@@ -71,13 +71,13 @@ render() {
     <div>
       <div className="row">
         <div className="col s12">
-          <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
+          <a className="btn waves-effect mygroups" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
           {this.state.form ? (<Form click={this.toggleForm} newGroup={this.props.newGroup} />) : ("")}
         </div>
       </div>
 
       <div className="col s2">
-        <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>My Groups</a>
+        <a className='dropdown-button btn material-icons left mygroups' data-activates='dropdown1'>My Groups</a>
         <ul id='dropdown1' className='dropdown-content'>
           {this.state.groups.map((group) => {
             if (group === 'no groups yet') {
