@@ -150,18 +150,16 @@ class Chat extends Component {
               <input id="icon_name" type="text" name="thing" className="validate" onChange={this.inputChange} />
               <label for="icon_name">What do you want to do?</label>
             </div>
-          </form>
-          <form>
             <div className="input-field col s12">
               <i className="material-icons icon-blue prefix">location_on</i>
               <input id="icon_location" type="text" name="location" className="validate" onChange={this.inputChange} />
-              <label for="icon_location">where are you searching?</label>
+              <label for="icon_location">Where are you searching?</label>
             </div>
           </form>
 
-          <a className="btn #42a5f5 blue lighten-1 " onClick={this.search}>Places</a>
-          <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchevent}>Events</a>
-          <a className="btn #42a5f5 blue lighten-1 " onClick={this.searchmovie}>Movies</a>
+          <a className="btn searchBtn" onClick={this.search}>Places</a>
+          <a className="btn searchBtn" onClick={this.searchevent}>Events</a>
+          <a className="btn searchBtn" onClick={this.searchmovie}>Movies</a>
           <h4 className="resultsText">Results</h4>
           <hr />
           <ul>

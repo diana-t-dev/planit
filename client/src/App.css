@@ -1,3 +1,20 @@
+body{
+  background: #f7f9fb;
+
+}
+
+hr {
+  height: 5px !important;
+  background: #687864 !important;
+}
+
+
+thead {
+    border-bottom: 5px solid #687864 !important;
+}
+
+
+
 table { table-layout: fixed; }
 td, th { 
   width: 25%;
@@ -160,16 +177,26 @@ i.icon-blue {
   background-color: dodgerblue;
 
 }
+.searchBtn{
+  background:#31708e !important;
+  margin-right: 5px
+}
+
+.mygroups{
+  background: #31708e !important;
+}
 
 .toprow{
-
-
-  padding-bottom: 25px;
+  border: solid #31708e 3px;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 100px;
 }
 
 .bordy {
 
-  border: 2px solid black;
+  border: 3px solid #31708e;
+  border-radius: 5px;
   height: 900px;
   overflow: auto;
 }
@@ -195,16 +222,17 @@ i.icon-blue {
 
 .bordy3 {
 
-  border: 2px solid black;
+  border: 3px solid #31708e;
   height: 200px;
   overflow: auto;
   margin-top: 10px;
+  border-radius: 5px;
 }
 
 .bordy4 {
 
-  border: 2px solid black;
-
+  border: 3px solid #31708e;
+  border-radius: 5px;
 }
 
 .bordy5 {
@@ -302,6 +330,10 @@ video {
   text-align: center;
   position: relative;
   z-index: 10;
+}
+
+#add-friend{
+  background: #5085a5;
 }
 
 .navbarTitle{

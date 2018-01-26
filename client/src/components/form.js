@@ -142,7 +142,7 @@ class Form extends Component {
 										 <ul id='friend-dropdown' className='dropdown-content'>
 											 {this.state.friends.map(friend => <li key={friend}><a type="button" className="addFriend" data-id="username" onClick={() => this.addToGroup(friend)}>{friend}</a></li>)}
 										 </ul>
-										 <a type="button" className="waves-effect btn" onClick={(event) => {
+										 <a type="button" className="waves-effect btn #31708e mygroups" onClick={(event) => {
 											 this.createGroup(event);
 											 this.props.newGroup(true);
 											 }}>Send Group Invites!</a>
