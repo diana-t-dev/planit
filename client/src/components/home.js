@@ -28,220 +28,225 @@ const styles = {
 
 class Home extends React.Component {
 
-	  state = {
-    form: false,
-    chat: "",
-    all: [],
-    channels: [],
-    room: 1,
-    image: "",
-    error: ""
-  };
+		state = {
+			form: false,
+			chat: "",
+			all: [],
+			channels: [],
+			room: 1,
+			image: "",
+			error: ""
+		};
 
-  	scrollToBottom = () => {
+		scrollToBottom = () => {
 
-  		if (this.messagesEnd !== undefined){
-		this.messagesEnd.scrollIntoView({behavior: "smooth"});
-	}
-	};
-
-  getImage = () => {
-		var id = cookies.get('id')
-		axios.get("/image/"+id)
-		.then(user => {
-			if(user.data[0] !== undefined){
-			this.setState({image: user.data[0].image});
+			if (this.messagesEnd !== undefined) {
+				this.messagesEnd.scrollIntoView({
+					behavior: "smooth"
+				});
 			}
-		})	
-	};
+		};
 
-     inputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+		getImage = () => {
+			var id = cookies.get('id')
+			axios.get("/image/" + id)
+				.then(user => {
+					if (user.data[0] !== undefined) {
+						this.setState({
+							image: user.data[0].image
+						});
+					}
+				})
+		};
 
-    this.setState({
-      [name]: value
-    });
+		inputChange = event => {
+			const name = event.target.name;
+			const value = event.target.value;
 
-  };
+			this.setState({
+				[name]: value
+			});
 
-  chats = (event) => {
-  	event.preventDefault();
+		};
 
-  	  	this.setState({
-  		error: ""
-  	})
+		chats = (event) => {
+			event.preventDefault();
 
-  	var profanity = ["fuck", "shit", "cock", "bitch", "asshole", 
-  	"goddammit", "tits", "8==d", "cunt", "ass", "motherfucker", "cocksucker", 
-  	"piss", "fag", "faggot", "dyke", "whore", "dick", "8===d", "penis", "pussy", "8=d",
-  	"8====d", "8=====d", "8======d", 'fayg', "nigger", "nigga", "wetback", "spic", "gook", "mooncricket", "chink"];
+			this.setState({
+				error: ""
+			})
 
-  	var chatWordy = this.state.chat.split(" ");
+			var profanity = ["fuck", "shit", "cock", "bitch", "asshole",
+				"goddammit", "tits", "8==d", "cunt", "ass", "motherfucker", "cocksucker",
+				"piss", "fag", "faggot", "dyke", "whore", "dick", "8===d", "penis", "pussy", "8=d",
+				"8====d", "8=====d", "8======d", 'fayg', "nigger", "nigga", "wetback", "spic", "gook", "mooncricket", "chink"
+			];
 
-  	console.log("SPLIT 1 ", chatWordy);
+			var chatWordy = this.state.chat.split(" ");
 
-	console.log("CHAT, ", this.state.chat.trim())
+			console.log("SPLIT 1 ", chatWordy);
 
-  if (this.state.chat.trim() === ""){
+			console.log("CHAT, ", this.state.chat.trim())
 
-  		this.setState({
+			if (this.state.chat.trim() === "") {
 
-		error: "Chat Must Not Be Empty!"
-	})
-  		return false;
-}
+				this.setState({
 
- for (var i = 0; i < chatWordy.length; i++) {
+					error: "Chat Must Not Be Empty!"
+				})
+				return false;
+			}
 
-for (var j = 0; j < profanity.length; j++) {
-	
-	if(chatWordy[i].toLowerCase() === profanity[j]){
+			for (var i = 0; i < chatWordy.length; i++) {
 
-		chatWordy[i] = "****";
-		j++;
-		this.setState({
-  		error: "No Profanity Please!"	})
-	}
-}
- 	}
+				for (var j = 0; j < profanity.length; j++) {
 
-console.log("SPLIT 2 ", chatWordy);
+					if (chatWordy[i].toLowerCase() === profanity[j]) {
 
-this.setState({
+						chatWordy[i] = "****";
+						j++;
+						this.setState({
+							error: "No Profanity Please!"
+						})
+					}
+				}
+			}
 
-	chat: chatWordy.join(" ")
-})
+			console.log("SPLIT 2 ", chatWordy);
 
-  socket.emit('SEND_MESSAGE', ({
+			this.setState({
 
-  name: cookies.get('name'),
-  chat: chatWordy.join(" "),
-  room: this.state.room,
-  image: this.state.image
+				chat: chatWordy.join(" ")
+			})
 
-  }));
+			socket.emit('SEND_MESSAGE', ({
+
+				name: cookies.get('name'),
+				chat: chatWordy.join(" "),
+				room: this.state.room,
+				image: this.state.image
+
+			}));
 
 
-  	this.setState({
-  		chat: ""
-  	})
+			this.setState({
+				chat: ""
+			})
 
-  console.log('chat posted');
-  
-  	};
+			console.log('chat posted');
 
-getChat = () =>{
+		};
 
-	let roomy = this.state.room;
+		getChat = () => {
 
-	axios.get("/chats/"+roomy).then(data => {
+			let roomy = this.state.room;
 
-		console.log("got chats");
-		console.log(data.data);
+			axios.get("/chats/" + roomy).then(data => {
 
-	this.setState({
+				console.log("got chats");
+				console.log(data.data);
 
-		all: data.data
-	})
+				this.setState({
 
-console.log(this.state.all)
-})
-};
+					all: data.data
+				})
 
-getChannels = () => {
+				console.log(this.state.all)
+			})
+		};
 
-		let daty = {
+		getChannels = () => {
 
-	name: "general"
-}
+			let daty = {
 
-axios.get("/channels").then(data => {
+				name: "general"
+			}
 
-		console.log("got channels");
-		console.log(data.data);
+			axios.get("/channels").then(data => {
 
-	this.setState({
+				console.log("got channels");
+				console.log(data.data);
 
-		channels: data.data
-	})
+				this.setState({
 
-  $('.dropdown-button').dropdown({
-          inDuration: 300,
-          outDuration: 225,
-          constrainWidth: true, // Does not change width of dropdown to that of the activator
-          hover: false, // Activate on hover
-          gutter: 0, // Spacing from edge
-          belowOrigin: false, // Displays dropdown below the button
-          alignment: 'left', // Displays dropdown with edge aligned to the left of button
-          stopPropagation: false // Stops event propagation	
+					channels: data.data
+				})
 
-});
-  
-data.data[0] === undefined?(
+				$('.dropdown-button').dropdown({
+					inDuration: 300,
+					outDuration: 225,
+					constrainWidth: true, // Does not change width of dropdown to that of the activator
+					hover: false, // Activate on hover
+					gutter: 0, // Spacing from edge
+					belowOrigin: false, // Displays dropdown below the button
+					alignment: 'left', // Displays dropdown with edge aligned to the left of button
+					stopPropagation: false // Stops event propagation	
 
-axios.post("/channel", {daty}).then(data => {
+				});
 
-	console.log("general channel set");
-	console.log(data);
-	this.setState({
+				data.data[0] === undefined ? (
 
-		room: data.data.id
-	})
-	this.getChannels();
-})):("")
+					axios.post("/channel", {
+						daty
+					}).then(data => {
 
-})
-};
+						console.log("general channel set");
+						console.log(data);
+						this.setState({
 
-goToChan = (chan, name) => {
+							room: data.data.id
+						})
+						this.getChannels();
+					})) : ("")
 
-console.log("CHANNEL ", chan);
+			})
+		};
 
-this.setState({
+		goToChan = (chan, name) => {
 
-	room: chan
-})
+			console.log("CHANNEL ", chan);
 
-room = name;
+			this.setState({
 
-setTimeout(() => { console.log("ROOM", this.state.room), this.getChat(); }, 500);
+				room: chan
+			})
 
-};
+			room = name;
 
- toggleForm = () =>{
+			setTimeout(() => {
+				console.log("ROOM", this.state.room), this.getChat();
+			}, 500);
 
-  	this.state.form === false ?(
+		};
 
-  		this.setState({
+		toggleForm = () => {
 
-  			form:true
-  		})):(
-		this.setState({
+			this.state.form === false ? (this.setState({
+				form: true
+			})) : (this.setState({
+				form: false
+			}))
+		};
 
-  			form:false
-  		})
-		
-  		)};
+		componentDidMount() {
 
-componentDidMount(){
+			this.getImage();
+			this.getChat();
+			this.getChannels();
+			this.scrollToBottom();
 
-	this.getImage();
-	this.getChat();
-	this.getChannels();
-	this.scrollToBottom();
+			socket.on('RECEIVE_MESSAGE', (data) => {
+				this.getChat();
+			});
 
-	 socket.on('RECEIVE_MESSAGE', (data) =>{
+		}
 
-    this.getChat();
-     
-});
+		componentDidUpdate() {
+			if (!this.state.form) {
+				this.scrollToBottom();
+			}
 
-}
-
-	componentDidUpdate() {
-		this.scrollToBottom();
-	}
+		}
 
 
 	render(){
@@ -250,68 +255,58 @@ componentDidMount(){
 
 	 cookies.get('name') === undefined ? (<Login {...this.props}/>):(
 
-		<div>
-			<Nav/>
-					<h1 className="center titles groupText">My Dashboard</h1>
-
-<div  className="container">
-<div  className="row">
-<div className="col s1">
-					 <a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>Channels</a>
-					  <ul id='dropdown1' className='dropdown-content'>
-					 {this.state.channels.map(i =>{
-					 return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }
-                    }>{i.name}</a></li> 	
-					 })}
-                  </ul>
-               </div>
-		<div className="col s11 center">
-					<a className="btn #42a5f5 blue lighten-1 " onClick={this.toggleForm}>Add Channel</a>
-   {this.state.form ?(
-                  	<ChanForm
-                  	form={this.toggleForm}
-                  	getchan={this.getChannels}/>
-                  	):("")}
-</div>
-</div>
-
-	<div  className="row">
-		<div className="col s12 top z-depth-2 bordy4 hoverable">
-		<h4 className="chatText">Channel: {room}</h4>
-            <hr/>
-		<div className="col s12 bordy5">
-		<ul>
-{ this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
-		<li><Img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
-		<li><Img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
-		}  )): ("") }
-		</ul>
-		 <div style={{ float:"left", clear: "both" }}
-             ref={(el) => { this.messagesEnd = el; }}>
-        </div>
+<div>
+	<Nav/>
+		<h1 className="center titles groupText">My Dashboard</h1>
+		<div className="container">
+			<div className="row">
+				<div className="col s1">
+					<a className='dropdown-button btn material-icons left mygroups #42a5f5 blue lighten-1 ' data-activates='dropdown1'>Channels</a>
+					<ul id='dropdown1' className='dropdown-content'>
+						{this.state.channels.map(i =>{
+						return <li><a type="button" className="goToChan" data-id="username" onClick={() => { this.goToChan(i.id, i.name) }
+						}>{i.name}</a></li>
+						})}
+					</ul>
+				</div>
+				<div className="col s11 center">
+					<a className="btn #42a5f5 blue  " onClick={this.toggleForm}>Add Channel</a>
+					{this.state.form ?( <ChanForm form={this.toggleForm} getchan={this.getChannels}/> ):("")}
+				</div>
+			</div>
+			<div  className="row">
+				<div className="col s12 top z-depth-2 bordy4 hoverable">
+					<h4 className="chatText">Channel: {room}</h4>
+					<hr/>
+					<div className="col s12 bordy5">
+						<ul>
+							{ this.state.all !== [] ?( this.state.all.map(i => { return   i.name === cookies.get('name')?
+							<li><Img className='chatImages' alt={i.name} src={i.image}/><span className='chatwords blue'>{i.name}: {i.text}</span></li>:
+							<li><Img className='chatImages' alt={i.name} src={i.image}/> <span className='chatwords light-green'>{i.name}: {i.text}</span></li>
+							}  )): ("") }
+						</ul>
+						<div style={{ float:"left", clear: "both" }}
+							ref={(el) => { this.messagesEnd = el; }}>
+						</div>
+					</div>
+				</div>
+				<div className="col s12 top z-depth-2 bordy3 hoverable">
+					<h4 className="chatText">Chat <span style={styles}>{this.state.error}</span></h4>
+					<hr/>
+					<form className="col s12" onSubmit={this.chats} >
+						<div className="input-field col s9 ">
+							<i className="material-icons icon-blue prefix">message</i>
+							<input id="icon_name" value={this.state.chat} type="text" className="validate chatty"  name="chat" onChange={this.inputChange} />
+							<label for="icon_name">What's on your mind'?</label>
+						</div>
+						<div className="col s3">
+							<a className="btn #42a5f5 blue lighten-1  center" onClick={this.chats}>Enter</a>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-		</div>
-		<div className="col s12 top z-depth-2 bordy3 hoverable">
-		  <h4 className="chatText">Chat <span style={styles}>{this.state.error}</span></h4>
-            <hr/>
-           <form className="col s12" onSubmit={this.chats} >
-                <div className="input-field col s9 ">
-                 <i className="material-icons icon-blue prefix">message</i>
-                 <input id="icon_name" value={this.state.chat} type="text" className="validate chatty"  name="chat" onChange={this.inputChange} />
-               <label for="icon_name">What's on your mind'?</label>
-                </div>
-                <div className="col s3">
-                <a className="btn #42a5f5 blue lighten-1  center" onClick={this.chats}>Enter</a>
-                </div>
-               </form>
-
-
-		</div>
-
-		</div>
-		</div>
-			
-			<Footer/>
+		<Footer/>
 		</div>
 		)
 	 );
