@@ -112,7 +112,7 @@ class Events extends Component {
     return (
 
 
-      <div className="col s6">
+      <div className="col s6 events-list">
         <h4 className="groupHeader">{this.state.name}</h4>
         <hr />
 

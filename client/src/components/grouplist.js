@@ -70,10 +70,11 @@ render() {
   return ( 
     <div>
       <div className="row">
-        <div className="col s12">
-          <a className="waves-effect #42a5f5 blue lighten-1 btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
+        <div className="col s12 center">
+          <a className="waves-effect btn" onClick={() => this.toggleForm()}><i className="material-icons left">assignment</i>Add A Group</a>
           {this.state.form ? (<Form click={this.toggleForm} newGroup={this.props.newGroup} />) : ("")}
         </div>
+        <hr/>
       </div>
 
       <div className="col s2">

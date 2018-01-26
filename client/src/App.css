@@ -694,3 +694,8 @@ position: absolute;
 }
 
 }
+
+body {
+  /* background-color: #7B695C; */
+  font-family: 'Nunito', sans-serif !important;
+}
