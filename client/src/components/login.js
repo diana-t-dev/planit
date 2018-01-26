@@ -107,7 +107,7 @@ const cookies = new Cookies();
                        <div className=" col s4 m4 l4">
                            <div className="loginCard card">
                               <div className="card-image">
-                                <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                                <img src="https://media.giphy.com/media/26wkuamBBxrz8uauA/giphy.gif"/>
                                 <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
@@ -118,11 +118,11 @@ const cookies = new Cookies();
                         <div className=" col s4 m4 l4">
                            <div className="loginCard card">
                               <div className="card-image">
-                                <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                                <img src="https://media.giphy.com/media/l3diMNIeqgStW4vK0/giphy.gif"/>
                                 <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">
-                                <p className="card-text">Vote events up and down, to pick the best one for your group!</p>
+                                <p className="card-text">Vote events up and down to pick the best one for your group!</p>
                               </div>
                               
                             </div>
@@ -131,7 +131,7 @@ const cookies = new Cookies();
                           <div className=" col s4 m4 l4">
                            <div className="loginCard card">
                               <div className="card-image">
-                                <img src="https://media.giphy.com/media/ZnbIrqkXGKfgk/giphy.gif"/>
+                                <img src="https://media.giphy.com/media/xUNd9zWDwrTbcOEd8Y/giphy.gif"/>
                                 <span className="cardText card-title"></span>
                               </div>
                               <div className="card-content">

@@ -1,13 +1,19 @@
-<h1>Welcome to The Star Wars React Click Game!</h1>
-<h4>The deployed app is <a href="https://g-rant88.github.io/click-game-react/">HERE</a>
+<h1>Welcome to planIt!</h1>
+<h4>The app for planning fun events and chatting with your friends</h4>
+<h4>The deployed app is <a href="https://super-party-planner.herokuapp.com/">HERE</a>
 <h3>Features:</h3>
 <ul>
-  <li>Click an image to gain a point, but if you click the same image twice you lose!</li>
-  <li>On click, the game will randomize the images</li>
-  <li>Your Score will gain a point</li>
-  <li>On a wrong click, if your score is higher than the Top Score it will be replaced with your score</li>
-  <li>Your score will reset to 0</li>
-  <li>A message will display in the navbar to tell you if your click was correct or wrong</li>
+	  <li>This is a full MERN app with Mysql, Express, React, and Node.</li>
+  <li>Add your friends and form a group! In your groups, you can search for events, places, and movies.</li>
+<img src ="https://media.giphy.com/media/26wkuamBBxrz8uauA/giphy.gif"/>
+
+  <li>Vote events up and down to pick the best one for your group!</li>
+
+<img src ="https://media.giphy.com/media/l3diMNIeqgStW4vK0/giphy.gif"/>
+
+  <li>>Chat with users, friends, groups, and make your own chat channels!</li>
+
+<img src ="https://media.giphy.com/media/xUNd9zWDwrTbcOEd8Y/giphy.gif"/>
+
     </ul>
-<img src ="https://media.giphy.com/media/3ohjVaLJdwKF1ZUTsI/giphy.gif"/>
-<p>Full video demo <a href="https://www.youtube.com/watch?v=gtzCA2JXQgY&feature=youtu.be">HERE</a>
+
