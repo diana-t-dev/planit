@@ -40,7 +40,7 @@ class Events extends Component {
     if (eventsExist) {
       let eventInfo = this.state.events.map(events => {
         return <li>
-          <div className="collapsible-header"><i className="material-icons">event</i>First<span>{events.name}</span></div>
+          <div className="collapsible-header"><i className="material-icons">event</i><span>{events.name}</span></div>
           <div className="collapsible-body">
             <h5>Suggested by: {events.person}</h5>
             <h6 className="votey">Current Votes: {events.votes}</h6>
