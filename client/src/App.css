@@ -16,15 +16,15 @@ td, th {
 }
 
  .chatImages{
-  width: 100px;
-  height: 75px;
+  width: 75px;
+  height: 65px;
   border-radius: 50%;
   border: solid black 1px;
   vertical-align: middle;
 }
 
 .chatwords{
-  padding: 13px;
+  padding: 11px;
   padding-left: 15px;
   border-radius: 70px 50px 50px 5px;
   color:white;
