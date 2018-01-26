@@ -15,5 +15,5 @@
 
 <img src ="https://media.giphy.com/media/xUNd9zWDwrTbcOEd8Y/giphy.gif"/>
 
-    </ul>
-
+  <li>Have fun!</li> 
+ </ul>

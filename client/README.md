@@ -14,6 +14,6 @@
   <li>Chat with users, friends, groups, and make your own chat channels!</li>
 
 <img src ="https://media.giphy.com/media/xUNd9zWDwrTbcOEd8Y/giphy.gif"/>
-
-    </ul>
-
+    
+ <li>Have fun!</li> 
+ </ul>
