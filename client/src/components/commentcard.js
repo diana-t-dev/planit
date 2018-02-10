@@ -53,7 +53,6 @@ run = () => {
 
 axios.post("/comment", {data}).then( data => {
 
-console.log('comment posted');
 
 this.setState({
   comment: ""

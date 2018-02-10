@@ -71,7 +71,6 @@ module.exports = function(app) {
 
              }
           );
-          console.log('@@@@@@@@@@@@@',friendsObj)
 
           var nonFriends = userList.filter(function (user) {
             return this.indexOf(user) < 0
@@ -97,7 +96,6 @@ module.exports = function(app) {
 
 
   app.get("/notifications/:userId", function (req ,res) {
-    console.log(`params:::: ${req.params.userId}`);
     db.notification.findAll({
       where: {
         to: req.params.userId
@@ -108,7 +106,6 @@ module.exports = function(app) {
   })
 
    app.post("/notification", function (req ,res) {
-     console.log(req.body);
 
     db.notification.create({
       
@@ -188,12 +185,9 @@ module.exports = function(app) {
 
   // creates new user-group association record in joined table
   app.post('/groups/members/:userId/:groupId', function (req, res) {
-    console.log(req.params.userId);
-    console.log(req.params.groupId);
 
     db.user.findById(req.params.userId).then(user => {
       user.addGroups(req.params.groupId).then(() => {
-        console.log('success');
         res.end();
       })
     });
@@ -201,7 +195,6 @@ module.exports = function(app) {
   })
 
   app.post('/newgroup/:userId/:groupId', function (req, res) {
-    console.log(`&&&&&&&&&&${req.params.userId}`);
     // find user record
     db.user.findAll({
       where: {
@@ -256,7 +249,6 @@ module.exports = function(app) {
 
    app.put("/delfriend", function(req, res) {
 
-    console.log("&*&*&&*", req.body.user);
 
     db.user.findAll({
 
@@ -328,24 +320,6 @@ module.exports = function(app) {
 
   });
 
-  //  app.post("/chat", function(req, res) {
-
-  //   console.log(req.body)
-
-  //   db.chat.create({
-  //     name: req.body.name,
-  //     text: req.body.chat,
-  //     image: req.body.image,
-  //     channelId: req.body.room
-
-  //   }).then(function(results) {
-
-
-  //     res.json(results);
-  //   });
-
-  // });
-
 
       app.get("/chats/:id", function(req, res) {
 
@@ -365,7 +339,6 @@ module.exports = function(app) {
 
         app.post("/addevent", function(req, res) {
 
-          console.log(req.body);
 
     db.event.create({
 
@@ -376,11 +349,9 @@ module.exports = function(app) {
 
     }).then(function(results) {
 
-      console.log(results);
       res.json(results);
     }).catch(function(err){
 
-    console.log(err);
 
   });
 
@@ -388,11 +359,8 @@ module.exports = function(app) {
 
   // renders all groups for specified user
   app.get("/mygroups/:userId", function(req, res){
-    console.log(`params userid: ${req.params.userId}, type: ${typeof req.params.userId}`)
     db.user.findById(req.params.userId).then(user => {
       user.getGroups().then((results) => {
-        console.log(`####### ${JSON.stringify(results)}`);
-        console.log('success');
         res.send(results);
       })
     });
@@ -405,14 +373,12 @@ module.exports = function(app) {
               id: req.params.groupId
             }
           }).then(results => {
-           // console.log(results[0].dataValues);
             res.send(results[0].dataValues)
           })
         })
 
       app.get("/events/:group", function(req, res){
 
-          console.log(req.params.group)
 
           db.group.findAll({
 
@@ -422,12 +388,6 @@ module.exports = function(app) {
             },
             include:[{model:db.event, include:[db.comment]}]
           }).then(function(results){
-
-            console.log(results);
-
-            console.log("***EVENTS***", results[0].events[0]);
-
-            // **********Second Include Here?*********
 
             res.json(results)
           })
@@ -465,7 +425,6 @@ module.exports = function(app) {
 
   app.post("/comment", function(req, res){
 
-    console.log(req.body.data)
     db.comment.create({
 
       user: req.body.data.name,
@@ -480,7 +439,6 @@ module.exports = function(app) {
 
   app.get("/comment/:id", function(req, res){
 
-    console.log(req.params.id)
     db.comment.findAll({
 
       where:{
@@ -495,14 +453,11 @@ module.exports = function(app) {
   // voting routes
   // upvote route
   app.put('/upvote/:eventId', function (req, res) {
-    console.log(`eventId: ${req.params.eventId}`);
     db.event.findById(req.params.eventId)
             .then(results => {
-              console.log('$$$$$$$$$$$$$$$$$$$$')
               let event = results.dataValues;
               // increment votes by 1
               let newVotes = event.votes + 1;
-              console.log(newVotes);
               // store new votes in db
               db.event.update({
                 votes: newVotes
@@ -517,15 +472,11 @@ module.exports = function(app) {
   })
   // downvote route
   app.put('/downvote/:eventId', function (req, res) {
-    console.log(`eventId: ${req.params.eventId}`);
     db.event.findById(req.params.eventId)
             .then(results => {
-              console.log('$$$$$$$$$$$$$$$$$$$$')
-              console.log(results);
               let event = results.dataValues;
               // increment votes by 1
               let newVotes = event.votes - 1;
-              console.log(newVotes);
               // store new votes in db
               db.event.update({
                 votes: newVotes
@@ -542,7 +493,6 @@ module.exports = function(app) {
 
   app.post("/channel", function(req, res){
 
-    console.log(req.body.daty)
 
     db.channel.create({
 
@@ -550,7 +500,6 @@ module.exports = function(app) {
 
     }).then(function(results){
 
-      console.log("channel created");
       res.json(results);
     })
 
@@ -560,7 +509,6 @@ module.exports = function(app) {
 
     db.channel.findAll({}).then(function(results){
 
-      console.log("got channels");
       res.json(results);
     })
 
@@ -568,14 +516,12 @@ module.exports = function(app) {
 
   app.get("/image/:id", function(req, res){
 
-    console.log(req.params.id)
     db.user.findAll({
       where:{
         usernameId: req.params.id
       }
 
     }).then(function(results) {
-      console.log('***************',results);
 
       res.json(results);
     });
@@ -584,13 +530,11 @@ module.exports = function(app) {
 
   app.put("/deleteMe", function(req, res) {
 
-    console.log("&&&&&&&&&&&&&&&&", req.body.data);
 
     db.user.findById(req.body.data.friendId)
     .then(function(results) {
 
       var friendsList = results.friends.split(", ");
-      console.log('!!!!!!!!!!!!!!!!!',friendsList);
 
       if(friendsList.length===1){
         newList=null;

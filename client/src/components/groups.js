@@ -30,8 +30,6 @@ this.setState({
 })
 
 
-console.log(this.state.mygroup)
-console.log('first click');
 
 // this.forceUpdate();
 

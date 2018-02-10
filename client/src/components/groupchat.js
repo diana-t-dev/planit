@@ -34,7 +34,6 @@ class Chat extends Component {
 
     axios.get(url).then(data => {
 
-      console.log(data.data.response.venues);
 
       this.setState({
 
@@ -43,7 +42,6 @@ class Chat extends Component {
         results3: []
       })
 
-      console.log(this.state.results);
 
 
     })
@@ -55,7 +53,6 @@ class Chat extends Component {
 
     axios.get(url).then(data => {
 
-      console.log(data.data.events);
 
       for (var i = 0; i < 5; i++) {
 
@@ -69,7 +66,6 @@ class Chat extends Component {
 
       }
 
-      console.log(this.state.results2);
 
     })
   };
@@ -80,7 +76,6 @@ class Chat extends Component {
 
     axios.get(BASEURL).then(data => {
 
-      console.log(data.data.results);
 
 
       for (var i = 0; i < 10; i++) {
@@ -94,7 +89,6 @@ class Chat extends Component {
 
       }
 
-      console.log(this.state.results3);
 
 
     })
@@ -116,8 +110,6 @@ class Chat extends Component {
 
     axios.post('/addevent', { data }).then(data => {
 
-      console.log('event added')
-      console.log(data)
 
     })
 
@@ -125,14 +117,11 @@ class Chat extends Component {
 
   componentWillReceiveProps(props) {
 
-    console.log(props);
-    console.log(props.group)
 
     this.setState({
       groupId: props.group
     })
 
-    console.log(this.state.groupId)
 
   }
 

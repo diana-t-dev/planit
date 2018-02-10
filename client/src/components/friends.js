@@ -78,7 +78,6 @@ class Friends extends Component {
 
     axios.get('/users/' + namey).then(user => {
 
-      console.log("********", user);
 
       user.data && user.data[0] ? (  this.setState({ id: user.data[0].id })) :("")
 
@@ -89,12 +88,10 @@ class Friends extends Component {
 
     axios.get('/users/' + i).then(user => {
 
-      console.log(user.data[0].id);
 
       let namey = cookies.get('name');
       let friend = i;
 
-      console.log(friend);
 
       let data = {
         user: namey,
@@ -105,7 +102,6 @@ class Friends extends Component {
 
       axios.post('/notification', data)
       .then(friend => {
-        console.log(friend);
       })
 
     })
@@ -116,7 +112,6 @@ class Friends extends Component {
 
   delFriend = (i) => {
 
-console.log("FRIEND ID", typeof i)
     let namey = cookies.get('name');
     let friend = i;
     let data = {
@@ -137,8 +132,6 @@ console.log("FRIEND ID", typeof i)
 
     deleteMe = (friendid) => {
 
-    console.log("My id is ", this.state.id)
-    console.log("Friend id is ", friendid )
     let myid = this.state.id.toString()
     let data = {
       friendId: friendid,
@@ -147,7 +140,6 @@ console.log("FRIEND ID", typeof i)
 
     axios.put('/deleteMe', {data})
       .then(friend => {
-       console.log('made it back')
       })
 
   };  
@@ -174,7 +166,6 @@ console.log("FRIEND ID", typeof i)
 }
 
  render() {
-   console.log('**************',this.state.friends)
 
     return (
 
@@ -212,8 +203,7 @@ console.log("FRIEND ID", typeof i)
                         <td><img className="friendImg" alt={i.name} src={i.image}/></td>
                         <td>{i.name}</td>
                         <td>{i.loggedIn===true? <span>✅</span> : <span>❌</span>  }</td>
-                        <td><a className="waves-effect waves-light btn delfriend #ef5350 red darken-4
-" onClick={() => this.delFriend(i.id)}>Remove Friend</a></td>
+                        <td><a className="waves-effect waves-light btn delfriend #ef5350 red darken-4" onClick={() => this.delFriend(i.id)}>Remove Friend</a></td>
                         </tr>)} 
                      ))}
                     </tbody>

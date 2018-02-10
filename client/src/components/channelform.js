@@ -48,7 +48,6 @@ run = () => {
 
 axios.post("/channel", {daty}).then( data => {
 
-console.log('channel posted');
 
 this.setState({
   name: ""

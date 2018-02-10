@@ -29,7 +29,6 @@ class List extends Component {
 
   getGroups = () => {
     axios.get('/mygroups/' + this.state.id).then(results => {
-      console.log(results);
       // set group state equal to the list of group objs
       if (!results.data[0]) {
         this.setState({groups: ['no groups yet']})

@@ -84,9 +84,6 @@ class Home extends React.Component {
 
 			var chatWordy = this.state.chat.split(" ");
 
-			console.log("SPLIT 1 ", chatWordy);
-
-			console.log("CHAT, ", this.state.chat.trim())
 
 			if (this.state.chat.trim() === "") {
 
@@ -112,7 +109,6 @@ class Home extends React.Component {
 				}
 			}
 
-			console.log("SPLIT 2 ", chatWordy);
 
 			this.setState({
 
@@ -133,7 +129,6 @@ class Home extends React.Component {
 				chat: ""
 			})
 
-			console.log('chat posted');
 
 		};
 
@@ -143,15 +138,12 @@ class Home extends React.Component {
 
 			axios.get("/chats/" + roomy).then(data => {
 
-				console.log("got chats");
-				console.log(data.data);
 
 				this.setState({
 
 					all: data.data
 				})
 
-				console.log(this.state.all)
 			})
 		};
 
@@ -164,8 +156,6 @@ class Home extends React.Component {
 
 			axios.get("/channels").then(data => {
 
-				console.log("got channels");
-				console.log(data.data);
 
 				this.setState({
 
@@ -190,8 +180,6 @@ class Home extends React.Component {
 						daty
 					}).then(data => {
 
-						console.log("general channel set");
-						console.log(data);
 						this.setState({
 
 							room: data.data.id
@@ -204,7 +192,6 @@ class Home extends React.Component {
 
 		goToChan = (chan, name) => {
 
-			console.log("CHANNEL ", chan);
 
 			this.setState({
 
@@ -214,7 +201,6 @@ class Home extends React.Component {
 			room = name;
 
 			setTimeout(() => {
-				console.log("ROOM", this.state.room), this.getChat();
 			}, 500);
 
 		};

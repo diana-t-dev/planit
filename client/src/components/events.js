@@ -19,13 +19,10 @@ class Events extends Component {
   };
 
   componentDidMount() {
-    console.log("mounted");
     $('.tooltipped').tooltip({delay: 50});
   }
 
   componentDidUpdate(props) {
-    console.log("updated");
-    console.log(props);
     $('.tooltipped').tooltip({delay: 50});
   }
 
@@ -35,7 +32,6 @@ class Events extends Component {
   }
 
   renderEvents = () => {
-    console.log(this.state.events);
     let eventsExist = this.state.events && this.state.events !== null;
     if (eventsExist) {
       let eventInfo = this.state.events.map(events => {
@@ -58,9 +54,7 @@ class Events extends Component {
 
   getEvents = (group) => {
     let groupy = group;
-    console.log(groupy);
     axios.get("/events/" + groupy).then(data => {
-      console.log("&&&&&& " + JSON.stringify(data.data[0]));
       this.setState({
         events: data.data[0].events,
         name: data.data[0].name
@@ -88,8 +82,6 @@ class Events extends Component {
     if (voteType === 'upvote') {
       axios.put(`/upvote/${eventId}`)
         .then(results => {
-          console.log(results);
-          console.log(`incremented votes for event ${eventId}`);
           // re-render event
           this.getEvents(this.state.group);
         })
@@ -98,8 +90,6 @@ class Events extends Component {
     else if (voteType === 'downvote') {
       axios.put(`/downvote/${eventId}`)
         .then(results => {
-          console.log(results.data);
-          console.log(`decremented votes for event ${eventId}`);
           //re-render event
           this.getEvents(this.state.group);
         })

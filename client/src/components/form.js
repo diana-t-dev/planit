@@ -37,7 +37,6 @@ class Form extends Component {
 	getUser = () => {
     let name = cookies.get('name');
     axios.get('/users/' + name).then(user => {
-      console.log(user);
       user.data && user.data[0] ? (this.setState({ id: user.data[0].id })) :("")
     })
   };
@@ -46,10 +45,8 @@ class Form extends Component {
 	addToGroup = (friendName) => {
 		// match friend name to friend id
 		let friendId = this.state.friendIds[this.state.friends.indexOf(friendName)];
-		console.log(`friendId: ${friendId}`);
 		// add friend to group
 		this.state.groupMembers.push(friendId);
-		console.log(this.state.groupMembers);
 		// update group members state
 		this.setState({groupMembers: this.state.groupMembers});
 	}
@@ -90,12 +87,8 @@ class Form extends Component {
 
 		// create new group record
 		axios.post('/groups/new/' + userid, groupInfo).then(results => {
-			console.log(results.data);
 			this.setState({groupId: results.data.id});
-			console.log(`STATE ID ${this.state.id}`);
-			console.log(`STATE GROUP ID ${this.state.groupId}`);
 			axios.post(`/groups/members/${this.state.id}/${results.data.id}`).then(results => {
-				console.log(results);
 			});
 			// send notifications to all group members
 			for (let i=0; i < this.state.groupMembers.length; i++) {
@@ -106,9 +99,7 @@ class Form extends Component {
 					type: 'Group Invite',
 					groupId: this.state.groupId
 				}
-				axios.post('/notification', groupNotification).then(results => {
-					console.log(results);
-					
+				axios.post('/notification', groupNotification).then(results => {					
 				});
 			}		
 		});

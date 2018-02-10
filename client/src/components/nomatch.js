@@ -40,7 +40,6 @@ class NoMatch extends Component {
 
 	render() {
 		
-			console.log(this.state.gifs)
 		
 		return (
 

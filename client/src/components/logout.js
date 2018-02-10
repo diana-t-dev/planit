@@ -32,9 +32,6 @@ class Logout extends Component {
 	};
 
      validate = (response) => {
-    console.log('***********',response.sub)
-    console.log('11111111111',response.name)
-    console.log('@@@@@@@@@@@',response.picture)
 
     var id = response.sub
     axios.get('/user/' + id)
@@ -57,10 +54,8 @@ class Logout extends Component {
             })
         } 
         else {
-            console.log('id: ', id)
            axios.put('/find/' + id)
             .then( data  => {
-          console.log('111111111111 made it here')
             cookies.set('name', response.name);
             cookies.set('id', response.sub);
             this.setState({ loggedin: true });

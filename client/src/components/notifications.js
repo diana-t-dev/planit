@@ -79,9 +79,7 @@ class Notifications extends Component {
         // if it's a group request, update userGroup table
         // then delete notifications
         else if (notificationType === 'Group Invite') {
-            console.log(`groupId ${groupId}`);
             axios.post(`/groups/members/${userId}/${groupId}`).then(results => {
-                console.log(results);
                 this.deleteNotification(notificationId);
                 
             })
@@ -113,7 +111,6 @@ class Notifications extends Component {
                         </thead>
                         <tbody>
                             {this.state.notifications.map( (el) => {
-                            console.log(el);
                             if (el === 'none') {
                             return <tr>
                                 <td>No Notifications</td>
